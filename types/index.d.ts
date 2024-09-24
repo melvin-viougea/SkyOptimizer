@@ -27,7 +27,6 @@ declare interface HypixelSkillsResponse {
 
 declare interface MojangResponse {
   uuid: string;
-  // Other relevant fields
 }
 
 declare interface ProfilesResponse {
