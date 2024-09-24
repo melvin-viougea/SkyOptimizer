@@ -1,56 +1,44 @@
-declare interface CustomError {
-  message: string;
+interface ProfileData {
+  farmingLvl: number;
+  farmingMaxLvl: number;
+  fishingLvl: number;
+  fishingMaxLvl: number;
+  miningLvl: number;
+  miningMaxLvl: number;
+  foragingLvl: number;
+  foragingMaxLvl: number;
+  combatLvl: number;
+  combatMaxLvl: number;
 }
 
-//HYPIXEL SKILL
-
-declare interface Skill {
-  maxLevel: number;
-  levels: number[];
+declare interface RenderProps {
+  profileData: ProfileData | null;
 }
 
 declare interface HypixelSkillsResponse {
   skills: {
-    FARMING: Skill;
-    FISHING: Skill;
-    MINING: Skill;
-    FORAGING: Skill;
-    COMBAT: Skill;
+    FARMING: { levels: number[], maxLevel: number };
+    FISHING: { levels: number[], maxLevel: number };
+    MINING: { levels: number[], maxLevel: number };
+    FORAGING: { levels: number[], maxLevel: number };
+    COMBAT: { levels: number[], maxLevel: number };
   };
 }
 
 declare interface MojangResponse {
   uuid: string;
-}
-
-//PLAYER DATA
-
-declare interface MemberExperience {
-  SKILL_FARMING: number;
-  SKILL_FISHING: number;
-  SKILL_MINING: number;
-  SKILL_FORAGING: number;
-  SKILL_COMBAT: number;
-}
-
-declare interface MemberData {
-  player_data: {
-    experience: MemberExperience;
-  };
-}
-
-declare interface Members {
-  [key: string]: MemberData;
-}
-
-declare interface SelectedProfile {
-  cute_name: string;
-  profile_id: string;
-  members: Members;
-  selected?: boolean;
+  // Other relevant fields
 }
 
 declare interface ProfilesResponse {
-  profiles: SelectedProfile[];
+  profiles: Array<{
+    cute_name: string;
+    selected: boolean;
+    profile_id: string;
+    members: { [key: string]: { player_data: { experience: { [skill: string]: number } } } };
+  }>;
 }
 
+declare interface CustomError {
+  message: string;
+}
