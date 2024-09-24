@@ -23,7 +23,7 @@ export default function Home() {
 
       const profilesResponse: ProfilesResponse = await ky.get(`https://api.hypixel.net/v2/skyblock/profiles?uuid=${playerUuid}`, {
         headers: {
-          'API-Key': process.env.NEXT_PUBLIC_API_KEY,
+          'API-Key': process.env.NEXT_PUBLIC_HOST,
         }
       }).json();
 
