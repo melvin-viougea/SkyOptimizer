@@ -122,21 +122,21 @@ export default function ProfilePage() {
 
         <button
           onClick={() => setActiveSection(Section.Home)}
-          className={`px-4 py-2 rounded ${activeSection === Section.Home ? "bg-blue-500 text-white" : "bg-gray-200 text-gray-800"}`}
+          className={`px-4 py-2 rounded font-bold ${activeSection === Section.Home ? "bg-blue-500 text-white" : "bg-gray-200 text-gray-800"}`}
         >
           Home
         </button>
 
         <button
           onClick={() => setActiveSection(Section.Accessories)}
-          className={`px-4 py-2 rounded ${activeSection === Section.Accessories ? "bg-blue-500 text-white" : "bg-gray-200 text-gray-800"}`}
+          className={`px-4 py-2 rounded font-bold ${activeSection === Section.Accessories ? "bg-blue-500 text-white" : "bg-gray-200 text-gray-800"}`}
         >
           Optimize Accessories
         </button>
 
         <button
           onClick={() => setActiveSection(Section.Farming)}
-          className={`px-4 py-2 rounded ${activeSection === Section.Farming ? "bg-blue-500 text-white" : "bg-gray-200 text-gray-800"}`}
+          className={`px-4 py-2 rounded font-bold ${activeSection === Section.Farming ? "bg-blue-500 text-white" : "bg-gray-200 text-gray-800"}`}
         >
           Optimize Farming
         </button>

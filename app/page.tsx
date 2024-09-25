@@ -64,7 +64,7 @@ export default function Home() {
             aria-label="Search username"
             value={pseudo}
             onChange={(e) => setPseudo(e.target.value)}
-            className="w-full p-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-900"
+            className="w-full p-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-900 font-bold"
           />
           <button
             onClick={handleNavigate}
