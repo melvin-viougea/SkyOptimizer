@@ -53,25 +53,27 @@ export default function Home() {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen gap-8">
-      <h1 className="text-4xl font-bold text-center">Show Optimizations For</h1>
-      <div className="flex flex-col items-center gap-4 w-full max-w-md">
-        <input
-          id="search-input"
-          type="text"
-          placeholder="Username"
-          aria-label="Search username"
-          value={pseudo}
-          onChange={(e) => setPseudo(e.target.value)}
-          className="w-full p-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-900"
-        />
-        <button
-          onClick={handleNavigate}
-          className="px-6 py-3 bg-blue-600 text-white rounded-md hover:bg-blue-800 transition">
-          Show
-        </button>
+    <div className="flex flex-col items-center justify-center min-h-screen gap-8 bg">
+      <div className="py-10 px-40 rounded-3xl bg-gray-800">
+        <div className="flex flex-col items-center gap-8   w-full max-w-md">
+          <h1 className="text-4xl font-bold text-center">Show Optimizations For</h1>
+          <input
+            id="search-input"
+            type="text"
+            placeholder="Username"
+            aria-label="Search username"
+            value={pseudo}
+            onChange={(e) => setPseudo(e.target.value)}
+            className="w-full p-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-900"
+          />
+          <button
+            onClick={handleNavigate}
+            className="px-6 py-3 bg-blue-600 text-white rounded-md hover:bg-blue-800 transition font-bold">
+            Show
+          </button>
 
-        {error && <p className="text-red-500">{error.message}</p>}
+          {error && <p className="text-red-500">{error.message}</p>}
+        </div>
       </div>
     </div>
   );
