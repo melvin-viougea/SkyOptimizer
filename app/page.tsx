@@ -1,6 +1,6 @@
-"use client";
+'use client';
 
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import ky from 'ky';
 
@@ -52,6 +52,12 @@ export default function Home() {
     }
   };
 
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      handleNavigate();
+    }
+  };
+
   return (
     <div className="flex flex-col items-center justify-center min-h-screen gap-8 bg">
       <div className="py-10 px-40 rounded-3xl bg-gray-800">
@@ -64,11 +70,12 @@ export default function Home() {
             aria-label="Search username"
             value={pseudo}
             onChange={(e) => setPseudo(e.target.value)}
-            className="w-full p-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-900 font-bold"
+            onKeyDown={handleKeyDown}
+            className="w-full p-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-yellow text-gray-900 font-bold"
           />
           <button
             onClick={handleNavigate}
-            className="px-6 py-3 bg-blue-600 text-white rounded-md hover:bg-blue-800 transition font-bold">
+            className="px-6 py-3 bg-yellow text-gray-800 rounded-md transition font-bold">
             Show
           </button>
 
