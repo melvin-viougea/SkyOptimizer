@@ -1,8 +1,8 @@
 "use client";
 
-import { useParams } from "next/navigation";
-import React, { useState, useEffect } from "react";
-import { getSkillLevel } from "@/lib/getSkillLevel";
+import {useParams} from "next/navigation";
+import React, {useEffect, useState} from "react";
+import {getSkillLevel} from "@/lib/getSkillLevel";
 import {Section} from "@/constants";
 import {fetchHypixelProfiles, fetchMojangData, fetchSkills} from "@/lib/fetch";
 import HomeRender from "@/components/HomeRender";
@@ -17,6 +17,7 @@ import ArcherRender from "@/components/ArcherRender";
 import BerserkRender from "@/components/BerserkRender";
 import TankRender from "@/components/TankRender";
 import HealerRender from "@/components/HealerRender";
+import ProgressionRender from "@/components/ProgressionRender";
 
 export default function ProfilePage() {
   const { pseudo } = useParams();
@@ -101,6 +102,8 @@ export default function ProfilePage() {
         return <AccessoriesRender profileData={profileData} />
       case Section.Minions:
         return <MinionsRender profileData={profileData} />
+      case Section.Progression:
+        return <ProgressionRender profileData={profileData} />
 
       // SKILLS
       case Section.Farming:
@@ -191,6 +194,13 @@ export default function ProfilePage() {
             className={`px-4 py-2 rounded font-bold text-gray-800 ${activeSection === Section.Home ? "bg-yellow" : "bg-gray-200"}`}
           >
             Home
+          </button>
+
+          <button
+            onClick={() => setActiveSection(Section.Progression)}
+            className={`px-4 py-2 rounded font-bold text-gray-800 ${activeSection === Section.Progression ? "bg-yellow" : "bg-gray-200"}`}
+          >
+            Progression
           </button>
 
           <button

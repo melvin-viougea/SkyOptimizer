@@ -71,7 +71,7 @@ export default function Home() {
             value={pseudo}
             onChange={(e) => setPseudo(e.target.value)}
             onKeyDown={handleKeyDown}
-            className="w-full p-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-yellow text-gray-900 font-bold"
+            className="w-full p-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-yellow text-gray-800 font-bold"
           />
           <button
             onClick={handleNavigate}

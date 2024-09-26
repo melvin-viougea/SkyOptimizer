@@ -4,6 +4,7 @@ export enum Section {
   Home = "Home",
   Accessories = "Accessories",
   Minions = "Minions",
+  Progression = "Progression",
 
   // SKILLS
   Farming = "Farming",
