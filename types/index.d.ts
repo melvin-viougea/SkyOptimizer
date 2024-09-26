@@ -9,6 +9,8 @@ interface ProfileData {
   foragingMaxLvl: number;
   combatLvl: number;
   combatMaxLvl: number;
+  purse: number;
+  bank: number;
 }
 
 declare interface RenderProps {
@@ -25,6 +27,18 @@ declare interface HypixelSkillsResponse {
   };
 }
 
+interface HypixelItem {
+  name: string;
+  category: string;
+  id: string;
+}
+
+interface HypixelItemsResponse {
+  success: boolean;
+  lastUpdated: number;
+  items: HypixelItem[];
+}
+
 declare interface MojangResponse {
   uuid: string;
 }
@@ -34,13 +48,30 @@ declare interface ProfilesResponse {
     cute_name: string;
     selected: boolean;
     profile_id: string;
+    banking: {
+      balance: number;
+    };
     members: { [key: string]: {
-        currencies(currencies: any): unknown;
-        inventory: any; player_data: { experience: { [skill: string]: number } }
+        currencies: {
+          coin_purse: number;
+        };
+        inventory: any;
+        player_data: {
+          experience: { [skill: string]: number }
+        };
       } };
   }>;
 }
 
 declare interface CustomError {
   message: string;
+}
+
+interface InventoryItem {
+  name: string;
+  count: number;
+}
+
+interface accessoriesItem {
+  name: string;
 }

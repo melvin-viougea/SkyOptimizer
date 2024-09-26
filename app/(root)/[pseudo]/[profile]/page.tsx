@@ -4,7 +4,7 @@ import {useParams} from "next/navigation";
 import React, {useEffect, useState} from "react";
 import {getSkillLevel} from "@/lib/function";
 import {Section} from "@/constants";
-import {fetchHypixelProfiles, fetchMojangData, fetchSkills} from "@/lib/fetch";
+import {fetchHypixelItems, fetchHypixelProfiles, fetchMojangData, fetchSkills} from "@/lib/fetch";
 import HomeRender from "@/components/HomeRender";
 import FarmingRender from "@/components/FarmingRender";
 import MinionsRender from "@/components/MinionsRender";
@@ -18,11 +18,11 @@ import BerserkRender from "@/components/BerserkRender";
 import TankRender from "@/components/TankRender";
 import HealerRender from "@/components/HealerRender";
 import ProgressionRender from "@/components/ProgressionRender";
-import { Buffer } from "buffer";
+import {Buffer} from "buffer";
 import nbt from 'prismarine-nbt';
 
 export default function ProfilePage() {
-  const { pseudo } = useParams();
+  const {pseudo} = useParams();
 
 
   const normalizedPseudo = Array.isArray(pseudo) ? pseudo[0] : pseudo;
@@ -55,8 +55,6 @@ export default function ProfilePage() {
         const members = selectedProfile.members;
         const normalizedPlayerUuid = playerUuid.replace(/-/g, "");
         const selectedMember = members[normalizedPlayerUuid];
-        console.log(selectedProfile)
-        console.log(selectedMember.currencies)
 
         const playerPurse = selectedMember.currencies.coin_purse
         const playerBank = selectedProfile.banking.balance
@@ -67,31 +65,74 @@ export default function ProfilePage() {
         }
 
 
+      // ALL ACCESSORIES
+        const itemsResponse = await fetchHypixelItems();
+        const accessoryItems = itemsResponse.items.filter(item => item.category === "ACCESSORY");
+        const talismanNames = accessoryItems.map(item => item.name);
+        console.log(talismanNames);
+
+        // PLAYER ACCESSORIES
+        let accessoriesItem: accessoriesItem[] = [];
+
+        try {
+          const yourBytes = Buffer.from(selectedMember.inventory.bag_contents.talisman_bag.data, "base64");
+          const { parsed } = await nbt.parse(yourBytes);
+
+          const accesories = parsed.value.i?.value.value;
+
+          if (Array.isArray(accesories)) {
+            accesories.forEach((element) => {
+              const tag = element?.tag?.value;
+              const displayName = tag?.display?.value?.Name?.value;
+
+              if (displayName !== undefined) {
+                const itemName = displayName.replace(/§./g, '');
+                const item: accessoriesItem = {
+                  name: itemName,
+                };
+                accessoriesItem.push(item);
+              }
+            });
+          }
+
+          console.log(accessoriesItem);
+        } catch (error) {
+          console.error('Erreur lors du traitement de l’inventaire:', error);
+        }
 
         // INVENTAIRE------------------------------------------------
-        let inventoryItems : any = []
+        let inventoryItems: InventoryItem[] = [];
 
-        let your_bytes = Buffer.from(selectedMember.inventory.inv_contents.data, "base64")
-        const { parsed, type } = await nbt.parse(your_bytes)
+        try {
+          const yourBytes = Buffer.from(selectedMember.inventory.inv_contents.data, "base64");
+          const { parsed } = await nbt.parse(yourBytes);
 
-        parsed.value.i.value.value.forEach((element,index) =>{
-          if(element.tag){
-            let itemName = element.tag.value.display.value.Name.value
-            itemName = itemName.replace(/§./g, '')
+          const inventory = parsed.value.i?.value.value;
 
-            let itemCount = element.Count.value
-            let item : any = []
-            item['name'] = itemName
-            item['count'] = itemCount
-            inventoryItems.push(item)
+          if (Array.isArray(inventory)) {
+            inventory.forEach((element) => {
+              const tag = element?.tag?.value;
+              const displayName = tag?.display?.value?.Name?.value;
+              const itemCount = element?.Count?.value;
+
+              if (displayName && itemCount !== undefined) {
+                const itemName = displayName.replace(/§./g, '');
+                const item: InventoryItem = {
+                  name: itemName,
+                  count: itemCount,
+                };
+                inventoryItems.push(item);
+              }
+            });
           }
-            }
-        )
-        console.log(inventoryItems)
 
+          //console.log(inventoryItems);
+        } catch (error) {
+          console.error('Erreur lors du traitement de l’inventaire:', error);
+        }
         //--------------------------------------------------------
 
-        const { FARMING, FISHING, MINING, FORAGING, COMBAT } = hypixelSkills.skills;
+        const {FARMING, FISHING, MINING, FORAGING, COMBAT} = hypixelSkills.skills;
         const farmingLvl = getSkillLevel(selectedMember.player_data.experience.SKILL_FARMING ?? 0, FARMING.levels);
         const fishingLvl = getSkillLevel(selectedMember.player_data.experience.SKILL_FISHING ?? 0, FISHING.levels);
         const miningLvl = getSkillLevel(selectedMember.player_data.experience.SKILL_MINING ?? 0, MINING.levels);
@@ -125,41 +166,40 @@ export default function ProfilePage() {
   }, [normalizedPseudo]);
 
 
-
   const renderSection = () => {
     switch (activeSection) {
 
       // GENERAL
       case Section.Home:
-        return <HomeRender profileData={profileData} />
+        return <HomeRender profileData={profileData}/>
       case Section.Accessories:
-        return <AccessoriesRender profileData={profileData} />
+        return <AccessoriesRender profileData={profileData}/>
       case Section.Minions:
-        return <MinionsRender profileData={profileData} />
+        return <MinionsRender profileData={profileData}/>
       case Section.Progression:
-        return <ProgressionRender profileData={profileData} />
+        return <ProgressionRender profileData={profileData}/>
 
       // SKILLS
       case Section.Farming:
-        return <FarmingRender profileData={profileData} />
+        return <FarmingRender profileData={profileData}/>
       case Section.Fishing:
-        return <FishingRender profileData={profileData} />
+        return <FishingRender profileData={profileData}/>
       case Section.Mining:
-        return <MiningRender profileData={profileData} />
+        return <MiningRender profileData={profileData}/>
       case Section.Foraging:
-        return <ForagingRender profileData={profileData} />
+        return <ForagingRender profileData={profileData}/>
 
       // CLASS
       case Section.Mage:
-        return <MageRender profileData={profileData} />
+        return <MageRender profileData={profileData}/>
       case Section.Archer:
-        return <ArcherRender profileData={profileData} />
+        return <ArcherRender profileData={profileData}/>
       case Section.Berserk:
-        return <BerserkRender profileData={profileData} />
+        return <BerserkRender profileData={profileData}/>
       case Section.Tank:
-        return <TankRender profileData={profileData} />
+        return <TankRender profileData={profileData}/>
       case Section.Healer:
-        return <HealerRender profileData={profileData} />
+        return <HealerRender profileData={profileData}/>
       default:
         return null;
     }

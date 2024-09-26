@@ -4,6 +4,10 @@ export const fetchSkills = async (): Promise<HypixelSkillsResponse> => {
   return await ky.get("https://api.hypixel.net/v2/resources/skyblock/skills").json();
 };
 
+export const fetchHypixelItems = async (): Promise<HypixelItemsResponse> => {
+  return await ky.get("https://api.hypixel.net/v2/resources/skyblock/items").json();
+};
+
 export const fetchMojangData = async (pseudo: string): Promise<MojangResponse> => {
   return await ky.get(`https://api.ashcon.app/mojang/v2/user/${pseudo}`).json();
 };
