@@ -2,7 +2,7 @@
 
 import {useParams} from "next/navigation";
 import React, {useEffect, useState} from "react";
-import {getSkillLevel} from "@/lib/getSkillLevel";
+import {getSkillLevel} from "@/lib/function";
 import {Section} from "@/constants";
 import {fetchHypixelProfiles, fetchMojangData, fetchSkills} from "@/lib/fetch";
 import HomeRender from "@/components/HomeRender";
@@ -55,6 +55,11 @@ export default function ProfilePage() {
         const members = selectedProfile.members;
         const normalizedPlayerUuid = playerUuid.replace(/-/g, "");
         const selectedMember = members[normalizedPlayerUuid];
+        console.log(selectedProfile)
+        console.log(selectedMember.currencies)
+
+        const playerPurse = selectedMember.currencies.coin_purse
+        const playerBank = selectedProfile.banking.balance
 
         if (!selectedMember) {
           setError("Selected member not found");
@@ -96,6 +101,8 @@ export default function ProfilePage() {
         setProfileData({
           pseudo: normalizedPseudo,
           profile: selectedProfile.cute_name,
+          purse: playerPurse,
+          bank: playerBank,
           farmingLvl,
           fishingLvl,
           miningLvl,

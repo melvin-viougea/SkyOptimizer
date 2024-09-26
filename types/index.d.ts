@@ -35,6 +35,7 @@ declare interface ProfilesResponse {
     selected: boolean;
     profile_id: string;
     members: { [key: string]: {
+        currencies(currencies: any): unknown;
         inventory: any; player_data: { experience: { [skill: string]: number } }
       } };
   }>;
