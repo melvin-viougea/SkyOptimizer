@@ -69,33 +69,26 @@ export default function ProfilePage() {
         const itemsResponse = await fetchHypixelItems();
         const accessoryItems = itemsResponse.items.filter(item => item.category === "ACCESSORY");
         const talismanNames = accessoryItems.map(item => item.name);
-        console.log(talismanNames);
 
         // PLAYER ACCESSORIES
-        let accessoriesItem: accessoriesItem[] = [];
+        let playerAccessories: accessoriesItem[] = [];
 
         try {
           const yourBytes = Buffer.from(selectedMember.inventory.bag_contents.talisman_bag.data, "base64");
           const { parsed } = await nbt.parse(yourBytes);
 
-          const accesories = parsed.value.i?.value.value;
+          const accessories = parsed?.value?.i?.value?.value;
 
-          if (Array.isArray(accesories)) {
-            accesories.forEach((element) => {
-              const tag = element?.tag?.value;
-              const displayName = tag?.display?.value?.Name?.value;
-
-              if (displayName !== undefined) {
-                const itemName = displayName.replace(/§./g, '');
-                const item: accessoriesItem = {
-                  name: itemName,
-                };
-                accessoriesItem.push(item);
+          if (Array.isArray(accessories)) {
+            accessories.forEach((element) => {
+              const displayName = element?.tag?.value?.display?.value?.Name?.value;
+              if (displayName) {
+                playerAccessories.push(displayName.replace(/§./g, ''));
               }
             });
           }
 
-          //onsole.log(accessoriesItem);
+          console.log(playerAccessories);
         } catch (error) {
           console.error('Erreur lors du traitement de l’inventaire:', error);
         }
@@ -128,7 +121,7 @@ export default function ProfilePage() {
             });
           }
 
-          console.log(inventoryItems);
+          //console.log(inventoryItems);
         } catch (error) {
           console.error('Erreur lors du traitement de l’inventaire:', error);
         }
@@ -146,6 +139,7 @@ export default function ProfilePage() {
           profile: selectedProfile.cute_name,
           purse: playerPurse,
           bank: playerBank,
+          playerAccessories,
           farmingLvl,
           fishingLvl,
           miningLvl,

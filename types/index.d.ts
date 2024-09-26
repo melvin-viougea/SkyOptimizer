@@ -11,6 +11,9 @@ interface ProfileData {
   combatMaxLvl: number;
   purse: number;
   bank: number;
+  playerAccessories: Array<{
+    name: string;
+  }>;
 }
 
 declare interface RenderProps {
@@ -67,12 +70,12 @@ declare interface CustomError {
   message: string;
 }
 
-interface InventoryItem {
+declare interface InventoryItem {
   name: string;
   count: number;
   id: number;
 }
 
-interface accessoriesItem {
+declare interface accessoriesItem {
   name: string;
 }
