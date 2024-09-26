@@ -4,7 +4,7 @@ import {useParams} from "next/navigation";
 import React, {useEffect, useState} from "react";
 import {getSkillLevel} from "@/lib/function";
 import {Section} from "@/constants";
-import {fetchHypixelItems, fetchHypixelProfiles, fetchMojangData, fetchSkills} from "@/lib/fetch";
+import {fetchHypixelProfiles, fetchMojangData, fetchSkills} from "@/lib/fetch";
 import HomeRender from "@/components/HomeRender";
 import FarmingRender from "@/components/FarmingRender";
 import MinionsRender from "@/components/MinionsRender";
@@ -114,12 +114,14 @@ export default function ProfilePage() {
               const tag = element?.tag?.value;
               const displayName = tag?.display?.value?.Name?.value;
               const itemCount = element?.Count?.value;
+              const itemId = element?.value?.ExtraAttributes?.value?.id;
 
-              if (displayName && itemCount !== undefined) {
+              if (displayName && itemCount && itemId !== undefined) {
                 const itemName = displayName.replace(/§./g, '');
                 const item: InventoryItem = {
                   name: itemName,
                   count: itemCount,
+                  id: itemId,
                 };
                 inventoryItems.push(item);
               }
