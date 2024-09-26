@@ -4,7 +4,7 @@ import {useParams} from "next/navigation";
 import React, {useEffect, useState} from "react";
 import {getSkillLevel} from "@/lib/function";
 import {Section} from "@/constants";
-import {fetchHypixelProfiles, fetchMojangData, fetchSkills} from "@/lib/fetch";
+import {fetchHypixelItems, fetchHypixelProfiles, fetchMojangData, fetchSkills} from "@/lib/fetch";
 import HomeRender from "@/components/HomeRender";
 import FarmingRender from "@/components/FarmingRender";
 import MinionsRender from "@/components/MinionsRender";
@@ -95,7 +95,7 @@ export default function ProfilePage() {
             });
           }
 
-          console.log(accessoriesItem);
+          //onsole.log(accessoriesItem);
         } catch (error) {
           console.error('Erreur lors du traitement de l’inventaire:', error);
         }
@@ -114,7 +114,7 @@ export default function ProfilePage() {
               const tag = element?.tag?.value;
               const displayName = tag?.display?.value?.Name?.value;
               const itemCount = element?.Count?.value;
-              const itemId = element?.value?.ExtraAttributes?.value?.id;
+              const itemId = tag?.ExtraAttributes.value.id;
 
               if (displayName && itemCount && itemId !== undefined) {
                 const itemName = displayName.replace(/§./g, '');
@@ -128,7 +128,7 @@ export default function ProfilePage() {
             });
           }
 
-          //console.log(inventoryItems);
+          console.log(inventoryItems);
         } catch (error) {
           console.error('Erreur lors du traitement de l’inventaire:', error);
         }

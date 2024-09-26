@@ -70,6 +70,7 @@ declare interface CustomError {
 interface InventoryItem {
   name: string;
   count: number;
+  id: number;
 }
 
 interface accessoriesItem {
