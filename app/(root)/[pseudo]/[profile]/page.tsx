@@ -80,9 +80,13 @@ export default function ProfilePage() {
             itemName = itemName.replace(/§./g, '')
 
             let itemCount = element.Count.value
+
+            let itemId = element.tag.value.ExtraAttributes.value.id
+
             let item : any = []
             item['name'] = itemName
             item['count'] = itemCount
+            item['id'] = itemId
             inventoryItems.push(item)
           }
             }
