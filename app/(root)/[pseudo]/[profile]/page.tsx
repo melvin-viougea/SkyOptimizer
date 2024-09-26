@@ -61,9 +61,30 @@ export default function ProfilePage() {
           return;
         }
 
+
+
+        // INVENTAIRE------------------------------------------------
+        let inventoryItems : any = []
+
         let your_bytes = Buffer.from(selectedMember.inventory.inv_contents.data, "base64")
         const { parsed, type } = await nbt.parse(your_bytes)
-        console.log(parsed)
+
+        parsed.value.i.value.value.forEach((element,index) =>{
+          if(element.tag){
+            let itemName = element.tag.value.display.value.Name.value
+            itemName = itemName.replace(/§./g, '')
+
+            let itemCount = element.Count.value
+            let item : any = []
+            item['name'] = itemName
+            item['count'] = itemCount
+            inventoryItems.push(item)
+          }
+            }
+        )
+        console.log(inventoryItems)
+
+        //--------------------------------------------------------
 
         const { FARMING, FISHING, MINING, FORAGING, COMBAT } = hypixelSkills.skills;
         const farmingLvl = getSkillLevel(selectedMember.player_data.experience.SKILL_FARMING ?? 0, FARMING.levels);
@@ -140,7 +161,7 @@ export default function ProfilePage() {
   if (loading) {
     return (
       <div className="flex flex-col items-center justify-center gap-2 pt-5 min-h-screen">
-        <h1 className="text-4xl font-bold text-center">Loading...</h1>
+        <h1 className="text-4xl font-bold text-gray-200 text-center">Loading...</h1>
       </div>
     );
   }
