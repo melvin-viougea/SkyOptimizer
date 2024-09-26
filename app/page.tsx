@@ -60,7 +60,7 @@ export default function Home() {
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen gap-8 bg">
-      <div className="py-10 px-40 rounded-3xl bg-gray-800">
+      <div className="py-10 px-40 rounded-3xl bg-gray-800 text-gray-200">
         <div className="flex flex-col items-center gap-8   w-full max-w-md">
           <h1 className="text-4xl font-bold text-center">Show Optimizations For</h1>
           <input

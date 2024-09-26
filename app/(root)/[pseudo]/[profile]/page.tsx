@@ -159,8 +159,8 @@ export default function ProfilePage() {
 
   return (
     <div className="flex flex-col items-center justify-center gap-2 pt-5">
-      <h1 className="text-4xl font-bold text-center mb-5">Show Optimizations For :</h1>
-      <h1 className="text-2xl font-bold text-center">{profileData.pseudo} - {profileData.profile}</h1>
+      <h1 className="text-4xl font-bold text-center text-gray-200 mb-5">Show Optimizations For :</h1>
+      <h1 className="text-2xl font-bold text-center text-gray-200">{profileData.pseudo} - {profileData.profile}</h1>
       <div className="flex gap-8 py-4">
         {/* SKILLS */}
         <div className="flex gap-2">
