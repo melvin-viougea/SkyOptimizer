@@ -34,7 +34,9 @@ declare interface ProfilesResponse {
     cute_name: string;
     selected: boolean;
     profile_id: string;
-    members: { [key: string]: { player_data: { experience: { [skill: string]: number } } } };
+    members: { [key: string]: {
+        inventory: any; player_data: { experience: { [skill: string]: number } }
+      } };
   }>;
 }
 

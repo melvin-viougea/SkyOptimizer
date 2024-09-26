@@ -18,9 +18,12 @@ import BerserkRender from "@/components/BerserkRender";
 import TankRender from "@/components/TankRender";
 import HealerRender from "@/components/HealerRender";
 import ProgressionRender from "@/components/ProgressionRender";
+import { Buffer } from "buffer";
 
 export default function ProfilePage() {
   const { pseudo } = useParams();
+
+  const nbt = require('prismarine-nbt')
 
 
   const normalizedPseudo = Array.isArray(pseudo) ? pseudo[0] : pseudo;
@@ -58,6 +61,11 @@ export default function ProfilePage() {
           setError("Selected member not found");
           return;
         }
+
+        let your_bytes = Buffer.from(selectedMember.inventory.inv_contents.data, "base64")
+        const { parsed, type } = await nbt.parse(your_bytes)
+        console.log(parsed)
+
 
         const { FARMING, FISHING, MINING, FORAGING, COMBAT } = hypixelSkills.skills;
         const farmingLvl = getSkillLevel(selectedMember.player_data.experience.SKILL_FARMING ?? 0, FARMING.levels);

@@ -12,8 +12,10 @@
     "dotenv": "^16.4.5",
     "ky": "^1.7.2",
     "next": "14.2.13",
+    "prismarine-nbt": "^2.5.0",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "react-native-gzip": "^1.1.0"
   },
   "devDependencies": {
     "@types/node": "^20",
