@@ -65,11 +65,49 @@ export default function ProfilePage() {
         }
 
         // ALL AUCTIONS
+        const itemsResponse = await fetchHypixelItems();
+        const allItems = itemsResponse.items;
+
+        const bazaarResponse = await fetchBazaar();
+        const bazaarItems = Object.values(bazaarResponse.products);
+        let bazaarProduct: BazaarItem | null | undefined = null;
+
+
         const auctionResponse = await fetchHypixelAuction();
-        //onsole.log(auctionResponse.auctions);
+        let allAuctions: any[] = [];
+        auctionResponse.forEach((element2) => {
+          allAuctions.push(element2.auctions);
+        })
+
+
+        allItems.forEach((item) =>{
+          allAuctions.forEach((auctions) => {
+            auctions.forEach((auction: { item_name: string; starting_bid: number; }) => {
+              if(item.name === auction.item_name){
+                if(item.ahPrice !== undefined){
+                  if(item.ahPrice > auction.starting_bid){
+                    item.ahPrice = auction.starting_bid;
+                  }
+                } else {
+                  item.ahPrice = auction.starting_bid;
+                }
+              }
+            });
+          });
+          if(!("ahPrice" in item)){
+            bazaarItems.forEach((bazaar) => {
+              if(bazaar.product_id == item.id){
+                item.bzPrice = bazaar.quick_status?.buyPrice
+              }
+            })
+          }
+
+        });
+
+
+        // console.log(itemsResponse)
 
         // ALL ACCESSORIES
-        const itemsResponse = await fetchHypixelItems();
         const accessoryItems = itemsResponse.items.filter(item => item.category === "ACCESSORY");
         const talismanNames = accessoryItems.map(item => item.name);
 
@@ -86,15 +124,19 @@ export default function ProfilePage() {
           if (Array.isArray(accessories)) {
             const priceForAccessories: PriceForAccessories = {};
 
-            auctionResponse.auctions.forEach(auction => {
-              if (auction.bin) {
-                const itemName = auction.item_name;
-                const startingBid = auction.starting_bid;
-                if (!priceForAccessories[itemName] || startingBid < priceForAccessories[itemName]) {
-                  priceForAccessories[itemName] = startingBid;
-                }
-              }
-            });
+
+            //MODULABLE (CHECK CALCUL NETWORTH INVENTAIRE)
+            // console.log(auctionResponse)
+            // auctionResponse.auctions.forEach(auction => {
+            //   if (auction.bin) {
+            //     const itemName = auction.item_name;
+            //     const startingBid = auction.starting_bid;
+            //     if (!priceForAccessories[itemName] || startingBid < priceForAccessories[itemName]) {
+            //       priceForAccessories[itemName] = startingBid;
+            //     }
+            //   }
+            // });
+            //MODULABLE FIN (CHECK CALCUL NETWORTH INVENTAIRE)
 
             accessories.forEach((element) => {
               const displayName = element?.tag?.value?.display?.value?.Name?.value;
@@ -125,11 +167,8 @@ export default function ProfilePage() {
         }
 
         // INVENTAIRE------------------------------------------------
-        const bazaarResponse = await fetchBazaar();
-        const bazaarItems = Object.values(bazaarResponse.products);
-        let bazaarProduct: BazaarItem | null | undefined = null;
         let inventoryItems: InventoryItem[] = [];
-        const allItems = itemsResponse.items;
+
 
         try {
           const yourBytes = Buffer.from(selectedMember.inventory.inv_contents.data, "base64");

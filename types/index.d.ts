@@ -64,9 +64,11 @@ interface HypixelSkillsResponse {
 
 // Hypixel Item Interface (used for auction and item responses)
 interface HypixelItem {
+  bzPrice: number;
   name: string;
   category: string;
   id: string;
+  ahPrice: number;
 }
 
 // Hypixel Items Response Interface (all items from Hypixel API)
@@ -76,6 +78,8 @@ interface HypixelItemsResponse {
 
 // Hypixel Auction Response Interface (auctions data from Hypixel API)
 interface HypixelAuctionResponse {
+  totalAuctions: number;
+  totalPages: number;
   auctions: Array<{
     item_name: string;
     starting_bid: number;
