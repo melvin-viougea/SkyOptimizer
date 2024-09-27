@@ -1,6 +1,6 @@
-import React, { FC } from "react";
+import React, {FC} from "react";
 
-const MiningRender: FC<RenderProps> = ({ profileData }) => {
+const MiningRender: FC<RenderProps> = ({profileData}) => {
   if (!profileData) return null;
 
   return (

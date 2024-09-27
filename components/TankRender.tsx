@@ -1,6 +1,6 @@
-import React, { FC } from "react";
+import React, {FC} from "react";
 
-const TankRender: FC<RenderProps> = ({ profileData }) => {
+const TankRender: FC<RenderProps> = ({profileData}) => {
   if (!profileData) return null;
 
   return (

@@ -1,6 +1,6 @@
-import React, { FC } from "react";
+import React, {FC} from "react";
 
-const FarmingRender: FC<RenderProps> = ({ profileData }) => {
+const FarmingRender: FC<RenderProps> = ({profileData}) => {
   if (!profileData) return null;
 
   return (

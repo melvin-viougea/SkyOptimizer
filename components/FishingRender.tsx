@@ -1,6 +1,6 @@
-import React, { FC } from "react";
+import React, {FC} from "react";
 
-const FishingRender: FC<RenderProps> = ({ profileData }) => {
+const FishingRender: FC<RenderProps> = ({profileData}) => {
   if (!profileData) return null;
 
   return (

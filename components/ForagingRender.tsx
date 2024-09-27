@@ -1,6 +1,6 @@
-import React, { FC } from "react";
+import React, {FC} from "react";
 
-const ForagingRender: FC<RenderProps> = ({ profileData }) => {
+const ForagingRender: FC<RenderProps> = ({profileData}) => {
   if (!profileData) return null;
 
   return (

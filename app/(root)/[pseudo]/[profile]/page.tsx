@@ -4,7 +4,7 @@ import {useParams} from "next/navigation";
 import React, {useEffect, useState} from "react";
 import {getSkillLevel} from "@/lib/function";
 import {Section} from "@/constants";
-import {fetchBazaar, fetchHypixelItems, fetchHypixelAuction, fetchHypixelProfiles, fetchMojangData, fetchSkills} from "@/lib/fetch";
+import {fetchBazaar, fetchHypixelAuction, fetchHypixelItems, fetchHypixelProfiles, fetchMojangData, fetchSkills} from "@/lib/fetch";
 import HomeRender from "@/components/HomeRender";
 import FarmingRender from "@/components/FarmingRender";
 import MinionsRender from "@/components/MinionsRender";
@@ -80,12 +80,12 @@ export default function ProfilePage() {
         })
 
 
-        allItems.forEach((item) =>{
+        allItems.forEach((item) => {
           allAuctions.forEach((auctions) => {
             auctions.forEach((auction: { item_name: string; starting_bid: number; }) => {
-              if(item.name === auction.item_name){
-                if(item.ahPrice !== undefined){
-                  if(item.ahPrice > auction.starting_bid){
+              if (item.name === auction.item_name) {
+                if (item.ahPrice !== undefined) {
+                  if (item.ahPrice > auction.starting_bid) {
                     item.ahPrice = auction.starting_bid;
                   }
                 } else {
@@ -94,9 +94,9 @@ export default function ProfilePage() {
               }
             });
           });
-          if(!("ahPrice" in item)){
+          if (!("ahPrice" in item)) {
             bazaarItems.forEach((bazaar) => {
-              if(bazaar.product_id == item.id){
+              if (bazaar.product_id == item.id) {
                 item.bzPrice = bazaar.quick_status?.buyPrice
               }
             })
@@ -126,18 +126,18 @@ export default function ProfilePage() {
               const priceForAccessories: PriceForAccessories = {};
 
 
-            //MODULABLE (CHECK CALCUL NETWORTH INVENTAIRE)
-            // console.log(auctionResponse)
-            // auctionResponse.auctions.forEach(auction => {
-            //   if (auction.bin) {
-            //     const itemName = auction.item_name;
-            //     const startingBid = auction.starting_bid;
-            //     if (!priceForAccessories[itemName] || startingBid < priceForAccessories[itemName]) {
-            //       priceForAccessories[itemName] = startingBid;
-            //     }
-            //   }
-            // });
-            //MODULABLE FIN (CHECK CALCUL NETWORTH INVENTAIRE)
+              //MODULABLE (CHECK CALCUL NETWORTH INVENTAIRE)
+              // console.log(auctionResponse)
+              // auctionResponse.auctions.forEach(auction => {
+              //   if (auction.bin) {
+              //     const itemName = auction.item_name;
+              //     const startingBid = auction.starting_bid;
+              //     if (!priceForAccessories[itemName] || startingBid < priceForAccessories[itemName]) {
+              //       priceForAccessories[itemName] = startingBid;
+              //     }
+              //   }
+              // });
+              //MODULABLE FIN (CHECK CALCUL NETWORTH INVENTAIRE)
 
               accessoriesItems.forEach((element: any) => {
                 if (element.tag && typeof element.tag === 'object' && 'value' in element.tag) {
@@ -169,7 +169,7 @@ export default function ProfilePage() {
         }
 
 
-// INVENTAIRE------------------------------------------------
+        // INVENTAIRE------------------------------------------------
         let inventoryItems: InventoryItem[] = [];
 
 

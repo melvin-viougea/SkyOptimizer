@@ -1,6 +1,6 @@
-import React, { FC } from "react";
+import React, {FC} from "react";
 
-const BerserkRender: FC<RenderProps> = ({ profileData }) => {
+const BerserkRender: FC<RenderProps> = ({profileData}) => {
   if (!profileData) return null;
 
   return (

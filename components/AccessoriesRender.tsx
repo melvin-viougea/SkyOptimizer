@@ -1,6 +1,6 @@
-import React, { FC } from "react";
+import React, {FC} from "react";
 
-const AccessoriesRender: FC<RenderProps> = ({ profileData }) => {
+const AccessoriesRender: FC<RenderProps> = ({profileData}) => {
   if (!profileData) return null;
 
   return (

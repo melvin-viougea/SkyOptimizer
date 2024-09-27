@@ -1,6 +1,6 @@
-import React, { FC } from "react";
+import React, {FC} from "react";
 
-const MinionsRender: FC<RenderProps> = ({ profileData }) => {
+const MinionsRender: FC<RenderProps> = ({profileData}) => {
   if (!profileData) return null;
 
   return (

@@ -1,6 +1,6 @@
-import React, { FC } from "react";
+import React, {FC} from "react";
 
-const ProgressionRender: FC<RenderProps> = ({ profileData }) => {
+const ProgressionRender: FC<RenderProps> = ({profileData}) => {
   if (!profileData) return null;
 
   return (
