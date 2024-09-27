@@ -142,6 +142,9 @@ interface HypixelBazaarResponse {
 }
 
 interface BazaarItem {
+  quick_status: {
+    buyPrice: number;
+  }
   product_id: any;
 }
 

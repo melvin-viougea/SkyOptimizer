@@ -66,7 +66,7 @@ export default function ProfilePage() {
 
         // ALL AUCTIONS
         const auctionResponse = await fetchHypixelAuction();
-        //onsole.log(auctionResponse.auctions);
+        console.log(auctionResponse.auctions);
 
         // ALL ACCESSORIES
         const itemsResponse = await fetchHypixelItems();
