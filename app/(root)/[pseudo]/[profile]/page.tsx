@@ -4,7 +4,7 @@ import {useParams} from "next/navigation";
 import React, {useEffect, useState} from "react";
 import {getSkillLevel} from "@/lib/function";
 import {Section} from "@/constants";
-import {fetchHypixelItems, fetchHypixelProfiles, fetchMojangData, fetchSkills} from "@/lib/fetch";
+import {fetchBazaar, fetchHypixelItems, fetchHypixelProfiles, fetchMojangData, fetchSkills} from "@/lib/fetch";
 import HomeRender from "@/components/HomeRender";
 import FarmingRender from "@/components/FarmingRender";
 import MinionsRender from "@/components/MinionsRender";
@@ -88,13 +88,17 @@ export default function ProfilePage() {
             });
           }
 
-          console.log(playerAccessories);
+          // console.log(playerAccessories);
         } catch (error) {
           console.error('Erreur lors du traitement de l’inventaire:', error);
         }
 
         // INVENTAIRE------------------------------------------------
+        const bazaarResponse = await fetchBazaar();
+        const bazaarItems = Object.values(bazaarResponse.products);
+        let bazaarProduct: BazaarItem | null | undefined = null;
         let inventoryItems: InventoryItem[] = [];
+        const allItems = itemsResponse.items;
 
         try {
           const yourBytes = Buffer.from(selectedMember.inventory.inv_contents.data, "base64");
@@ -107,7 +111,27 @@ export default function ProfilePage() {
               const tag = element?.tag?.value;
               const displayName = tag?.display?.value?.Name?.value;
               const itemCount = element?.Count?.value;
-              const itemId = tag?.ExtraAttributes.value.id;
+              const itemId = tag?.ExtraAttributes.value.id.value;
+              let sellableItem = true;
+              let bazaarPrice: number = 0;
+
+              allItems.forEach((element2) => {
+                if(itemId === element2.id){
+                  if("can_auction" in element2 || itemId == "SKYBLOCK_MENU"){
+                    sellableItem = false;
+                  }
+                }
+              })
+
+              if(sellableItem){
+                bazaarItems.forEach((element3) => {
+                  if(element3.product_id == itemId){
+                    bazaarProduct = element3;
+                    bazaarPrice = bazaarProduct.quick_status?.buyPrice
+                  }
+                })
+              }
+
 
               if (displayName && itemCount && itemId !== undefined) {
                 const itemName = displayName.replace(/§./g, '');
@@ -115,6 +139,8 @@ export default function ProfilePage() {
                   name: itemName,
                   count: itemCount,
                   id: itemId,
+                  sellable: sellableItem,
+                  bazaarPrice: bazaarPrice
                 };
                 inventoryItems.push(item);
               }

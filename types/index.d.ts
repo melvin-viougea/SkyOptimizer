@@ -74,6 +74,18 @@ declare interface InventoryItem {
   name: string;
   count: number;
   id: number;
+  sellable: boolean;
+  bazaarPrice: number;
+}
+
+interface HypixelBazaarResponse {
+  success: boolean;
+  lastUpdated: number;
+  products: BazaarItem[];
+}
+
+interface BazaarItem {
+  product_id: any;
 }
 
 declare interface accessoriesItem {

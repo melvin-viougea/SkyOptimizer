@@ -12,6 +12,10 @@ export const fetchMojangData = async (pseudo: string): Promise<MojangResponse> =
   return await ky.get(`https://api.ashcon.app/mojang/v2/user/${pseudo}`).json();
 };
 
+export const fetchBazaar = async (): Promise<HypixelBazaarResponse> => {
+  return await ky.get(`https://api.hypixel.net/v2/skyblock/bazaar`).json();
+};
+
 export const fetchHypixelProfiles = async (playerUuid: string): Promise<ProfilesResponse> => {
   return await ky.get(`https://api.hypixel.net/v2/skyblock/profiles?uuid=${playerUuid}`, {
     headers: {
