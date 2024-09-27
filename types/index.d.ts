@@ -1,18 +1,15 @@
-// Accessory Item Interface
-interface accessoriesItem {
+declare interface accessoriesItem {
   name: string;
   lowestBin?: number;
 }
 
-// Inventory Item Interface
-interface InventoryItem {
+declare interface InventoryItem {
   name: string;
   count: number;
   id: string;
 }
 
-// Profile Data Interface
-interface ProfileData {
+declare interface ProfileData {
   pseudo: string;
   profile: string;
   farmingLvl: number;
@@ -31,13 +28,11 @@ interface ProfileData {
   playerAccessoriesNetworth: number;
 }
 
-// Render Props Interface (used for rendering components)
-interface RenderProps {
+declare interface RenderProps {
   profileData: ProfileData;
 }
 
-// Hypixel Skills Response Interface (skills data from Hypixel API)
-interface HypixelSkillsResponse {
+declare interface HypixelSkillsResponse {
   skills: {
     FARMING: {
       levels: number[];
@@ -62,20 +57,17 @@ interface HypixelSkillsResponse {
   };
 }
 
-// Hypixel Item Interface (used for auction and item responses)
-interface HypixelItem {
+declare interface HypixelItem {
   name: string;
   category: string;
   id: string;
 }
 
-// Hypixel Items Response Interface (all items from Hypixel API)
-interface HypixelItemsResponse {
+declare interface HypixelItemsResponse {
   items: HypixelItem[];
 }
 
-// Hypixel Auction Response Interface (auctions data from Hypixel API)
-interface HypixelAuctionResponse {
+declare interface HypixelAuctionResponse {
   auctions: Array<{
     item_name: string;
     starting_bid: number;
@@ -83,13 +75,11 @@ interface HypixelAuctionResponse {
   }>;
 }
 
-// Mojang Response Interface (used for getting player UUID from Mojang API)
-interface MojangResponse {
+declare interface MojangResponse {
   uuid: string;
 }
 
-// Profiles Response Interface (contains profile and members data from Hypixel API)
-interface ProfilesResponse {
+declare interface ProfilesResponse {
   profiles: Array<{
     cute_name: string;
     selected: boolean;
@@ -122,8 +112,7 @@ interface ProfilesResponse {
   }>;
 }
 
-// Custom Error Interface (used for handling errors)
-interface CustomError {
+declare interface CustomError {
   message: string;
 }
 
@@ -135,13 +124,13 @@ declare interface InventoryItem {
   bazaarPrice: number;
 }
 
-interface HypixelBazaarResponse {
+declare interface HypixelBazaarResponse {
   success: boolean;
   lastUpdated: number;
   products: BazaarItem[];
 }
 
-interface BazaarItem {
+declare interface BazaarItem {
   quick_status: {
     buyPrice: number;
   }
@@ -152,7 +141,15 @@ declare interface accessoriesItem {
   name: string;
 }
 
-// Define the type with an index signature
+declare interface PriceForAccessories {
+  [key: string]: number;
+}
+
+declare interface accessoriesItem {
+  name: string;
+  lowestBin?: number;
+}
+
 declare interface PriceForAccessories {
   [key: string]: number;
 }
