@@ -1,4 +1,20 @@
+// Accessory Item Interface
+interface accessoriesItem {
+  name: string;
+  lowestBin?: number;
+}
+
+// Inventory Item Interface
+interface InventoryItem {
+  name: string;
+  count: number;
+  id: string;
+}
+
+// Profile Data Interface
 interface ProfileData {
+  pseudo: string;
+  profile: string;
   farmingLvl: number;
   farmingMaxLvl: number;
   fishingLvl: number;
@@ -11,42 +27,69 @@ interface ProfileData {
   combatMaxLvl: number;
   purse: number;
   bank: number;
-  playerAccessories: Array<{
-    name: string;
-  }>;
+  playerAccessories: accessoriesItem[];
+  playerAccessoriesNetworth: number;
 }
 
-declare interface RenderProps {
-  profileData: ProfileData | null;
+// Render Props Interface (used for rendering components)
+interface RenderProps {
+  profileData: ProfileData;
 }
 
-declare interface HypixelSkillsResponse {
+// Hypixel Skills Response Interface (skills data from Hypixel API)
+interface HypixelSkillsResponse {
   skills: {
-    FARMING: { levels: number[], maxLevel: number };
-    FISHING: { levels: number[], maxLevel: number };
-    MINING: { levels: number[], maxLevel: number };
-    FORAGING: { levels: number[], maxLevel: number };
-    COMBAT: { levels: number[], maxLevel: number };
+    FARMING: {
+      levels: number[];
+      maxLevel: number;
+    };
+    FISHING: {
+      levels: number[];
+      maxLevel: number;
+    };
+    MINING: {
+      levels: number[];
+      maxLevel: number;
+    };
+    FORAGING: {
+      levels: number[];
+      maxLevel: number;
+    };
+    COMBAT: {
+      levels: number[];
+      maxLevel: number;
+    };
   };
 }
 
+// Hypixel Item Interface (used for auction and item responses)
 interface HypixelItem {
   name: string;
   category: string;
   id: string;
 }
 
+// Hypixel Items Response Interface (all items from Hypixel API)
 interface HypixelItemsResponse {
-  success: boolean;
-  lastUpdated: number;
   items: HypixelItem[];
 }
 
-declare interface MojangResponse {
+// Hypixel Auction Response Interface (auctions data from Hypixel API)
+interface HypixelAuctionResponse {
+  auctions: Array<{
+    item_name: string;
+    starting_bid: number;
+    bin: boolean;
+  }>;
+}
+
+// Mojang Response Interface (used for getting player UUID from Mojang API)
+interface MojangResponse {
   uuid: string;
 }
 
-declare interface ProfilesResponse {
+// Profiles Response Interface (contains profile and members data from Hypixel API)
+interface ProfilesResponse {
   profiles: Array<{
     cute_name: string;
     selected: boolean;
@@ -54,28 +97,37 @@ declare interface ProfilesResponse {
     banking: {
       balance: number;
     };
-    members: { [key: string]: {
+    members: {
+      [key: string]: {
         currencies: {
           coin_purse: number;
         };
-        inventory: any;
-        player_data: {
-          experience: { [skill: string]: number }
+        inventory: {
+          inv_contents: {
+            data: string;
+          };
+          bag_contents: {
+            talisman_bag: {
+              data: string;
+            };
+          };
         };
-      } };
+        player_data: {
+          experience: {
+            [skill: string]: number;
+          };
+        };
+      };
+    };
   }>;
 }
 
-declare interface CustomError {
+// Custom Error Interface (used for handling errors)
+interface CustomError {
   message: string;
 }
 
-declare interface InventoryItem {
-  name: string;
-  count: number;
-  id: number;
-}
-
-declare interface accessoriesItem {
-  name: string;
+// Define the type with an index signature
+declare interface PriceForAccessories {
+  [key: string]: number;
 }

@@ -1,7 +1,6 @@
-import React, {FC} from "react";
-import {formatToMillions} from "@/lib/function";
+import React, { FC } from "react";
 
-const AccessoriesRender: FC<RenderProps> = ({profileData}) => {
+const AccessoriesRender: FC<RenderProps> = ({ profileData }) => {
   if (!profileData) return null;
 
   return (
@@ -13,14 +12,16 @@ const AccessoriesRender: FC<RenderProps> = ({profileData}) => {
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
           {profileData.playerAccessories.map((accessory, index) => (
             <div key={index} className="p-2 bg-gray-700 rounded-lg text-center">
-              {accessory}
+              <p className="text-lg font-semibold">{accessory.name}</p>
+              {accessory.lowestBin !== undefined && (
+                <p className="font-bold text-sm text-yellow">Lowest Bin: {accessory.lowestBin}</p>
+              )}
             </div>
           ))}
         </div>
       </div>
     </div>
-  )
-    ;
+  );
 };
 
 export default AccessoriesRender;

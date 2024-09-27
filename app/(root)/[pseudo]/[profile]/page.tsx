@@ -4,7 +4,7 @@ import {useParams} from "next/navigation";
 import React, {useEffect, useState} from "react";
 import {getSkillLevel} from "@/lib/function";
 import {Section} from "@/constants";
-import {fetchHypixelItems, fetchHypixelProfiles, fetchMojangData, fetchSkills} from "@/lib/fetch";
+import {fetchHypixelItems, fetchHypixelAuction, fetchHypixelProfiles, fetchMojangData, fetchSkills} from "@/lib/fetch";
 import HomeRender from "@/components/HomeRender";
 import FarmingRender from "@/components/FarmingRender";
 import MinionsRender from "@/components/MinionsRender";
@@ -64,14 +64,18 @@ export default function ProfilePage() {
           return;
         }
 
+        // ALL AUCTIONS
+        const auctionResponse = await fetchHypixelAuction();
+        //onsole.log(auctionResponse.auctions);
 
-      // ALL ACCESSORIES
+        // ALL ACCESSORIES
         const itemsResponse = await fetchHypixelItems();
         const accessoryItems = itemsResponse.items.filter(item => item.category === "ACCESSORY");
         const talismanNames = accessoryItems.map(item => item.name);
 
         // PLAYER ACCESSORIES
         let playerAccessories: accessoriesItem[] = [];
+        let playerAccessoriesNetworth = 0;
 
         try {
           const yourBytes = Buffer.from(selectedMember.inventory.bag_contents.talisman_bag.data, "base64");
@@ -80,15 +84,40 @@ export default function ProfilePage() {
           const accessories = parsed?.value?.i?.value?.value;
 
           if (Array.isArray(accessories)) {
+            const priceForAccessories: PriceForAccessories = {};
+
+            auctionResponse.auctions.forEach(auction => {
+              if (auction.bin) {
+                const itemName = auction.item_name;
+                const startingBid = auction.starting_bid;
+                if (!priceForAccessories[itemName] || startingBid < priceForAccessories[itemName]) {
+                  priceForAccessories[itemName] = startingBid;
+                }
+              }
+            });
+
             accessories.forEach((element) => {
               const displayName = element?.tag?.value?.display?.value?.Name?.value;
-              if (displayName) {
-                playerAccessories.push(displayName.replace(/§./g, ''));
+
+              const cleanedDisplayName = displayName?.replace(/§./g, '');
+
+              const lowestBin = priceForAccessories[cleanedDisplayName];
+
+              if (cleanedDisplayName && lowestBin !== undefined) {
+                const item: accessoriesItem = {
+                  name: cleanedDisplayName,
+                  lowestBin: lowestBin,
+                };
+                playerAccessories.push(item);
+                playerAccessoriesNetworth += lowestBin;
+              } else {
+                const item: accessoriesItem = {
+                  name: cleanedDisplayName,
+                };
+                playerAccessories.push(item);
               }
             });
           }
-
-          console.log(playerAccessories);
         } catch (error) {
           console.error('Erreur lors du traitement de l’inventaire:', error);
         }
@@ -140,6 +169,7 @@ export default function ProfilePage() {
           purse: playerPurse,
           bank: playerBank,
           playerAccessories,
+          playerAccessoriesNetworth,
           farmingLvl,
           fishingLvl,
           miningLvl,
