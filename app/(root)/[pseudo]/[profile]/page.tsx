@@ -2,7 +2,7 @@
 
 import {useParams} from "next/navigation";
 import React, {useEffect, useState} from "react";
-import {getSkillLevel} from "@/lib/function";
+import {fetchAndProcessData, getSkillLevel} from "@/lib/function";
 import {Section} from "@/constants";
 import {fetchBazaar, fetchHypixelAuction, fetchHypixelItems, fetchHypixelProfiles, fetchMojangData, fetchSkills} from "@/lib/fetch";
 import HomeRender from "@/components/HomeRender";
@@ -64,49 +64,13 @@ export default function ProfilePage() {
           return;
         }
 
-        // ALL AUCTIONS
-        const itemsResponse = await fetchHypixelItems();
-        const allItems = itemsResponse.items;
-
-        const bazaarResponse = await fetchBazaar();
-        const bazaarItems = Object.values(bazaarResponse.products);
-        let bazaarProduct: BazaarItem | null | undefined = null;
-
-
-        const auctionResponse = await fetchHypixelAuction();
-        let allAuctions: any[] = [];
-        auctionResponse.forEach((element2) => {
-          allAuctions.push(element2.auctions);
-        })
-
-
-        allItems.forEach((item) => {
-          allAuctions.forEach((auctions) => {
-            auctions.forEach((auction: { item_name: string; starting_bid: number; }) => {
-              if (item.name === auction.item_name) {
-                if (item.ahPrice !== undefined) {
-                  if (item.ahPrice > auction.starting_bid) {
-                    item.ahPrice = auction.starting_bid;
-                  }
-                } else {
-                  item.ahPrice = auction.starting_bid;
-                }
-              }
-            });
-          });
-          if (!("ahPrice" in item)) {
-            bazaarItems.forEach((bazaar) => {
-              if (bazaar.product_id == item.id) {
-                item.bzPrice = bazaar.quick_status?.buyPrice
-              }
-            })
-          }
-        });
-        // console.log(itemsResponse)
+        // ALL ITEMS
+        const allItems = await fetchAndProcessData();
+        console.log(allItems)
 
         // ALL ACCESSORIES
-        const accessoryItems = itemsResponse.items.filter(item => item.category === "ACCESSORY");
-        const talismanNames = accessoryItems.map(item => item.name);
+        // const accessoryItems = allItems.items.filter(item => item.category === "ACCESSORY");
+        // const talismanNames = accessoryItems.map(item => item.name);
 
         // PLAYER ACCESSORIES
         let playerAccessories: accessoriesItem[] = [];
@@ -199,14 +163,14 @@ export default function ProfilePage() {
                     }
                   });
 
-                  if (sellableItem) {
-                    bazaarItems.forEach((element3) => {
-                      if (element3.product_id === itemId) {
-                        bazaarProduct = element3;
-                        bazaarPrice = bazaarProduct?.quick_status?.buyPrice ?? 0;
-                      }
-                    });
-                  }
+                  // if (sellableItem) {
+                  //   bazaarItems.forEach((element3) => {
+                  //     if (element3.product_id === itemId) {
+                  //       bazaarProduct = element3;
+                  //       bazaarPrice = bazaarProduct?.quick_status?.buyPrice ?? 0;
+                  //     }
+                  //   });
+                  // }
 
                   if (cleanedDisplayName && itemCount !== undefined && itemId !== undefined) {
                     const item: InventoryItem = {
