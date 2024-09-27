@@ -101,10 +101,7 @@ export default function ProfilePage() {
               }
             })
           }
-
         });
-
-
         // console.log(itemsResponse)
 
         // ALL ACCESSORIES

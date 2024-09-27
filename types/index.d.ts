@@ -7,6 +7,8 @@ declare interface InventoryItem {
   name: string;
   count: number;
   id: string;
+  sellable: boolean;
+  bazaarPrice?: number;
 }
 
 declare interface ProfileData {
@@ -58,11 +60,11 @@ declare interface HypixelSkillsResponse {
 }
 
 declare interface HypixelItem {
-  bzPrice: number;
+  bzPrice?: number;
   name: string;
   category: string;
   id: string;
-  ahPrice: number;
+  ahPrice?: number;
 }
 
 declare interface HypixelItemsResponse {
@@ -131,14 +133,16 @@ declare interface InventoryItem {
 declare interface HypixelBazaarResponse {
   success: boolean;
   lastUpdated: number;
-  products: BazaarItem[];
+  products: {
+    [key: string]: BazaarItem;
+  }
 }
 
 declare interface BazaarItem {
   quick_status: {
     buyPrice: number;
   }
-  product_id: any;
+  product_id: string;
 }
 
 declare interface accessoriesItem {
