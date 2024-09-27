@@ -78,53 +78,58 @@ export default function ProfilePage() {
         let playerAccessoriesNetworth = 0;
 
         try {
-          const yourBytes = Buffer.from(selectedMember.inventory.bag_contents.talisman_bag.data, "base64");
-          const { parsed } = await nbt.parse(yourBytes);
+          const inventoryData = selectedMember?.inventory?.bag_contents?.talisman_bag?.data;
 
-          const accessories = parsed?.value?.i?.value?.value;
+          if (inventoryData) {
+            const decodedBytes = Buffer.from(inventoryData, "base64");
+            const nbtDecoded = await nbt.parse(decodedBytes);
+            const accessories = nbtDecoded?.parsed?.value?.i?.value;
 
-          if (Array.isArray(accessories)) {
-            const priceForAccessories: PriceForAccessories = {};
+            if (accessories && typeof accessories === 'object' && 'value' in accessories) {
+              const accessoriesItems = accessories.value as any[];
 
-            auctionResponse.auctions.forEach(auction => {
-              if (auction.bin) {
-                const itemName = auction.item_name;
-                const startingBid = auction.starting_bid;
-                if (!priceForAccessories[itemName] || startingBid < priceForAccessories[itemName]) {
-                  priceForAccessories[itemName] = startingBid;
+              const priceForAccessories: PriceForAccessories = {};
+
+              auctionResponse.auctions
+                .filter(auction => auction.bin)
+                .forEach(auction => {
+                  const { item_name, starting_bid } = auction;
+                  if (!priceForAccessories[item_name] || starting_bid < priceForAccessories[item_name]) {
+                    priceForAccessories[item_name] = starting_bid;
+                  }
+                });
+
+              accessoriesItems.forEach((element: any) => {
+                if (element.tag && typeof element.tag === 'object' && 'value' in element.tag) {
+                  const displayName = element.tag.value?.display?.value?.Name?.value;
+
+                  if (typeof displayName === 'string') {
+                    const cleanedDisplayName = displayName.replace(/§./g, '');
+
+                    if (cleanedDisplayName) {
+                      const lowestBin = priceForAccessories[cleanedDisplayName];
+
+                      const accessoryItem: accessoriesItem = {
+                        name: cleanedDisplayName,
+                        lowestBin: lowestBin ?? undefined,
+                      };
+
+                      playerAccessories.push(accessoryItem);
+                      if (lowestBin) {
+                        playerAccessoriesNetworth += lowestBin;
+                      }
+                    }
+                  }
                 }
-              }
-            });
-
-            accessories.forEach((element) => {
-              const displayName = element?.tag?.value?.display?.value?.Name?.value;
-
-              const cleanedDisplayName = displayName?.replace(/§./g, '');
-
-              const lowestBin = priceForAccessories[cleanedDisplayName];
-
-              if (cleanedDisplayName && lowestBin !== undefined) {
-                const item: accessoriesItem = {
-                  name: cleanedDisplayName,
-                  lowestBin: lowestBin,
-                };
-                playerAccessories.push(item);
-                playerAccessoriesNetworth += lowestBin;
-              } else {
-                const item: accessoriesItem = {
-                  name: cleanedDisplayName,
-                };
-                playerAccessories.push(item);
-              }
-            });
+              });
+            }
           }
-
-          // console.log(playerAccessories);
         } catch (error) {
-          console.error('Erreur lors du traitement de l’inventaire:', error);
+          console.error('Error processing the inventory:', error);
         }
 
-        // INVENTAIRE------------------------------------------------
+
+// INVENTAIRE------------------------------------------------
         const bazaarResponse = await fetchBazaar();
         const bazaarItems = Object.values(bazaarResponse.products);
         let bazaarProduct: BazaarItem | null | undefined = null;
@@ -133,55 +138,57 @@ export default function ProfilePage() {
 
         try {
           const yourBytes = Buffer.from(selectedMember.inventory.inv_contents.data, "base64");
-          const { parsed } = await nbt.parse(yourBytes);
+          const nbtDecoded = await nbt.parse(yourBytes);
 
-          const inventory = parsed.value.i?.value.value;
+          const inventory = nbtDecoded?.parsed?.value?.i?.value;
 
           if (Array.isArray(inventory)) {
-            inventory.forEach((element) => {
-              const tag = element?.tag?.value;
-              const displayName = tag?.display?.value?.Name?.value;
-              const itemCount = element?.Count?.value;
-              const itemId = tag?.ExtraAttributes.value.id.value;
-              let sellableItem = true;
-              let bazaarPrice: number = 0;
+            inventory.forEach((element: any) => {
+              if (element.tag && typeof element.tag === 'object' && 'value' in element.tag) {
+                const displayName = element.tag.value?.display?.value?.Name?.value;
 
-              allItems.forEach((element2) => {
-                if(itemId === element2.id){
-                  if("can_auction" in element2 || itemId == "SKYBLOCK_MENU"){
-                    sellableItem = false;
+                if (typeof displayName === 'string') {
+                  const cleanedDisplayName = displayName.replace(/§./g, '');
+                  const itemCount = element?.Count?.value;
+                  const itemId = element.tag?.ExtraAttributes?.value?.id?.value;
+                  let sellableItem = true;
+                  let bazaarPrice: number = 0;
+
+                  allItems.forEach((element2) => {
+                    if (itemId === element2.id) {
+                      if ("can_auction" in element2 || itemId === "SKYBLOCK_MENU") {
+                        sellableItem = false;
+                      }
+                    }
+                  });
+
+                  if (sellableItem) {
+                    bazaarItems.forEach((element3) => {
+                      if (element3.product_id === itemId) {
+                        bazaarProduct = element3;
+                        bazaarPrice = bazaarProduct?.quick_status?.buyPrice ?? 0;
+                      }
+                    });
+                  }
+
+                  if (cleanedDisplayName && itemCount !== undefined && itemId !== undefined) {
+                    const item: InventoryItem = {
+                      name: cleanedDisplayName,
+                      count: itemCount,
+                      id: itemId,
+                      sellable: sellableItem,
+                      bazaarPrice: bazaarPrice
+                    };
+                    inventoryItems.push(item);
                   }
                 }
-              })
-
-              if(sellableItem){
-                bazaarItems.forEach((element3) => {
-                  if(element3.product_id == itemId){
-                    bazaarProduct = element3;
-                    bazaarPrice = bazaarProduct.quick_status?.buyPrice
-                  }
-                })
-              }
-
-
-              if (displayName && itemCount && itemId !== undefined) {
-                const itemName = displayName.replace(/§./g, '');
-                const item: InventoryItem = {
-                  name: itemName,
-                  count: itemCount,
-                  id: itemId,
-                  sellable: sellableItem,
-                  bazaarPrice: bazaarPrice
-                };
-                inventoryItems.push(item);
               }
             });
           }
-
-          //console.log(inventoryItems);
         } catch (error) {
           console.error('Erreur lors du traitement de l’inventaire:', error);
         }
+
         //--------------------------------------------------------
 
         const {FARMING, FISHING, MINING, FORAGING, COMBAT} = hypixelSkills.skills;
