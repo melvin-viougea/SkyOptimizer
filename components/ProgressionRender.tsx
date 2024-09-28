@@ -1,24 +1,64 @@
 import React, {FC} from "react";
+import {formatToPrice} from "@/lib/function";
 
-const ProgressionRender: FC<RenderProps> = ({profileData}) => {
+interface RenderProps {
+  profileData: {
+    networth: number;
+  };
+}
+
+const ProgressionRender: FC<RenderProps> = ({ profileData }) => {
   if (!profileData) return null;
 
   return (
     <div className="w-[75vw] rounded-3xl bg-gray-800 text-gray-200 p-5 m-5">
-      <h1 className="text-2xl font-bold underline decoration-wavy decoration-yellow decoration-4 underline-offset-8 mb-5">Progression Optimizer :</h1>
-      <div className="bg-red-400 text-gray-800 rounded-lg p-5 w-1/2 mx-auto text-center">
+      <h1 className="text-2xl font-bold underline decoration-wavy decoration-yellow decoration-4 underline-offset-8 mb-5">
+        Progression Optimizer :
+      </h1>
+
+      {/* Step 1 */}
+      <div
+        className={`${
+          profileData.networth >= 100_000_000 ? "bg-green-400" : "bg-red-400"
+        } text-gray-800 rounded-lg p-5 w-1/2 mx-auto text-center mt-5`}
+      >
         <h2 className="text-xl font-bold">Step 1 : 100M Networth</h2>
-        <p className="mt-2 text-lg font-bold">Player networth : {profileData.fishingLvl}</p>
+        <p className="mt-2 text-lg font-bold">
+          Player networth: {formatToPrice(profileData.networth)}
+        </p>
       </div>
 
-      <div className="bg-red-400 text-gray-800 rounded-lg p-5 w-1/2 mx-auto text-center mt-5">
-        <h2 className="text-xl font-bold">Step 1 : 6B Networth</h2>
-        <p className="mt-2 text-lg font-bold">Player networth : {profileData.farmingLvl}</p>
+      {/*<div*/}
+      {/*  className={`${*/}
+      {/*    profileData.item?.hyperion ? "bg-green-400" : "bg-red-400"*/}
+      {/*  } text-gray-800 rounded-lg p-5 w-1/2 mx-auto text-center mt-5`}*/}
+      {/*>*/}
+      {/*  <h2 className="text-xl font-bold">Step 2 : Hyperion</h2>*/}
+      {/*  <p className="mt-2 text-lg font-bold">*/}
+      {/*    Player hyperion value: {formatToPrice(profileData.item.hyperion)}*/}
+      {/*  </p>*/}
+      {/*</div>*/}
+
+      <div
+        className={`${
+          profileData.networth >= 6_000_000_000 ? "bg-green-400" : "bg-red-400"
+        } text-gray-800 rounded-lg p-5 w-1/2 mx-auto text-center mt-5`}
+      >
+        <h2 className="text-xl font-bold">Step 2 : 6B Networth</h2>
+        <p className="mt-2 text-lg font-bold">
+          Player networth: {formatToPrice(profileData.networth)}
+        </p>
       </div>
 
-      <div className="bg-red-400 text-gray-800 rounded-lg p-5 w-1/2 mx-auto text-center mt-5">
-        <h2 className="text-xl font-bold">Step 1 : 15B Networth</h2>
-        <p className="mt-2 text-lg font-bold">Player networth : {profileData.miningLvl}</p>
+      <div
+        className={`${
+          profileData.networth >= 15_000_000_000 ? "bg-green-400" : "bg-red-400"
+        } text-gray-800 rounded-lg p-5 w-1/2 mx-auto text-center mt-5`}
+      >
+        <h2 className="text-xl font-bold">Step 3 : 15B Networth</h2>
+        <p className="mt-2 text-lg font-bold">
+          Player networth: {formatToPrice(profileData.networth)}
+        </p>
       </div>
     </div>
   );

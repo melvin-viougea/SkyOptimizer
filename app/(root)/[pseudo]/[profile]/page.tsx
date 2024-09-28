@@ -4,7 +4,6 @@ import {useParams} from "next/navigation";
 import React, {useEffect, useState} from "react";
 import {fetchAndProcessData, getSkillLevel} from "@/lib/function";
 import {Section} from "@/constants";
-import {fetchBazaar, fetchHypixelAuction, fetchHypixelItems, fetchHypixelProfiles, fetchMojangData, fetchSkills} from "@/lib/fetch";
 import HomeRender from "@/components/HomeRender";
 import FarmingRender from "@/components/FarmingRender";
 import MinionsRender from "@/components/MinionsRender";
@@ -20,6 +19,7 @@ import HealerRender from "@/components/HealerRender";
 import ProgressionRender from "@/components/ProgressionRender";
 import {Buffer} from "buffer";
 import nbt from 'prismarine-nbt';
+import {fetchHypixelProfiles, fetchMojangData, fetchSkills} from "@/lib/fetch";
 
 export default function ProfilePage() {
   const {pseudo} = useParams();
@@ -87,22 +87,6 @@ export default function ProfilePage() {
             if (accessories && typeof accessories === 'object' && 'value' in accessories) {
               const accessoriesItems = accessories.value as any[];
 
-              const priceForAccessories: PriceForAccessories = {};
-
-
-              //MODULABLE (CHECK CALCUL NETWORTH INVENTAIRE)
-              // console.log(auctionResponse)
-              // auctionResponse.auctions.forEach(auction => {
-              //   if (auction.bin) {
-              //     const itemName = auction.item_name;
-              //     const startingBid = auction.starting_bid;
-              //     if (!priceForAccessories[itemName] || startingBid < priceForAccessories[itemName]) {
-              //       priceForAccessories[itemName] = startingBid;
-              //     }
-              //   }
-              // });
-              //MODULABLE FIN (CHECK CALCUL NETWORTH INVENTAIRE)
-
               accessoriesItems.forEach((element: any) => {
                 if (element.tag && typeof element.tag === 'object' && 'value' in element.tag) {
                   const displayName = element.tag.value?.display?.value?.Name?.value;
@@ -111,7 +95,10 @@ export default function ProfilePage() {
                     const cleanedDisplayName = displayName.replace(/§./g, '');
 
                     if (cleanedDisplayName) {
-                      const lowestBin = priceForAccessories[cleanedDisplayName];
+                      const lowestBin = allItems.find((item: any) => {
+                        const cleanedItemName = item.name.replace(/§./g, '');
+                        return cleanedItemName === cleanedDisplayName;
+                      })?.ahPrice;
 
                       const accessoryItem: accessoriesItem = {
                         name: cleanedDisplayName,
@@ -202,6 +189,7 @@ export default function ProfilePage() {
         setProfileData({
           pseudo: normalizedPseudo,
           profile: selectedProfile.cute_name,
+          networth: playerPurse + playerBank + playerAccessoriesNetworth,
           purse: playerPurse,
           bank: playerBank,
           playerAccessories,

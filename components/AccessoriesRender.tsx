@@ -1,4 +1,5 @@
 import React, {FC} from "react";
+import {formatToPrice} from "@/lib/function";
 
 const AccessoriesRender: FC<RenderProps> = ({profileData}) => {
   if (!profileData) return null;
@@ -14,7 +15,7 @@ const AccessoriesRender: FC<RenderProps> = ({profileData}) => {
             <div key={index} className="p-2 bg-gray-700 rounded-lg text-center">
               <p className="text-lg font-semibold">{accessory.name}</p>
               {accessory.lowestBin !== undefined && (
-                <p className="font-bold text-sm text-yellow">Lowest Bin: {accessory.lowestBin}</p>
+                <p className="font-bold text-sm text-yellow">Lowest Bin: {formatToPrice(accessory.lowestBin)}</p>
               )}
             </div>
           ))}

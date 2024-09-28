@@ -12,9 +12,21 @@ export const getSkillLevel = (actualXP: number, allLvlSkill: any[]): number => {
   return level;
 };
 
-export function formatToMillions(value: number): string {
-  return (value / 1_000_000).toFixed(1);
+export function formatToPrice(value: number): string {
+  if (value >= 1_000_000_000) {
+    const formatted = (value / 1_000_000_000).toFixed(1);
+    return formatted.endsWith('.0') ? formatted.slice(0, -2) + 'B' : formatted + 'B';
+  } else if (value >= 1_000_000) {
+    const formatted = (value / 1_000_000).toFixed(1);
+    return formatted.endsWith('.0') ? formatted.slice(0, -2) + 'M' : formatted + 'M';
+  } else if (value >= 1_000) {
+    const formatted = (value / 1_000).toFixed(1);
+    return formatted.endsWith('.0') ? formatted.slice(0, -2) + 'K' : formatted + 'K';
+  }
+  return value.toString();
 }
+
+
 
 export async function fetchAndProcessData() {
   const itemsResponse = await fetchHypixelItems();

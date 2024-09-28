@@ -24,6 +24,7 @@ declare interface ProfileData {
   foragingMaxLvl: number;
   combatLvl: number;
   combatMaxLvl: number;
+  networth: number;
   purse: number;
   bank: number;
   playerAccessories: accessoriesItem[];
