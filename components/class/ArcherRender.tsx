@@ -17,10 +17,8 @@ const ArcherRender: FC<RenderProps> = ({ profileData }) => {
       <div className="mt-6">
         <h3 className="font-bold text-xl underline">Pet:</h3>
         <ul className="list-disc ml-6">
-          <li className="font-bold">Golden Dragon: <span className="text-yellow">Best DPS Pet</span></li>
-          <li className="font-bold">Ender Dragon: <span className="text-yellow">2nd Best DPS Pet</span></li>
-          <li className="font-bold">Skeleton: <span className="text-yellow">Easy Content</span></li>
-          <li className="font-bold">Wither Skeleton: <span className="text-yellow">F7/M7 Boss Room</span></li>
+          <li className="font-bold">Golden Dragon: <span className="text-yellow">Best DPS</span></li>
+          <li className="font-bold">Ender Dragon: <span className="text-yellow">Dragon M7</span></li>
         </ul>
       </div>
 
