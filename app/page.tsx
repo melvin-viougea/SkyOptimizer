@@ -45,7 +45,7 @@ export default function Home() {
       }
     } catch (error) {
       if (error instanceof Error) {
-        setError({message: `Server error`});//setError({ message: `Server error: ${error.message}` });
+        setError({ message: `Server error: ${error.message}` });
       } else {
         setError({message: 'Unknown error occurred'});
       }
