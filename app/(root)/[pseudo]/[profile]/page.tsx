@@ -2,24 +2,24 @@
 
 import {useParams} from "next/navigation";
 import React, {useEffect, useState} from "react";
-import {getSkillLevel} from "@/lib/function";
+import {fetchAndProcessData, getItemPriceByName, getSkillLevel} from "@/lib/function";
 import {Section} from "@/constants";
-import {fetchBazaar, fetchHypixelItems, fetchHypixelAuction, fetchHypixelProfiles, fetchMojangData, fetchSkills} from "@/lib/fetch";
 import HomeRender from "@/components/HomeRender";
-import FarmingRender from "@/components/FarmingRender";
+import FarmingRender from "@/components/skill/FarmingRender";
 import MinionsRender from "@/components/MinionsRender";
 import AccessoriesRender from "@/components/AccessoriesRender";
-import MiningRender from "@/components/MiningRender";
-import FishingRender from "@/components/FishingRender";
-import ForagingRender from "@/components/ForagingRender";
-import MageRender from "@/components/MageRender";
-import ArcherRender from "@/components/ArcherRender";
-import BerserkRender from "@/components/BerserkRender";
-import TankRender from "@/components/TankRender";
-import HealerRender from "@/components/HealerRender";
+import MiningRender from "@/components/skill/MiningRender";
+import FishingRender from "@/components/skill/FishingRender";
+import ForagingRender from "@/components/skill/ForagingRender";
+import MageRender from "@/components/class/MageRender";
+import ArcherRender from "@/components/class/ArcherRender";
+import BerserkRender from "@/components/class/BerserkRender";
+import TankRender from "@/components/class/TankRender";
+import HealerRender from "@/components/class/HealerRender";
 import ProgressionRender from "@/components/ProgressionRender";
 import {Buffer} from "buffer";
 import nbt from 'prismarine-nbt';
+import {fetchHypixelProfiles, fetchMojangData, fetchSkills} from "@/lib/fetch";
 
 export default function ProfilePage() {
   const {pseudo} = useParams();
@@ -64,17 +64,17 @@ export default function ProfilePage() {
           return;
         }
 
-        // ALL AUCTIONS
-        const auctionResponse = await fetchHypixelAuction();
-        console.log(auctionResponse.auctions);
+        // ALL ITEMS
+        const allItems = await fetchAndProcessData();
 
         // ALL ACCESSORIES
-        const itemsResponse = await fetchHypixelItems();
-        const accessoryItems = itemsResponse.items.filter(item => item.category === "ACCESSORY");
-        const talismanNames = accessoryItems.map(item => item.name);
+        // const accessoryItems = allItems.items.filter(item => item.category === "ACCESSORY");
+        // const talismanNames = accessoryItems.map(item => item.name);
 
-        // PLAYER ACCESSORIES
-        let playerAccessories: accessoriesItem[] = [];
+        //////////////////////// NETWORTH ////////////////////////
+
+        // NETWORTH PLAYER ACCESSORIES
+        let playerAccessories: AccessoriesItem[] = [];
         let playerAccessoriesNetworth = 0;
 
         try {
@@ -88,53 +88,68 @@ export default function ProfilePage() {
             if (accessories && typeof accessories === 'object' && 'value' in accessories) {
               const accessoriesItems = accessories.value as any[];
 
-              const priceForAccessories: PriceForAccessories = {};
-
-              auctionResponse.auctions
-                .filter(auction => auction.bin)
-                .forEach(auction => {
-                  const { item_name, starting_bid } = auction;
-                  if (!priceForAccessories[item_name] || starting_bid < priceForAccessories[item_name]) {
-                    priceForAccessories[item_name] = starting_bid;
-                  }
-                });
-
-              accessoriesItems.forEach((element: any) => {
+              for (const element of accessoriesItems) {
                 if (element.tag && typeof element.tag === 'object' && 'value' in element.tag) {
                   const displayName = element.tag.value?.display?.value?.Name?.value;
-
-                  if (typeof displayName === 'string') {
-                    const cleanedDisplayName = displayName.replace(/§./g, '');
-
-                    if (cleanedDisplayName) {
-                      const lowestBin = priceForAccessories[cleanedDisplayName];
-
-                      const accessoryItem: accessoriesItem = {
-                        name: cleanedDisplayName,
-                        lowestBin: lowestBin ?? undefined,
-                      };
-
-                      playerAccessories.push(accessoryItem);
-                      if (lowestBin) {
-                        playerAccessoriesNetworth += lowestBin;
+                  const cleanedDisplayName = displayName.replace(/§./g, '');
+                  if (typeof cleanedDisplayName === 'string') {
+                    console.log(allItems)
+                    const accessoriesItems = await getItemPriceByName(cleanedDisplayName, allItems);
+                    if (accessoriesItems) {
+                      playerAccessories.push(accessoriesItems);
+                      if (accessoriesItems.lowestBin) {
+                        playerAccessoriesNetworth += accessoriesItems.lowestBin;
                       }
                     }
                   }
                 }
-              });
+              }
             }
           }
         } catch (error) {
           console.error('Error processing the inventory:', error);
         }
 
+        // NETWORTH PLAYER ARMOR
+        let playerArmor: ArmorItem[] = [];
+        let playerArmorNetworth = 0;
 
-// INVENTAIRE------------------------------------------------
-        const bazaarResponse = await fetchBazaar();
-        const bazaarItems = Object.values(bazaarResponse.products);
-        let bazaarProduct: BazaarItem | null | undefined = null;
+        try {
+          const armorData = selectedMember?.inventory?.inv_armor?.data;
+
+          if (armorData) {
+            const decodedBytes = Buffer.from(armorData, "base64");
+            const nbtDecoded = await nbt.parse(decodedBytes);
+            const armor = nbtDecoded?.parsed?.value?.i?.value;
+
+            if (armor && typeof armor === 'object' && 'value' in armor) {
+              const armorItems = armor.value as any[];
+
+              for (const element of armorItems) {
+                if (element.tag && typeof element.tag === 'object' && 'value' in element.tag) {
+                  const displayName = element.tag.value?.display?.value?.Name?.value;
+                  const cleanedDisplayName = displayName.replace(/§./g, '');
+                  if (typeof cleanedDisplayName === 'string') {
+                    const armorItem = await getItemPriceByName(cleanedDisplayName, allItems);
+                    if (armorItem) {
+                      playerArmor.push(armorItem);
+                      if (armorItem.lowestBin) {
+                        playerArmorNetworth += armorItem.lowestBin;
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        } catch (error) {
+          console.error('Error processing the inventory:', error);
+        }
+        console.log(playerArmorNetworth)
+
+        // NETWORTH PLAYER INVENTORY
         let inventoryItems: InventoryItem[] = [];
-        const allItems = itemsResponse.items;
+
 
         try {
           const yourBytes = Buffer.from(selectedMember.inventory.inv_contents.data, "base64");
@@ -162,14 +177,14 @@ export default function ProfilePage() {
                     }
                   });
 
-                  if (sellableItem) {
-                    bazaarItems.forEach((element3) => {
-                      if (element3.product_id === itemId) {
-                        bazaarProduct = element3;
-                        bazaarPrice = bazaarProduct?.quick_status?.buyPrice ?? 0;
-                      }
-                    });
-                  }
+                  // if (sellableItem) {
+                  //   bazaarItems.forEach((element3) => {
+                  //     if (element3.product_id === itemId) {
+                  //       bazaarProduct = element3;
+                  //       bazaarPrice = bazaarProduct?.quick_status?.buyPrice ?? 0;
+                  //     }
+                  //   });
+                  // }
 
                   if (cleanedDisplayName && itemCount !== undefined && itemId !== undefined) {
                     const item: InventoryItem = {
@@ -201,6 +216,7 @@ export default function ProfilePage() {
         setProfileData({
           pseudo: normalizedPseudo,
           profile: selectedProfile.cute_name,
+          networth: playerPurse + playerBank + playerAccessoriesNetworth,
           purse: playerPurse,
           bank: playerBank,
           playerAccessories,

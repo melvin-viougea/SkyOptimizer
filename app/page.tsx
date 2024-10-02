@@ -1,7 +1,7 @@
 'use client';
 
-import React, { useState } from 'react';
-import { useRouter } from 'next/navigation';
+import React, {useState} from 'react';
+import {useRouter} from 'next/navigation';
 import ky from 'ky';
 
 export default function Home() {
@@ -13,7 +13,7 @@ export default function Home() {
     setError(null);
 
     if (!pseudo) {
-      setError({ message: 'Username is required.' });
+      setError({message: 'Username is required.'});
       return;
     }
 
@@ -31,7 +31,7 @@ export default function Home() {
       const selectedProfile = profiles.find(profile => profile.selected);
 
       if (!selectedProfile) {
-        setError({ message: 'No selected profile found.' });
+        setError({message: 'No selected profile found.'});
         return;
       }
 
@@ -41,13 +41,13 @@ export default function Home() {
       if (profileId) {
         router.push(`/${pseudo}/${profile}`);
       } else {
-        setError({ message: 'Profile ID is undefined.' });
+        setError({message: 'Profile ID is undefined.'});
       }
     } catch (error) {
       if (error instanceof Error) {
-        setError({ message: `Server error` });//setError({ message: `Server error: ${error.message}` });
+        setError({message: `Server error`});//setError({ message: `Server error: ${error.message}` });
       } else {
-        setError({ message: 'Unknown error occurred' });
+        setError({message: 'Unknown error occurred'});
       }
     }
   };

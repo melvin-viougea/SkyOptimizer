@@ -1,14 +1,3 @@
-declare interface accessoriesItem {
-  name: string;
-  lowestBin?: number;
-}
-
-declare interface InventoryItem {
-  name: string;
-  count: number;
-  id: string;
-}
-
 declare interface ProfileData {
   pseudo: string;
   profile: string;
@@ -22,10 +11,66 @@ declare interface ProfileData {
   foragingMaxLvl: number;
   combatLvl: number;
   combatMaxLvl: number;
+  networth: number;
   purse: number;
   bank: number;
   playerAccessories: accessoriesItem[];
   playerAccessoriesNetworth: number;
+}
+
+declare interface ProfilesResponse {
+  profiles: Array<{
+    cute_name: string;
+    selected: boolean;
+    profile_id: string;
+    banking: {
+      balance: number;
+    };
+    members: {
+      [key: string]: {
+        currencies: {
+          coin_purse: number;
+        };
+        inventory: {
+          inv_contents: {
+            data: string;
+          };
+          bag_contents: {
+            talisman_bag: {
+              data: string;
+            };
+          };
+          inv_armor: {
+            data: string;
+          };
+        };
+        player_data: {
+          experience: {
+            [skill: string]: number;
+          };
+        };
+      };
+    };
+  }>;
+}
+
+declare interface AccessoriesItem {
+  name: string;
+  lowestBin?: number;
+}
+
+declare interface ArmorItem {
+  name: string;
+  lowestBin?: number;
+  bzPrice?: number;
+}
+
+declare interface InventoryItem {
+  name: string;
+  count: number;
+  id: string;
+  sellable: boolean;
+  bazaarPrice?: number;
 }
 
 declare interface RenderProps {
@@ -58,9 +103,11 @@ declare interface HypixelSkillsResponse {
 }
 
 declare interface HypixelItem {
+  bzPrice?: number;
   name: string;
   category: string;
   id: string;
+  ahPrice?: number;
 }
 
 declare interface HypixelItemsResponse {
@@ -68,6 +115,8 @@ declare interface HypixelItemsResponse {
 }
 
 declare interface HypixelAuctionResponse {
+  totalAuctions: number;
+  totalPages: number;
   auctions: Array<{
     item_name: string;
     starting_bid: number;
@@ -77,39 +126,6 @@ declare interface HypixelAuctionResponse {
 
 declare interface MojangResponse {
   uuid: string;
-}
-
-declare interface ProfilesResponse {
-  profiles: Array<{
-    cute_name: string;
-    selected: boolean;
-    profile_id: string;
-    banking: {
-      balance: number;
-    };
-    members: {
-      [key: string]: {
-        currencies: {
-          coin_purse: number;
-        };
-        inventory: {
-          inv_contents: {
-            data: string;
-          };
-          bag_contents: {
-            talisman_bag: {
-              data: string;
-            };
-          };
-        };
-        player_data: {
-          experience: {
-            [skill: string]: number;
-          };
-        };
-      };
-    };
-  }>;
 }
 
 declare interface CustomError {
@@ -127,29 +143,23 @@ declare interface InventoryItem {
 declare interface HypixelBazaarResponse {
   success: boolean;
   lastUpdated: number;
-  products: BazaarItem[];
+  products: {
+    [key: string]: BazaarItem;
+  }
 }
 
 declare interface BazaarItem {
   quick_status: {
     buyPrice: number;
   }
-  product_id: any;
+  product_id: string;
 }
 
 declare interface accessoriesItem {
   name: string;
-}
-
-declare interface PriceForAccessories {
-  [key: string]: number;
 }
 
 declare interface accessoriesItem {
   name: string;
   lowestBin?: number;
-}
-
-declare interface PriceForAccessories {
-  [key: string]: number;
 }

@@ -8,8 +8,22 @@ export const fetchHypixelItems = async (): Promise<HypixelItemsResponse> => {
   return await ky.get("https://api.hypixel.net/v2/resources/skyblock/items").json();
 };
 
-export const fetchHypixelAuction = async (): Promise<HypixelAuctionResponse> => {
-  return await ky.get("https://api.hypixel.net/v2/skyblock/auctions").json();
+export const fetchHypixelAuction = async (): Promise<HypixelAuctionResponse[]> => {
+  const firstResponse = await ky.get("https://api.hypixel.net/v2/skyblock/auctions?page=0").json<HypixelAuctionResponse>();
+
+  const totalPages = firstResponse.totalPages;
+
+  const promises: Promise<HypixelAuctionResponse>[] = [];
+
+  //for (let page = 0; page < totalPages; page++) {
+  for (let page = 0; page < 1; page++) {
+    const request = ky.get(`https://api.hypixel.net/v2/skyblock/auctions?page=${page}`).json<HypixelAuctionResponse>();
+    promises.push(request);
+  }
+
+  const results = await Promise.all(promises);
+
+  return results;
 };
 
 export const fetchMojangData = async (pseudo: string): Promise<MojangResponse> => {
