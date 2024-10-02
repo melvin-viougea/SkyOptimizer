@@ -1,12 +1,12 @@
 import React, { FC } from "react";
 
-const ArcherRender: FC<RenderProps> = ({ profileData }) => {
+const MageRender: FC<RenderProps> = ({ profileData }) => {
   if (!profileData) return null;
 
   return (
-    <div className="w-[75vw] rounded-3xl bg-gray-900 text-gray-200 p-8 m-5 shadow-lg">
+    <div className="w-[75vw] rounded-3xl bg-gray-800 text-gray-200 p-8 m-5 shadow-lg">
       <h1 className="text-3xl font-extrabold underline decoration-wavy decoration-yellow decoration-4 underline-offset-8 mb-8">
-        Archer Optimizer : (Work In Progress)
+        Mage Optimizer :
       </h1>
 
       <p className="font-bold text-lg">Weapon: <span className="text-yellow">Hyperion</span></p>
@@ -24,7 +24,7 @@ const ArcherRender: FC<RenderProps> = ({ profileData }) => {
       </div>
 
       <div className="flex justify-around mt-8 space-x-6">
-        <div className="flex-1 bg-gray-800 p-6 rounded-xl shadow-lg transform hover:scale-105 transition-transform">
+        <div className="flex-1 bg-gray-700 p-6 rounded-xl shadow-lg transform hover:scale-105 transition-transform">
           <h2 className="text-2xl font-bold mb-4">Dungeon</h2>
           <div>
             <h3 className="font-bold text-lg">Armor:</h3>
@@ -46,7 +46,7 @@ const ArcherRender: FC<RenderProps> = ({ profileData }) => {
           </div>
         </div>
 
-        <div className="flex-1 bg-gray-800 p-6 rounded-xl shadow-lg transform hover:scale-105 transition-transform">
+        <div className="flex-1 bg-gray-700 p-6 rounded-xl shadow-lg transform hover:scale-105 transition-transform">
           <h2 className="text-2xl font-bold mb-4">Outside Dungeon</h2>
           <div>
             <h3 className="font-bold text-lg">Armor:</h3>
@@ -72,4 +72,4 @@ const ArcherRender: FC<RenderProps> = ({ profileData }) => {
   );
 };
 
-export default ArcherRender;
+export default MageRender;
