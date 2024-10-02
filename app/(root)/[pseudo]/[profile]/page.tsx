@@ -2,7 +2,7 @@
 
 import {useParams} from "next/navigation";
 import React, {useEffect, useState} from "react";
-import {fetchAndProcessData, getSkillLevel} from "@/lib/function";
+import {fetchAndProcessData, getItemPriceByName, getSkillLevel} from "@/lib/function";
 import {Section} from "@/constants";
 import HomeRender from "@/components/HomeRender";
 import FarmingRender from "@/components/FarmingRender";
@@ -66,14 +66,15 @@ export default function ProfilePage() {
 
         // ALL ITEMS
         const allItems = await fetchAndProcessData();
-        console.log(allItems)
 
         // ALL ACCESSORIES
         // const accessoryItems = allItems.items.filter(item => item.category === "ACCESSORY");
         // const talismanNames = accessoryItems.map(item => item.name);
 
-        // PLAYER ACCESSORIES
-        let playerAccessories: accessoriesItem[] = [];
+        //////////////////////// NETWORTH ////////////////////////
+
+        // NETWORTH PLAYER ACCESSORIES
+        let playerAccessories: AccessoriesItem[] = [];
         let playerAccessoriesNetworth = 0;
 
         try {
@@ -87,40 +88,66 @@ export default function ProfilePage() {
             if (accessories && typeof accessories === 'object' && 'value' in accessories) {
               const accessoriesItems = accessories.value as any[];
 
-              accessoriesItems.forEach((element: any) => {
+              for (const element of accessoriesItems) {
                 if (element.tag && typeof element.tag === 'object' && 'value' in element.tag) {
                   const displayName = element.tag.value?.display?.value?.Name?.value;
-
-                  if (typeof displayName === 'string') {
-                    const cleanedDisplayName = displayName.replace(/§./g, '');
-
-                    if (cleanedDisplayName) {
-                      const lowestBin = allItems.find((item: any) => {
-                        const cleanedItemName = item.name.replace(/§./g, '');
-                        return cleanedItemName === cleanedDisplayName;
-                      })?.ahPrice;
-
-                      const accessoryItem: accessoriesItem = {
-                        name: cleanedDisplayName,
-                        lowestBin: lowestBin ?? undefined,
-                      };
-
-                      playerAccessories.push(accessoryItem);
-                      if (lowestBin) {
-                        playerAccessoriesNetworth += lowestBin;
+                  const cleanedDisplayName = displayName.replace(/§./g, '');
+                  if (typeof cleanedDisplayName === 'string') {
+                    console.log(allItems)
+                    const accessoriesItems = await getItemPriceByName(cleanedDisplayName, allItems);
+                    if (accessoriesItems) {
+                      playerAccessories.push(accessoriesItems);
+                      if (accessoriesItems.lowestBin) {
+                        playerAccessoriesNetworth += accessoriesItems.lowestBin;
                       }
                     }
                   }
                 }
-              });
+              }
             }
           }
         } catch (error) {
           console.error('Error processing the inventory:', error);
         }
 
+        // NETWORTH PLAYER ARMOR
+        let playerArmor: ArmorItem[] = [];
+        let playerArmorNetworth = 0;
 
-        // INVENTAIRE------------------------------------------------
+        try {
+          const armorData = selectedMember?.inventory?.inv_armor?.data;
+
+          if (armorData) {
+            const decodedBytes = Buffer.from(armorData, "base64");
+            const nbtDecoded = await nbt.parse(decodedBytes);
+            const armor = nbtDecoded?.parsed?.value?.i?.value;
+
+            if (armor && typeof armor === 'object' && 'value' in armor) {
+              const armorItems = armor.value as any[];
+
+              for (const element of armorItems) {
+                if (element.tag && typeof element.tag === 'object' && 'value' in element.tag) {
+                  const displayName = element.tag.value?.display?.value?.Name?.value;
+                  const cleanedDisplayName = displayName.replace(/§./g, '');
+                  if (typeof cleanedDisplayName === 'string') {
+                    const armorItem = await getItemPriceByName(cleanedDisplayName, allItems);
+                    if (armorItem) {
+                      playerArmor.push(armorItem);
+                      if (armorItem.lowestBin) {
+                        playerArmorNetworth += armorItem.lowestBin;
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        } catch (error) {
+          console.error('Error processing the inventory:', error);
+        }
+        console.log(playerArmorNetworth)
+
+        // NETWORTH PLAYER INVENTORY
         let inventoryItems: InventoryItem[] = [];
 
 

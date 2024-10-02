@@ -23,7 +23,7 @@ export function formatToPrice(value: number): string {
     const formatted = (value / 1_000).toFixed(1);
     return formatted.endsWith('.0') ? formatted.slice(0, -2) + 'K' : formatted + 'K';
   }
-  return value.toString();
+  return Math.floor(value).toString();
 }
 
 
@@ -64,4 +64,27 @@ export async function fetchAndProcessData() {
     }
   });
   return allItems;
+}
+
+export async function getItemPriceByName(displayName: string, allItems: any[]): Promise<ArmorItem | undefined> {
+  const cleanedDisplayName = displayName.replace(/§./g, '');
+
+  if (cleanedDisplayName) {
+    const itemData = allItems.find((item: any) => {
+      const cleanedItemName = item.name.replace(/§./g, '');
+      return cleanedItemName === cleanedDisplayName;
+    });
+
+    if (itemData) {
+      const lowestBin = itemData?.ahPrice;
+      const bzPrice = itemData?.bzPrice;
+
+      return {
+        name: cleanedDisplayName,
+        lowestBin: lowestBin ?? undefined,
+        bzPrice: bzPrice ?? undefined,
+      };
+    }
+  }
+  return undefined;
 }

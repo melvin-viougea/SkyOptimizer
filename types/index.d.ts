@@ -1,16 +1,3 @@
-declare interface accessoriesItem {
-  name: string;
-  lowestBin?: number;
-}
-
-declare interface InventoryItem {
-  name: string;
-  count: number;
-  id: string;
-  sellable: boolean;
-  bazaarPrice?: number;
-}
-
 declare interface ProfileData {
   pseudo: string;
   profile: string;
@@ -29,6 +16,61 @@ declare interface ProfileData {
   bank: number;
   playerAccessories: accessoriesItem[];
   playerAccessoriesNetworth: number;
+}
+
+declare interface ProfilesResponse {
+  profiles: Array<{
+    cute_name: string;
+    selected: boolean;
+    profile_id: string;
+    banking: {
+      balance: number;
+    };
+    members: {
+      [key: string]: {
+        currencies: {
+          coin_purse: number;
+        };
+        inventory: {
+          inv_contents: {
+            data: string;
+          };
+          bag_contents: {
+            talisman_bag: {
+              data: string;
+            };
+          };
+          inv_armor: {
+            data: string;
+          };
+        };
+        player_data: {
+          experience: {
+            [skill: string]: number;
+          };
+        };
+      };
+    };
+  }>;
+}
+
+declare interface AccessoriesItem {
+  name: string;
+  lowestBin?: number;
+}
+
+declare interface ArmorItem {
+  name: string;
+  lowestBin?: number;
+  bzPrice?: number;
+}
+
+declare interface InventoryItem {
+  name: string;
+  count: number;
+  id: string;
+  sellable: boolean;
+  bazaarPrice?: number;
 }
 
 declare interface RenderProps {
@@ -86,39 +128,6 @@ declare interface MojangResponse {
   uuid: string;
 }
 
-declare interface ProfilesResponse {
-  profiles: Array<{
-    cute_name: string;
-    selected: boolean;
-    profile_id: string;
-    banking: {
-      balance: number;
-    };
-    members: {
-      [key: string]: {
-        currencies: {
-          coin_purse: number;
-        };
-        inventory: {
-          inv_contents: {
-            data: string;
-          };
-          bag_contents: {
-            talisman_bag: {
-              data: string;
-            };
-          };
-        };
-        player_data: {
-          experience: {
-            [skill: string]: number;
-          };
-        };
-      };
-    };
-  }>;
-}
-
 declare interface CustomError {
   message: string;
 }
@@ -150,15 +159,7 @@ declare interface accessoriesItem {
   name: string;
 }
 
-declare interface PriceForAccessories {
-  [key: string]: number;
-}
-
 declare interface accessoriesItem {
   name: string;
   lowestBin?: number;
-}
-
-declare interface PriceForAccessories {
-  [key: string]: number;
 }

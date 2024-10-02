@@ -15,7 +15,8 @@ export const fetchHypixelAuction = async (): Promise<HypixelAuctionResponse[]> =
 
   const promises: Promise<HypixelAuctionResponse>[] = [];
 
-  for (let page = 0; page < 1; page++) { //totalPages; page++) {
+  //for (let page = 0; page < totalPages; page++) {
+  for (let page = 0; page < 1; page++) {
     const request = ky.get(`https://api.hypixel.net/v2/skyblock/auctions?page=${page}`).json<HypixelAuctionResponse>();
     promises.push(request);
   }
