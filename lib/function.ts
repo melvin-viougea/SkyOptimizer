@@ -42,14 +42,16 @@ export async function fetchAndProcessData() {
 
   allItems.forEach((item: any) => {
     allAuctions.forEach((auctions: any[]) => {
-      auctions.forEach((auction: { item_name: string; starting_bid: number; }) => {
-        if (item.name === auction.item_name) {
-          if (item.ahPrice !== undefined) {
-            if (item.ahPrice > auction.starting_bid) {
+      auctions.forEach((auction: { bin: boolean; item_name: string; starting_bid: number; }) => {
+        if(auction.bin){
+          if (item.name === auction.item_name) {
+            if (item.ahPrice !== undefined) {
+              if (item.ahPrice > auction.starting_bid) {
+                item.ahPrice = auction.starting_bid;
+              }
+            } else {
               item.ahPrice = auction.starting_bid;
             }
-          } else {
-            item.ahPrice = auction.starting_bid;
           }
         }
       });
