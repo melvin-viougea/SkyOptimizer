@@ -16,6 +16,12 @@ declare interface ProfileData {
   bank: number;
   playerAccessories: accessoriesItem[];
   playerAccessoriesNetworth: number;
+  playerInventory: InventoryItem[];
+  playerInventoryNetworth: number;
+  playerArmor: ArmorItem[];
+  playerArmorNetworth: number;
+  playerEquipment: EquipmentItem[];
+  playerEquipmentNetworth: number;
 }
 
 declare interface ProfilesResponse {
@@ -43,6 +49,9 @@ declare interface ProfilesResponse {
           inv_armor: {
             data: string;
           };
+          equipment_contents: {
+            data: string;
+          };
         };
         player_data: {
           experience: {
@@ -61,16 +70,21 @@ declare interface AccessoriesItem {
 
 declare interface ArmorItem {
   name: string;
-  lowestBin?: number;
-  bzPrice?: number;
+  id: string;
+  networth?: networth;
+}
+
+declare interface EquipmentItem {
+  name: string;
+  id: string;
+  networth?: networth;
 }
 
 declare interface InventoryItem {
   name: string;
   count: number;
   id: string;
-  sellable: boolean;
-  bazaarPrice?: number;
+  networth?: networth;
 }
 
 declare interface RenderProps {
@@ -130,14 +144,6 @@ declare interface MojangResponse {
 
 declare interface CustomError {
   message: string;
-}
-
-declare interface InventoryItem {
-  name: string;
-  count: number;
-  id: number;
-  sellable: boolean;
-  bazaarPrice: number;
 }
 
 declare interface HypixelBazaarResponse {

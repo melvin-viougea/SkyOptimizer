@@ -25,10 +25,10 @@ const HomeRender: FC<RenderProps> = ({profileData}) => {
         <p className="font-bold">Purse : {formatToPrice(profileData.purse)}</p>
         <p className="font-bold">Bank : {formatToPrice(profileData.bank)}</p>
         <p className="font-bold">Sacks : {profileData.combatLvl}</p>
-        <p className="font-bold">Armor : {profileData.combatLvl}</p>
-        <p className="font-bold">Equipment : {profileData.combatLvl}</p>
+        <p className="font-bold">Armor : {formatToPrice(profileData.playerArmorNetworth)}</p>
+        <p className="font-bold">Equipment : {formatToPrice(profileData.playerEquipmentNetworth)}</p>
         <p className="font-bold">Wardrobe : {profileData.combatLvl}</p>
-        <p className="font-bold">Inventory : {profileData.combatLvl}</p>
+        <p className="font-bold">Inventory : {formatToPrice(profileData.playerInventoryNetworth)}</p>
         <p className="font-bold">Ender Chest : {profileData.combatLvl}</p>
         <p className="font-bold">Accessories : {formatToPrice(profileData.playerAccessoriesNetworth)}</p>
         <p className="font-bold">Storage : {profileData.combatLvl}</p>

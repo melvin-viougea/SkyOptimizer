@@ -1,4 +1,5 @@
 import {fetchBazaar, fetchHypixelAuction, fetchHypixelItems} from "@/lib/fetch";
+import nbt from "prismarine-nbt";
 
 export const getSkillLevel = (actualXP: number, allLvlSkill: any[]): number => {
   let level = 0;
@@ -87,4 +88,11 @@ export async function getItemPriceByName(displayName: string, allItems: any[]): 
     }
   }
   return undefined;
+}
+
+export async function decodeItems(invContents: any) {
+  const yourBytes = Buffer.from(invContents, "base64");
+  const nbtDecoded = await nbt.parse(yourBytes);
+
+  return nbtDecoded?.parsed?.value?.i?.value;
 }

@@ -21,9 +21,7 @@ export const fetchHypixelAuction = async (): Promise<HypixelAuctionResponse[]> =
     promises.push(request);
   }
 
-  const results = await Promise.all(promises);
-
-  return results;
+  return await Promise.all(promises);
 };
 
 export const fetchMojangData = async (pseudo: string): Promise<MojangResponse> => {

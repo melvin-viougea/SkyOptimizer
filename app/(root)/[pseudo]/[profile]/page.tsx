@@ -2,7 +2,7 @@
 
 import {useParams} from "next/navigation";
 import React, {useEffect, useState} from "react";
-import {fetchAndProcessData, getItemPriceByName, getSkillLevel} from "@/lib/function";
+import {decodeItems, fetchAndProcessData, getItemPriceByName, getSkillLevel} from "@/lib/function";
 import {Section} from "@/constants";
 import HomeRender from "@/components/HomeRender";
 import FarmingRender from "@/components/skill/FarmingRender";
@@ -20,6 +20,7 @@ import ProgressionRender from "@/components/ProgressionRender";
 import {fetchHypixelProfiles, fetchMojangData, fetchSkills} from "@/lib/fetch";
 import {Buffer} from "buffer";
 import nbt from 'prismarine-nbt';
+import {all} from "deepmerge";
 
 export default function ProfilePage() {
   const {pseudo} = useParams();
@@ -91,7 +92,6 @@ export default function ProfilePage() {
                   const displayName = element.tag.value?.display?.value?.Name?.value;
                   const cleanedDisplayName = displayName.replace(/§./g, '');
                   if (typeof cleanedDisplayName === 'string') {
-                    console.log(allItems)
                     const accessoriesItems = await getItemPriceByName(cleanedDisplayName, allItems);
                     if (accessoriesItems) {
                       playerAccessories.push(accessoriesItems);
@@ -108,91 +108,146 @@ export default function ProfilePage() {
           console.error('Error processing the inventory:', error);
         }
 
-        // NETWORTH PLAYER ARMOR
-        let playerArmor: ArmorItem[] = [];
-        let playerArmorNetworth = 0;
+        // NETWORTH PLAYER EQUIPMENT
+
+        let playerEquipment: EquipmentItem[] = [];
+        let playerEquipmentNetworth = 0;
+
+        console.log(selectedMember?.inventory);
 
         try {
-          const armorData = selectedMember?.inventory?.inv_armor?.data;
+          const equipment: any = await decodeItems(selectedMember?.inventory?.equipment_contents?.data);
+          const equipmentValues = equipment.value;
 
-          if (armorData) {
-            const decodedBytes = Buffer.from(armorData, "base64");
-            const nbtDecoded = await nbt.parse(decodedBytes);
-            const armor = nbtDecoded?.parsed?.value?.i?.value;
-
-            if (armor && typeof armor === 'object' && 'value' in armor) {
-              const armorItems = armor.value as any[];
-
-              for (const element of armorItems) {
-                if (element.tag && typeof element.tag === 'object' && 'value' in element.tag) {
-                  const displayName = element.tag.value?.display?.value?.Name?.value;
-                  const cleanedDisplayName = displayName.replace(/§./g, '');
-                  if (typeof cleanedDisplayName === 'string') {
-                    const armorItem = await getItemPriceByName(cleanedDisplayName, allItems);
-                    if (armorItem) {
-                      playerArmor.push(armorItem);
-                      if (armorItem.lowestBin) {
-                        playerArmorNetworth += armorItem.lowestBin;
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
-        } catch (error) {
-          console.error('Error processing the inventory:', error);
-        }
-        console.log(playerArmorNetworth)
-
-        // NETWORTH PLAYER INVENTORY
-        let inventoryItems: InventoryItem[] = [];
-
-
-        try {
-          const yourBytes = Buffer.from(selectedMember.inventory.inv_contents.data, "base64");
-          const nbtDecoded = await nbt.parse(yourBytes);
-
-          const inventory = nbtDecoded?.parsed?.value?.i?.value;
-
-          if (Array.isArray(inventory)) {
-            inventory.forEach((element: any) => {
+          if (Array.isArray(equipmentValues)) {
+            equipmentValues.forEach((element: any) => {
               if (element.tag && typeof element.tag === 'object' && 'value' in element.tag) {
                 const displayName = element.tag.value?.display?.value?.Name?.value;
 
                 if (typeof displayName === 'string') {
                   const cleanedDisplayName = displayName.replace(/§./g, '');
-                  const itemCount = element?.Count?.value;
-                  const itemId = element.tag?.ExtraAttributes?.value?.id?.value;
-                  let sellableItem = true;
-                  let bazaarPrice: number = 0;
+                  let itemCount = 1;
+                  const itemId = element.tag?.value?.ExtraAttributes?.value?.id?.value;
+                  let networth = 0;
+                  let itemEqu: HypixelItem | undefined = allItems.find((element) => element.id.includes(itemId));
+                  if (itemEqu?.bzPrice != null){
+                    networth = itemEqu.bzPrice;
+                  } else if (itemEqu?.ahPrice != null){
+                    networth = itemEqu.ahPrice;
+                  }
 
-                  allItems.forEach((element2) => {
-                    if (itemId === element2.id) {
-                      if ("can_auction" in element2 || itemId === "SKYBLOCK_MENU") {
-                        sellableItem = false;
-                      }
-                    }
-                  });
+                  if(element?.Count?.value){
+                    itemCount = element?.Count?.value;
+                  }
 
-                  // if (sellableItem) {
-                  //   bazaarItems.forEach((element3) => {
-                  //     if (element3.product_id === itemId) {
-                  //       bazaarProduct = element3;
-                  //       bazaarPrice = bazaarProduct?.quick_status?.buyPrice ?? 0;
-                  //     }
-                  //   });
-                  // }
 
-                  if (cleanedDisplayName && itemCount !== undefined && itemId !== undefined) {
+                  if (cleanedDisplayName && itemId !== undefined) {
+                    const item: EquipmentItem = {
+                      name: cleanedDisplayName,
+                      id: itemId,
+                      networth: networth
+                    };
+                    playerEquipment.push(item);
+                    playerEquipmentNetworth += item.networth;
+                  }
+                }
+              }
+            });
+          }
+        } catch (error) {
+          console.error('Error processing the inventory:', error);
+        }
+
+        // NETWORTH PLAYER ARMOR
+
+        let playerArmor: ArmorItem[] = [];
+        let playerArmorNetworth = 0;
+
+        console.log(selectedMember?.inventory);
+
+        try {
+          const armor: any = await decodeItems(selectedMember?.inventory?.inv_armor?.data);
+          const armorValues = armor.value;
+
+          if (Array.isArray(armorValues)) {
+            armorValues.forEach((element: any) => {
+              if (element.tag && typeof element.tag === 'object' && 'value' in element.tag) {
+                const displayName = element.tag.value?.display?.value?.Name?.value;
+
+                if (typeof displayName === 'string') {
+                  const cleanedDisplayName = displayName.replace(/§./g, '');
+                  let itemCount = 1;
+                  const itemId = element.tag?.value?.ExtraAttributes?.value?.id?.value;
+                  let networth = 0;
+                  let itemArm: HypixelItem | undefined = allItems.find((element) => element.id.includes(itemId));
+                  if (itemArm?.bzPrice != null){
+                    networth = itemArm.bzPrice;
+                  } else if (itemArm?.ahPrice != null){
+                    networth = itemArm.ahPrice;
+                  }
+
+                  if(element?.Count?.value){
+                    itemCount = element?.Count?.value;
+                  }
+
+
+                  if (cleanedDisplayName && itemId !== undefined) {
+                    const item: ArmorItem = {
+                      name: cleanedDisplayName,
+                      id: itemId,
+                      networth: networth
+                    };
+                    playerArmor.push(item);
+                    playerArmorNetworth += item.networth;
+                  }
+                }
+              }
+            });
+          }
+        } catch (error) {
+          console.error('Error processing the inventory:', error);
+        }
+
+        // NETWORTH PLAYER INVENTORY
+        let playerInventory: InventoryItem[] = [];
+        let playerInventoryNetworth: number = 0;
+
+
+        try {
+          const inventory: any = await decodeItems(selectedMember.inventory.inv_contents.data);
+          const inventoryValues = inventory.value;
+
+          if (Array.isArray(inventoryValues)) {
+            inventoryValues.forEach((element: any) => {
+              if (element.tag && typeof element.tag === 'object' && 'value' in element.tag) {
+                const displayName = element.tag.value?.display?.value?.Name?.value;
+
+                if (typeof displayName === 'string') {
+                  const cleanedDisplayName = displayName.replace(/§./g, '');
+                  let itemCount = 1;
+                  const itemId = element.tag?.value?.ExtraAttributes?.value?.id?.value;
+                  let networth = 0;
+                  let itemInv: HypixelItem | undefined = allItems.find((element) => element.id.includes(itemId));
+                  if (itemInv?.bzPrice != null){
+                    networth = itemInv.bzPrice;
+                  } else if (itemInv?.ahPrice != null){
+                    networth = itemInv.ahPrice;
+                  }
+
+                  if(element?.Count?.value){
+                    itemCount = element?.Count?.value;
+                  }
+
+
+                  if (cleanedDisplayName && itemId !== undefined) {
                     const item: InventoryItem = {
                       name: cleanedDisplayName,
                       count: itemCount,
                       id: itemId,
-                      sellable: sellableItem,
-                      bazaarPrice: bazaarPrice
+                      networth: networth
                     };
-                    inventoryItems.push(item);
+                    playerInventory.push(item);
+                    playerInventoryNetworth += item.networth;
                   }
                 }
               }
@@ -213,11 +268,17 @@ export default function ProfilePage() {
         setProfileData({
           pseudo: normalizedPseudo,
           profile: selectedProfile.cute_name,
-          networth: playerPurse + playerBank + playerAccessoriesNetworth,
+          networth: playerPurse + playerBank + playerAccessoriesNetworth + playerInventoryNetworth + playerArmorNetworth,
           purse: playerPurse,
           bank: playerBank,
           playerAccessories,
           playerAccessoriesNetworth,
+          playerInventory,
+          playerInventoryNetworth,
+          playerArmor,
+          playerArmorNetworth,
+          playerEquipment,
+          playerEquipmentNetworth,
           farmingLvl,
           fishingLvl,
           miningLvl,
