@@ -17,14 +17,12 @@ import BerserkRender from "@/components/class/BerserkRender";
 import TankRender from "@/components/class/TankRender";
 import HealerRender from "@/components/class/HealerRender";
 import ProgressionRender from "@/components/ProgressionRender";
+import {fetchHypixelProfiles, fetchMojangData, fetchSkills} from "@/lib/fetch";
 import {Buffer} from "buffer";
 import nbt from 'prismarine-nbt';
-import {fetchHypixelProfiles, fetchMojangData, fetchSkills} from "@/lib/fetch";
 
 export default function ProfilePage() {
   const {pseudo} = useParams();
-
-
   const normalizedPseudo = Array.isArray(pseudo) ? pseudo[0] : pseudo;
 
   const [loading, setLoading] = useState(true);
@@ -203,8 +201,7 @@ export default function ProfilePage() {
         } catch (error) {
           console.error('Erreur lors du traitement de l’inventaire:', error);
         }
-
-        //--------------------------------------------------------
+        //////////////////////// END NETWORTH ////////////////////////
 
         const {FARMING, FISHING, MINING, FORAGING, COMBAT} = hypixelSkills.skills;
         const farmingLvl = getSkillLevel(selectedMember.player_data.experience.SKILL_FARMING ?? 0, FARMING.levels);
@@ -242,41 +239,37 @@ export default function ProfilePage() {
     fetchData();
   }, [normalizedPseudo]);
 
-
   const renderSection = () => {
     switch (activeSection) {
-
-      // GENERAL
       case Section.Home:
-        return <HomeRender profileData={profileData}/>
+        return <HomeRender profileData={profileData}/>;
       case Section.Accessories:
-        return <AccessoriesRender profileData={profileData}/>
+        return <AccessoriesRender profileData={profileData}/>;
       case Section.Minions:
-        return <MinionsRender profileData={profileData}/>
+        return <MinionsRender profileData={profileData}/>;
       case Section.Progression:
-        return <ProgressionRender profileData={profileData}/>
+        return <ProgressionRender profileData={profileData}/>;
 
-      // SKILLS
       case Section.Farming:
-        return <FarmingRender profileData={profileData}/>
+        return <FarmingRender profileData={profileData}/>;
       case Section.Fishing:
-        return <FishingRender profileData={profileData}/>
+        return <FishingRender profileData={profileData}/>;
       case Section.Mining:
-        return <MiningRender profileData={profileData}/>
-      case Section.Foraging:
-        return <ForagingRender profileData={profileData}/>
+        return <MiningRender profileData={profileData}/>;
 
-      // CLASS
+      case Section.Foraging:
+        return <ForagingRender profileData={profileData}/>;
+
       case Section.Mage:
-        return <MageRender profileData={profileData}/>
+        return <MageRender profileData={profileData}/>;
       case Section.Archer:
-        return <ArcherRender profileData={profileData}/>
+        return <ArcherRender profileData={profileData}/>;
       case Section.Berserk:
-        return <BerserkRender profileData={profileData}/>
+        return <BerserkRender profileData={profileData}/>;
       case Section.Tank:
-        return <TankRender profileData={profileData}/>
+        return <TankRender profileData={profileData}/>;
       case Section.Healer:
-        return <HealerRender profileData={profileData}/>
+        return <HealerRender profileData={profileData}/>;
       default:
         return null;
     }
@@ -303,112 +296,58 @@ export default function ProfilePage() {
   }
 
   return (
-    <div className="flex flex-col items-center justify-center gap-2 pt-5">
-      <h1 className="text-4xl font-bold text-center text-gray-200 mb-5">Show Optimizations For :</h1>
-      <h1 className="text-2xl font-bold text-center text-gray-200">{profileData.pseudo} - {profileData.profile}</h1>
-      <div className="flex gap-8 py-4">
-        {/* SKILLS */}
-        <div className="flex gap-2">
-          <button
-            onClick={() => setActiveSection(Section.Farming)}
-            className={`px-4 py-2 rounded font-bold text-gray-800 ${activeSection === Section.Farming ? "bg-yellow" : "bg-gray-200"}`}
-          >
-            Farming
-          </button>
-
-          <button
-            onClick={() => setActiveSection(Section.Fishing)}
-            className={`px-4 py-2 rounded font-bold text-gray-800 ${activeSection === Section.Fishing ? "bg-yellow" : "bg-gray-200"}`}
-          >
-            Fishing
-          </button>
-
-          <button
-            onClick={() => setActiveSection(Section.Mining)}
-            className={`px-4 py-2 rounded font-bold text-gray-800 ${activeSection === Section.Mining ? "bg-yellow" : "bg-gray-200"}`}
-          >
-            Mining
-          </button>
-
-          <button
-            onClick={() => setActiveSection(Section.Foraging)}
-            className={`px-4 py-2 rounded font-bold text-gray-800 ${activeSection === Section.Foraging ? "bg-yellow" : "bg-gray-200"}`}
-          >
-            Foraging
-          </button>
-        </div>
-
-        {/* GENERAL */}
-        <div className="flex gap-2">
-          <button
-            onClick={() => setActiveSection(Section.Home)}
-            className={`px-4 py-2 rounded font-bold text-gray-800 ${activeSection === Section.Home ? "bg-yellow" : "bg-gray-200"}`}
-          >
+    <div className="flex">
+      <div className="w-64 h-screen bg-gray-800 text-white flex flex-col py-4">
+        <h2 className="text-2xl font-bold text-center text-yellow mb-4">SkyOptimizer</h2>
+        <h2 className="text-xl font-bold text-center mb-4">{profileData.pseudo}</h2>
+        <h2 className="text-lg font-bold text-center mb-4">{profileData.profile}</h2>
+        <div className="flex flex-col gap-2 m-3">
+          <button onClick={() => setActiveSection(Section.Home)} className={`px-4 py-2 rounded font-bold text-gray-800 ${activeSection === Section.Home ? "bg-yellow" : "bg-gray-200"}`}>
             Home
           </button>
-
-          <button
-            onClick={() => setActiveSection(Section.Progression)}
-            className={`px-4 py-2 rounded font-bold text-gray-800 ${activeSection === Section.Progression ? "bg-yellow" : "bg-gray-200"}`}
-          >
+          <button onClick={() => setActiveSection(Section.Progression)} className={`px-4 py-2 rounded font-bold text-gray-800 ${activeSection === Section.Progression ? "bg-yellow" : "bg-gray-200"}`}>
             Progression
           </button>
-
-          <button
-            onClick={() => setActiveSection(Section.Accessories)}
-            className={`px-4 py-2 rounded font-bold text-gray-800 ${activeSection === Section.Accessories ? "bg-yellow" : "bg-gray-200"}`}
-          >
+          <button onClick={() => setActiveSection(Section.Accessories)} className={`px-4 py-2 rounded font-bold text-gray-800 ${activeSection === Section.Accessories ? "bg-yellow" : "bg-gray-200"}`}>
             Accessories
           </button>
-
-          <button
-            onClick={() => setActiveSection(Section.Minions)}
-            className={`px-4 py-2 rounded font-bold text-gray-800 ${activeSection === Section.Minions ? "bg-yellow" : "bg-gray-200"}`}
-          >
+          <button onClick={() => setActiveSection(Section.Minions)} className={`px-4 py-2 rounded font-bold text-gray-800 ${activeSection === Section.Minions ? "bg-yellow" : "bg-gray-200"}`}>
             Minions
           </button>
-        </div>
 
-        {/* CLASS */}
-        <div className="flex gap-2">
-          <button
-            onClick={() => setActiveSection(Section.Mage)}
-            className={`px-4 py-2 rounded font-bold text-gray-800 ${activeSection === Section.Mage ? "bg-yellow" : "bg-gray-200"}`}
-          >
+          <button onClick={() => setActiveSection(Section.Farming)} className={`mt-5 px-4 py-2 rounded font-bold text-gray-800 ${activeSection === Section.Farming ? "bg-yellow" : "bg-gray-200"}`}>
+            Farming
+          </button>
+          <button onClick={() => setActiveSection(Section.Fishing)} className={`px-4 py-2 rounded font-bold text-gray-800 ${activeSection === Section.Fishing ? "bg-yellow" : "bg-gray-200"}`}>
+            Fishing
+          </button>
+          <button onClick={() => setActiveSection(Section.Mining)} className={`px-4 py-2 rounded font-bold text-gray-800 ${activeSection === Section.Mining ? "bg-yellow" : "bg-gray-200"}`}>
+            Mining
+          </button>
+          <button onClick={() => setActiveSection(Section.Foraging)} className={`px-4 py-2 rounded font-bold text-gray-800 ${activeSection === Section.Foraging ? "bg-yellow" : "bg-gray-200"}`}>
+            Foraging
+          </button>
+
+          <button onClick={() => setActiveSection(Section.Mage)} className={`mt-5 px-4 py-2 rounded font-bold text-gray-800 ${activeSection === Section.Mage ? "bg-yellow" : "bg-gray-200"}`}>
             Mage
           </button>
-
-          <button
-            onClick={() => setActiveSection(Section.Archer)}
-            className={`px-4 py-2 rounded font-bold text-gray-800 ${activeSection === Section.Archer ? "bg-yellow" : "bg-gray-200"}`}
-          >
+          <button onClick={() => setActiveSection(Section.Archer)} className={`px-4 py-2 rounded font-bold text-gray-800 ${activeSection === Section.Archer ? "bg-yellow" : "bg-gray-200"}`}>
             Archer
           </button>
-
-          <button
-            onClick={() => setActiveSection(Section.Berserk)}
-            className={`px-4 py-2 rounded font-bold text-gray-800 ${activeSection === Section.Berserk ? "bg-yellow" : "bg-gray-200"}`}
-          >
+          <button onClick={() => setActiveSection(Section.Berserk)} className={`px-4 py-2 rounded font-bold text-gray-800 ${activeSection === Section.Berserk ? "bg-yellow" : "bg-gray-200"}`}>
             Berserk
           </button>
-
-          <button
-            onClick={() => setActiveSection(Section.Tank)}
-            className={`px-4 py-2 rounded font-bold text-gray-800 ${activeSection === Section.Tank ? "bg-yellow" : "bg-gray-200"}`}
-          >
+          <button onClick={() => setActiveSection(Section.Tank)} className={`px-4 py-2 rounded font-bold text-gray-800 ${activeSection === Section.Tank ? "bg-yellow" : "bg-gray-200"}`}>
             Tank
           </button>
-
-          <button
-            onClick={() => setActiveSection(Section.Healer)}
-            className={`px-4 py-2 rounded font-bold text-gray-800 ${activeSection === Section.Healer ? "bg-yellow" : "bg-gray-200"}`}
-          >
+          <button onClick={() => setActiveSection(Section.Healer)} className={`px-4 py-2 rounded font-bold text-gray-800 ${activeSection === Section.Healer ? "bg-yellow" : "bg-gray-200"}`}>
             Healer
           </button>
-
         </div>
       </div>
-      {renderSection()}
+      <div className="flex-1">
+        {renderSection()}
+      </div>
     </div>
   );
 }
