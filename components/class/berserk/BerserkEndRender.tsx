@@ -1,24 +1,23 @@
 import React, {FC} from "react";
 
-const ArcherRender: FC<RenderProps> = ({profileData}) => {
+const BerserkEndRender: FC<RenderProps> = ({profileData}) => {
   if (!profileData) return null;
 
   return (
-    <div className="rounded-3xl bg-gray-800 text-gray-200 p-8 m-5 shadow-lg">
+    <div className="text-gray-200 p-8 m-5">
       <h1 className="text-3xl font-extrabold underline decoration-wavy decoration-yellow decoration-4 underline-offset-8 mb-8">
-        Archer Optimizer :
+        Berserk End Game :
       </h1>
 
-      <p className="font-bold text-lg">Weapon: <span className="text-yellow">Terminator</span></p>
-      <p className="font-bold text-lg">Power Stone: <span className="text-yellow">Fortuitous</span></p>
+      <p className="font-bold text-lg">Weapon: <span className="text-yellow">Dark Claymore</span></p>
+      <p className="font-bold text-lg">Power Stone: <span className="text-yellow">Strong</span></p>
       <p className="font-bold text-lg">Reforge Armor: <span className="text-yellow">Ancient</span></p>
-      <p className="font-bold text-lg">Reforge Equipment: <span className="text-yellow">Waxed</span></p>
+      <p className="font-bold text-lg">Reforge Equipment: <span className="text-yellow">Strengthened</span></p>
 
       <div className="mt-6">
         <h3 className="font-bold text-xl underline">Pet:</h3>
         <ul className="list-disc ml-6">
           <li className="font-bold">Golden Dragon: <span className="text-yellow">Best DPS</span></li>
-          <li className="font-bold">Ender Dragon: <span className="text-yellow">Dragon M7</span></li>
         </ul>
       </div>
 
@@ -29,9 +28,9 @@ const ArcherRender: FC<RenderProps> = ({profileData}) => {
             <h3 className="font-bold text-lg">Armor:</h3>
             <ul className="list-disc ml-6">
               <li className="font-bold">Helmet: <span className="text-yellow">Diamond Necron Head</span></li>
-              <li className="font-bold">Chestplate: <span className="text-yellow">Necron's Chestplate</span> <span className="text-sm text-gray-400">(option: Skeleton Master Chestplate)</span></li>
+              <li className="font-bold">Chestplate: <span className="text-yellow">Necron's Chestplate</span></li>
               <li className="font-bold">Leggings: <span className="text-yellow">Necron's Leggings</span></li>
-              <li className="font-bold">Boots: <span className="text-yellow">Maxor's Boots</span> <span className="text-sm text-gray-400">(option: Necron's Boots)</span></li>
+              <li className="font-bold">Boots: <span className="text-yellow">Necron's Boots</span></li>
             </ul>
           </div>
           <div className="mt-6">
@@ -51,9 +50,9 @@ const ArcherRender: FC<RenderProps> = ({profileData}) => {
             <h3 className="font-bold text-lg">Armor:</h3>
             <ul className="list-disc ml-6">
               <li className="font-bold">Helmet: <span className="text-yellow">Warden Helmet</span></li>
-              <li className="font-bold">Chestplate: <span className="text-yellow">Skeleton Master Chestplate</span> <span className="text-sm text-gray-400">(option: Terror Chestplate)</span></li>
-              <li className="font-bold">Leggings: <span className="text-yellow">Terror Leggings</span></li>
-              <li className="font-bold">Boots: <span className="text-yellow">Terror Boots</span></li>
+              <li className="font-bold">Chestplate: <span className="text-yellow">Crimson Chestplate</span></li>
+              <li className="font-bold">Leggings: <span className="text-yellow">Crimson Leggings</span></li>
+              <li className="font-bold">Boots: <span className="text-yellow">Crimson Boots</span></li>
             </ul>
           </div>
           <div className="mt-6">
@@ -71,4 +70,4 @@ const ArcherRender: FC<RenderProps> = ({profileData}) => {
   );
 };
 
-export default ArcherRender;
+export default BerserkEndRender;

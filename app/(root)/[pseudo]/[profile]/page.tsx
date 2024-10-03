@@ -2,22 +2,22 @@
 
 import {useParams} from "next/navigation";
 import React, {useEffect, useState} from "react";
-import {calculateNetworth, decodeItems, fetchAndProcessData, getSkillLevel} from "@/lib/function";
 import {Section} from "@/constants";
 import HomeRender from "@/components/HomeRender";
-import FarmingRender from "@/components/skill/FarmingRender";
 import MinionsRender from "@/components/MinionsRender";
 import AccessoriesRender from "@/components/AccessoriesRender";
-import MiningRender from "@/components/skill/MiningRender";
-import FishingRender from "@/components/skill/FishingRender";
-import ForagingRender from "@/components/skill/ForagingRender";
-import MageRender from "@/components/class/MageRender";
-import ArcherRender from "@/components/class/ArcherRender";
-import BerserkRender from "@/components/class/BerserkRender";
-import TankRender from "@/components/class/TankRender";
-import HealerRender from "@/components/class/HealerRender";
+import HealerRender from "@/components/class/healer/HealerRender";
+import MageRender from "@/components/class/mage/MageRender";
+import ArcherRender from "@/components/class/archer/ArcherRender";
+import BerserkRender from "@/components/class/berserk/BerserkRender";
+import TankRender from "@/components/class/tank/TankRender";
+import MiningRender from "@/components/skill/mining/MiningRender";
+import FarmingRender from "@/components/skill/farming/FarmingRender";
+import FishingRender from "@/components/skill/fishing/FishingRender";
+import ForagingRender from "@/components/skill/foraging/ForagingRender";
 import ProgressionRender from "@/components/ProgressionRender";
 import {fetchHypixelProfiles, fetchMojangData, fetchSkills} from "@/lib/fetch";
+import {calculateNetworth, fetchAndProcessData, getSkillLevel} from "@/lib/function";
 
 export default function ProfilePage() {
   const {pseudo} = useParams();
@@ -74,7 +74,6 @@ export default function ProfilePage() {
         let equipmentItems = await calculateNetworth(selectedMember?.inventory?.equipment_contents?.data, allItems);
         let armorItems = await calculateNetworth(selectedMember?.inventory?.inv_armor?.data, allItems);
         let inventoryItems = await calculateNetworth(selectedMember.inventory.inv_contents.data, allItems);
-        console.log(fishingBagItems)
 
         //////////////////////// END NETWORTH ////////////////////////
 
@@ -137,7 +136,6 @@ export default function ProfilePage() {
         return <FishingRender profileData={profileData}/>;
       case Section.Mining:
         return <MiningRender profileData={profileData}/>;
-
       case Section.Foraging:
         return <ForagingRender profileData={profileData}/>;
 
