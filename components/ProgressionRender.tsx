@@ -7,7 +7,7 @@ interface RenderProps {
   };
 }
 
-const ProgressionRender: FC<RenderProps> = ({ profileData }) => {
+const ProgressionRender: FC<RenderProps> = ({profileData}) => {
   if (!profileData) return null;
 
   return (

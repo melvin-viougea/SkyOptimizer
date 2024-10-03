@@ -1,6 +1,6 @@
-import React, { FC } from "react";
+import React, {FC} from "react";
 
-const MageRender: FC<RenderProps> = ({ profileData }) => {
+const MageRender: FC<RenderProps> = ({profileData}) => {
   if (!profileData) return null;
 
   return (

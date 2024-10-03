@@ -27,8 +27,6 @@ export function formatToPrice(value: number): string {
   return Math.floor(value).toString();
 }
 
-
-
 export async function fetchAndProcessData() {
   const itemsResponse = await fetchHypixelItems();
   const bazaarResponse = await fetchBazaar();
@@ -65,29 +63,6 @@ export async function fetchAndProcessData() {
     }
   });
   return allItems;
-}
-
-export async function getItemPriceByName(displayName: string, allItems: any[]): Promise<ArmorItem | undefined> {
-  const cleanedDisplayName = displayName.replace(/§./g, '');
-
-  if (cleanedDisplayName) {
-    const itemData = allItems.find((item: any) => {
-      const cleanedItemName = item.name.replace(/§./g, '');
-      return cleanedItemName === cleanedDisplayName;
-    });
-
-    if (itemData) {
-      const lowestBin = itemData?.ahPrice;
-      const bzPrice = itemData?.bzPrice;
-
-      return {
-        name: cleanedDisplayName,
-        lowestBin: lowestBin ?? undefined,
-        bzPrice: bzPrice ?? undefined,
-      };
-    }
-  }
-  return undefined;
 }
 
 export async function decodeItems(invContents: any) {

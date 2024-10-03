@@ -2,7 +2,7 @@
 
 import {useParams} from "next/navigation";
 import React, {useEffect, useState} from "react";
-import {decodeItems, fetchAndProcessData, getItemPriceByName, getSkillLevel} from "@/lib/function";
+import {decodeItems, fetchAndProcessData, getSkillLevel} from "@/lib/function";
 import {Section} from "@/constants";
 import HomeRender from "@/components/HomeRender";
 import FarmingRender from "@/components/skill/FarmingRender";
@@ -18,9 +18,6 @@ import TankRender from "@/components/class/TankRender";
 import HealerRender from "@/components/class/HealerRender";
 import ProgressionRender from "@/components/ProgressionRender";
 import {fetchHypixelProfiles, fetchMojangData, fetchSkills} from "@/lib/fetch";
-import {Buffer} from "buffer";
-import nbt from 'prismarine-nbt';
-import {all} from "deepmerge";
 
 export default function ProfilePage() {
   const {pseudo} = useParams();
@@ -72,48 +69,50 @@ export default function ProfilePage() {
 
         //////////////////////// NETWORTH ////////////////////////
 
-        // NETWORTH PLAYER ACCESSORIES
-        let playerAccessories: AccessoriesItem[] = [];
+        // NETWORTH ACCESSORIES
+        let playerAccessories: networthItem[] = [];
         let playerAccessoriesNetworth = 0;
 
         try {
-          const inventoryData = selectedMember?.inventory?.bag_contents?.talisman_bag?.data;
+          const accessories: any = await decodeItems(selectedMember?.inventory?.bag_contents?.talisman_bag?.data);
+          const accessoriesValues = accessories.value;
 
-          if (inventoryData) {
-            const decodedBytes = Buffer.from(inventoryData, "base64");
-            const nbtDecoded = await nbt.parse(decodedBytes);
-            const accessories = nbtDecoded?.parsed?.value?.i?.value;
+          if (Array.isArray(accessoriesValues)) {
+            accessoriesValues.forEach((element: any) => {
+              if (element.tag && typeof element.tag === 'object' && 'value' in element.tag) {
+                const displayName = element.tag.value?.display?.value?.Name?.value;
 
-            if (accessories && typeof accessories === 'object' && 'value' in accessories) {
-              const accessoriesItems = accessories.value as any[];
-
-              for (const element of accessoriesItems) {
-                if (element.tag && typeof element.tag === 'object' && 'value' in element.tag) {
-                  const displayName = element.tag.value?.display?.value?.Name?.value;
+                if (typeof displayName === 'string') {
                   const cleanedDisplayName = displayName.replace(/§./g, '');
-                  if (typeof cleanedDisplayName === 'string') {
-                    const accessoriesItems = await getItemPriceByName(cleanedDisplayName, allItems);
-                    if (accessoriesItems) {
-                      playerAccessories.push(accessoriesItems);
-                      if (accessoriesItems.lowestBin) {
-                        playerAccessoriesNetworth += accessoriesItems.lowestBin;
-                      }
-                    }
+                  const itemId = element.tag?.value?.ExtraAttributes?.value?.id?.value;
+                  let networth = 0;
+                  let itemEqu: HypixelItem | undefined = allItems.find((element) => element.id.includes(itemId));
+                  if (itemEqu?.bzPrice != null) {
+                    networth = itemEqu.bzPrice;
+                  } else if (itemEqu?.ahPrice != null) {
+                    networth = itemEqu.ahPrice;
+                  }
+
+                  if (cleanedDisplayName && itemId !== undefined) {
+                    const item: networthItem = {
+                      name: cleanedDisplayName,
+                      id: itemId,
+                      networth: networth
+                    };
+                    playerAccessories.push(item);
+                    playerAccessoriesNetworth += item.networth;
                   }
                 }
               }
-            }
+            });
           }
         } catch (error) {
           console.error('Error processing the inventory:', error);
         }
 
-        // NETWORTH PLAYER EQUIPMENT
-
-        let playerEquipment: EquipmentItem[] = [];
+        // NETWORTH EQUIPMENT
+        let playerEquipment: networthItem[] = [];
         let playerEquipmentNetworth = 0;
-
-        console.log(selectedMember?.inventory);
 
         try {
           const equipment: any = await decodeItems(selectedMember?.inventory?.equipment_contents?.data);
@@ -126,23 +125,17 @@ export default function ProfilePage() {
 
                 if (typeof displayName === 'string') {
                   const cleanedDisplayName = displayName.replace(/§./g, '');
-                  let itemCount = 1;
                   const itemId = element.tag?.value?.ExtraAttributes?.value?.id?.value;
                   let networth = 0;
                   let itemEqu: HypixelItem | undefined = allItems.find((element) => element.id.includes(itemId));
-                  if (itemEqu?.bzPrice != null){
+                  if (itemEqu?.bzPrice != null) {
                     networth = itemEqu.bzPrice;
-                  } else if (itemEqu?.ahPrice != null){
+                  } else if (itemEqu?.ahPrice != null) {
                     networth = itemEqu.ahPrice;
                   }
 
-                  if(element?.Count?.value){
-                    itemCount = element?.Count?.value;
-                  }
-
-
                   if (cleanedDisplayName && itemId !== undefined) {
-                    const item: EquipmentItem = {
+                    const item: networthItem = {
                       name: cleanedDisplayName,
                       id: itemId,
                       networth: networth
@@ -158,12 +151,9 @@ export default function ProfilePage() {
           console.error('Error processing the inventory:', error);
         }
 
-        // NETWORTH PLAYER ARMOR
-
-        let playerArmor: ArmorItem[] = [];
+        // NETWORTH ARMOR
+        let playerArmor: networthItem[] = [];
         let playerArmorNetworth = 0;
-
-        console.log(selectedMember?.inventory);
 
         try {
           const armor: any = await decodeItems(selectedMember?.inventory?.inv_armor?.data);
@@ -176,23 +166,17 @@ export default function ProfilePage() {
 
                 if (typeof displayName === 'string') {
                   const cleanedDisplayName = displayName.replace(/§./g, '');
-                  let itemCount = 1;
                   const itemId = element.tag?.value?.ExtraAttributes?.value?.id?.value;
                   let networth = 0;
                   let itemArm: HypixelItem | undefined = allItems.find((element) => element.id.includes(itemId));
-                  if (itemArm?.bzPrice != null){
+                  if (itemArm?.bzPrice != null) {
                     networth = itemArm.bzPrice;
-                  } else if (itemArm?.ahPrice != null){
+                  } else if (itemArm?.ahPrice != null) {
                     networth = itemArm.ahPrice;
                   }
 
-                  if(element?.Count?.value){
-                    itemCount = element?.Count?.value;
-                  }
-
-
                   if (cleanedDisplayName && itemId !== undefined) {
-                    const item: ArmorItem = {
+                    const item: networthItem = {
                       name: cleanedDisplayName,
                       id: itemId,
                       networth: networth
@@ -208,10 +192,9 @@ export default function ProfilePage() {
           console.error('Error processing the inventory:', error);
         }
 
-        // NETWORTH PLAYER INVENTORY
-        let playerInventory: InventoryItem[] = [];
+        // NETWORTH INVENTORY
+        let playerInventory: networthItem[] = [];
         let playerInventoryNetworth: number = 0;
-
 
         try {
           const inventory: any = await decodeItems(selectedMember.inventory.inv_contents.data);
@@ -228,19 +211,18 @@ export default function ProfilePage() {
                   const itemId = element.tag?.value?.ExtraAttributes?.value?.id?.value;
                   let networth = 0;
                   let itemInv: HypixelItem | undefined = allItems.find((element) => element.id.includes(itemId));
-                  if (itemInv?.bzPrice != null){
+                  if (itemInv?.bzPrice != null) {
                     networth = itemInv.bzPrice;
-                  } else if (itemInv?.ahPrice != null){
+                  } else if (itemInv?.ahPrice != null) {
                     networth = itemInv.ahPrice;
                   }
 
-                  if(element?.Count?.value){
+                  if (element?.Count?.value) {
                     itemCount = element?.Count?.value;
                   }
 
-
                   if (cleanedDisplayName && itemId !== undefined) {
-                    const item: InventoryItem = {
+                    const item: networthItem = {
                       name: cleanedDisplayName,
                       count: itemCount,
                       id: itemId,

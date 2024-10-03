@@ -63,28 +63,11 @@ declare interface ProfilesResponse {
   }>;
 }
 
-declare interface AccessoriesItem {
+declare interface networthItem {
+  id: any;
   name: string;
-  lowestBin?: number;
-}
-
-declare interface ArmorItem {
-  name: string;
-  id: string;
-  networth?: networth;
-}
-
-declare interface EquipmentItem {
-  name: string;
-  id: string;
-  networth?: networth;
-}
-
-declare interface InventoryItem {
-  name: string;
-  count: number;
-  id: string;
-  networth?: networth;
+  networth: number;
+  count?: number;
 }
 
 declare interface RenderProps {
