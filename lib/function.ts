@@ -57,7 +57,7 @@ export async function fetchAndProcessData() {
     if (!("ahPrice" in item)) {
       bazaarItems.forEach((bazaar: any) => {
         if (bazaar.product_id == item.id) {
-          item.bzPrice = bazaar.quick_status?.buyPrice;
+          item.bzPrice = (bazaar.quick_status?.sellPrice + bazaar.quick_status?.buyPrice) / 2;
         }
       });
     }
@@ -70,4 +70,58 @@ export async function decodeItems(invContents: any) {
   const nbtDecoded = await nbt.parse(yourBytes);
 
   return nbtDecoded?.parsed?.value?.i?.value;
+}
+
+export async function calculateNetworth(searchValue: any, allItems: HypixelItem[]){
+  let playerItems: networthItem[] = [];
+  let playerItemsNetworth: number = 0;
+
+  try {
+    const items: any = await decodeItems(searchValue);
+    console.log(items)
+    const itemsValues = items.value;
+
+    if (Array.isArray(itemsValues)) {
+      itemsValues.forEach((element: any) => {
+        if (element.tag && typeof element.tag === 'object' && 'value' in element.tag) {
+          const displayName = element.tag.value?.display?.value?.Name?.value;
+
+          if (typeof displayName === 'string') {
+            const cleanedDisplayName = displayName.replace(/§./g, '');
+            const itemId = element.tag?.value?.ExtraAttributes?.value?.id?.value;
+            let itemCount = 1;
+            let networth = 0;
+            let item: HypixelItem | undefined = allItems.find((element) => element.id.includes(itemId));
+            if (item?.bzPrice != null) {
+              networth = item.bzPrice;
+            } else if (item?.ahPrice != null) {
+              networth = item.ahPrice;
+            }
+
+            if (element?.Count?.value) {
+              itemCount = element?.Count?.value;
+            }
+
+            if (cleanedDisplayName && itemId !== undefined) {
+              const item: networthItem = {
+                name: cleanedDisplayName,
+                id: itemId,
+                count: itemCount,
+                networth: networth
+              };
+              playerItems.push(item);
+              playerItemsNetworth += item.networth*itemCount;
+            }
+          }
+        }
+      });
+    }
+  } catch (error) {
+    console.error('Error processing the inventory:', error);
+  }
+
+  return {
+    items: playerItems,
+    networth: playerItemsNetworth
+  }
 }

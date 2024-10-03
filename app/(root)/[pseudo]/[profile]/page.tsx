@@ -2,7 +2,7 @@
 
 import {useParams} from "next/navigation";
 import React, {useEffect, useState} from "react";
-import {decodeItems, fetchAndProcessData, getSkillLevel} from "@/lib/function";
+import {calculateNetworth, decodeItems, fetchAndProcessData, getSkillLevel} from "@/lib/function";
 import {Section} from "@/constants";
 import HomeRender from "@/components/HomeRender";
 import FarmingRender from "@/components/skill/FarmingRender";
@@ -69,175 +69,13 @@ export default function ProfilePage() {
 
         //////////////////////// NETWORTH ////////////////////////
 
-        // NETWORTH ACCESSORIES
-        let playerAccessories: networthItem[] = [];
-        let playerAccessoriesNetworth = 0;
+        let fishingBagItems = await calculateNetworth(selectedMember?.inventory?.bag_contents?.fishing_bag?.data, allItems);
+        let accessoriesItems = await calculateNetworth(selectedMember?.inventory?.bag_contents?.talisman_bag?.data, allItems);
+        let equipmentItems = await calculateNetworth(selectedMember?.inventory?.equipment_contents?.data, allItems);
+        let armorItems = await calculateNetworth(selectedMember?.inventory?.inv_armor?.data, allItems);
+        let inventoryItems = await calculateNetworth(selectedMember.inventory.inv_contents.data, allItems);
+        console.log(fishingBagItems)
 
-        try {
-          const accessories: any = await decodeItems(selectedMember?.inventory?.bag_contents?.talisman_bag?.data);
-          const accessoriesValues = accessories.value;
-
-          if (Array.isArray(accessoriesValues)) {
-            accessoriesValues.forEach((element: any) => {
-              if (element.tag && typeof element.tag === 'object' && 'value' in element.tag) {
-                const displayName = element.tag.value?.display?.value?.Name?.value;
-
-                if (typeof displayName === 'string') {
-                  const cleanedDisplayName = displayName.replace(/§./g, '');
-                  const itemId = element.tag?.value?.ExtraAttributes?.value?.id?.value;
-                  let networth = 0;
-                  let itemEqu: HypixelItem | undefined = allItems.find((element) => element.id.includes(itemId));
-                  if (itemEqu?.bzPrice != null) {
-                    networth = itemEqu.bzPrice;
-                  } else if (itemEqu?.ahPrice != null) {
-                    networth = itemEqu.ahPrice;
-                  }
-
-                  if (cleanedDisplayName && itemId !== undefined) {
-                    const item: networthItem = {
-                      name: cleanedDisplayName,
-                      id: itemId,
-                      networth: networth
-                    };
-                    playerAccessories.push(item);
-                    playerAccessoriesNetworth += item.networth;
-                  }
-                }
-              }
-            });
-          }
-        } catch (error) {
-          console.error('Error processing the inventory:', error);
-        }
-
-        // NETWORTH EQUIPMENT
-        let playerEquipment: networthItem[] = [];
-        let playerEquipmentNetworth = 0;
-
-        try {
-          const equipment: any = await decodeItems(selectedMember?.inventory?.equipment_contents?.data);
-          const equipmentValues = equipment.value;
-
-          if (Array.isArray(equipmentValues)) {
-            equipmentValues.forEach((element: any) => {
-              if (element.tag && typeof element.tag === 'object' && 'value' in element.tag) {
-                const displayName = element.tag.value?.display?.value?.Name?.value;
-
-                if (typeof displayName === 'string') {
-                  const cleanedDisplayName = displayName.replace(/§./g, '');
-                  const itemId = element.tag?.value?.ExtraAttributes?.value?.id?.value;
-                  let networth = 0;
-                  let itemEqu: HypixelItem | undefined = allItems.find((element) => element.id.includes(itemId));
-                  if (itemEqu?.bzPrice != null) {
-                    networth = itemEqu.bzPrice;
-                  } else if (itemEqu?.ahPrice != null) {
-                    networth = itemEqu.ahPrice;
-                  }
-
-                  if (cleanedDisplayName && itemId !== undefined) {
-                    const item: networthItem = {
-                      name: cleanedDisplayName,
-                      id: itemId,
-                      networth: networth
-                    };
-                    playerEquipment.push(item);
-                    playerEquipmentNetworth += item.networth;
-                  }
-                }
-              }
-            });
-          }
-        } catch (error) {
-          console.error('Error processing the inventory:', error);
-        }
-
-        // NETWORTH ARMOR
-        let playerArmor: networthItem[] = [];
-        let playerArmorNetworth = 0;
-
-        try {
-          const armor: any = await decodeItems(selectedMember?.inventory?.inv_armor?.data);
-          const armorValues = armor.value;
-
-          if (Array.isArray(armorValues)) {
-            armorValues.forEach((element: any) => {
-              if (element.tag && typeof element.tag === 'object' && 'value' in element.tag) {
-                const displayName = element.tag.value?.display?.value?.Name?.value;
-
-                if (typeof displayName === 'string') {
-                  const cleanedDisplayName = displayName.replace(/§./g, '');
-                  const itemId = element.tag?.value?.ExtraAttributes?.value?.id?.value;
-                  let networth = 0;
-                  let itemArm: HypixelItem | undefined = allItems.find((element) => element.id.includes(itemId));
-                  if (itemArm?.bzPrice != null) {
-                    networth = itemArm.bzPrice;
-                  } else if (itemArm?.ahPrice != null) {
-                    networth = itemArm.ahPrice;
-                  }
-
-                  if (cleanedDisplayName && itemId !== undefined) {
-                    const item: networthItem = {
-                      name: cleanedDisplayName,
-                      id: itemId,
-                      networth: networth
-                    };
-                    playerArmor.push(item);
-                    playerArmorNetworth += item.networth;
-                  }
-                }
-              }
-            });
-          }
-        } catch (error) {
-          console.error('Error processing the inventory:', error);
-        }
-
-        // NETWORTH INVENTORY
-        let playerInventory: networthItem[] = [];
-        let playerInventoryNetworth: number = 0;
-
-        try {
-          const inventory: any = await decodeItems(selectedMember.inventory.inv_contents.data);
-          const inventoryValues = inventory.value;
-
-          if (Array.isArray(inventoryValues)) {
-            inventoryValues.forEach((element: any) => {
-              if (element.tag && typeof element.tag === 'object' && 'value' in element.tag) {
-                const displayName = element.tag.value?.display?.value?.Name?.value;
-
-                if (typeof displayName === 'string') {
-                  const cleanedDisplayName = displayName.replace(/§./g, '');
-                  let itemCount = 1;
-                  const itemId = element.tag?.value?.ExtraAttributes?.value?.id?.value;
-                  let networth = 0;
-                  let itemInv: HypixelItem | undefined = allItems.find((element) => element.id.includes(itemId));
-                  if (itemInv?.bzPrice != null) {
-                    networth = itemInv.bzPrice;
-                  } else if (itemInv?.ahPrice != null) {
-                    networth = itemInv.ahPrice;
-                  }
-
-                  if (element?.Count?.value) {
-                    itemCount = element?.Count?.value;
-                  }
-
-                  if (cleanedDisplayName && itemId !== undefined) {
-                    const item: networthItem = {
-                      name: cleanedDisplayName,
-                      count: itemCount,
-                      id: itemId,
-                      networth: networth
-                    };
-                    playerInventory.push(item);
-                    playerInventoryNetworth += item.networth;
-                  }
-                }
-              }
-            });
-          }
-        } catch (error) {
-          console.error('Erreur lors du traitement de l’inventaire:', error);
-        }
         //////////////////////// END NETWORTH ////////////////////////
 
         const {FARMING, FISHING, MINING, FORAGING, COMBAT} = hypixelSkills.skills;
@@ -250,17 +88,17 @@ export default function ProfilePage() {
         setProfileData({
           pseudo: normalizedPseudo,
           profile: selectedProfile.cute_name,
-          networth: playerPurse + playerBank + playerAccessoriesNetworth + playerInventoryNetworth + playerArmorNetworth,
+          networth: playerPurse + playerBank + accessoriesItems.networth + inventoryItems.networth + armorItems.networth + equipmentItems.networth,
           purse: playerPurse,
           bank: playerBank,
-          playerAccessories,
-          playerAccessoriesNetworth,
-          playerInventory,
-          playerInventoryNetworth,
-          playerArmor,
-          playerArmorNetworth,
-          playerEquipment,
-          playerEquipmentNetworth,
+          playerAccessories: accessoriesItems.items,
+          playerAccessoriesNetworth: accessoriesItems.networth,
+          playerInventory: inventoryItems.items,
+          playerInventoryNetworth: inventoryItems.networth,
+          playerArmor: armorItems.items,
+          playerArmorNetworth: armorItems.networth,
+          playerEquipment: equipmentItems.items,
+          playerEquipmentNetworth: equipmentItems.networth,
           farmingLvl,
           fishingLvl,
           miningLvl,

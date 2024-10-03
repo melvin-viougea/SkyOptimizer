@@ -42,6 +42,9 @@ declare interface ProfilesResponse {
             data: string;
           };
           bag_contents: {
+            fishing_bag: {
+              data: string;
+            }
             talisman_bag: {
               data: string;
             };
