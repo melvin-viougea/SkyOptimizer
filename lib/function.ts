@@ -27,7 +27,7 @@ export function formatToPrice(value: number): string {
   return Math.floor(value).toString();
 }
 
-export async function fetchAndProcessData() {
+export async function fetchAllItemsWithPrice() {
   const itemsResponse = await fetchHypixelItems();
   const bazaarResponse = await fetchBazaar();
   const auctionResponse = await fetchHypixelAuction();
@@ -80,7 +80,6 @@ export async function calculateNetworth(searchValue: any, allItems: HypixelItem[
 
   try {
     const items: any = await decodeItems(searchValue);
-    console.log(items)
     const itemsValues = items.value;
 
     if (Array.isArray(itemsValues)) {

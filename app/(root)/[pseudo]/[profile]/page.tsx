@@ -17,7 +17,7 @@ import FishingRender from "@/components/skill/fishing/FishingRender";
 import ForagingRender from "@/components/skill/foraging/ForagingRender";
 import ProgressionRender from "@/components/ProgressionRender";
 import {fetchHypixelProfiles, fetchMojangData, fetchSkills} from "@/lib/fetch";
-import {calculateNetworth, fetchAndProcessData, getSkillLevel} from "@/lib/function";
+import {calculateNetworth, fetchAllItemsWithPrice, getSkillLevel} from "@/lib/function";
 
 export default function ProfilePage() {
   const {pseudo} = useParams();
@@ -52,31 +52,29 @@ export default function ProfilePage() {
         const normalizedPlayerUuid = playerUuid.replace(/-/g, "");
         const selectedMember = members[normalizedPlayerUuid];
 
-        const playerPurse = selectedMember.currencies.coin_purse
-        const playerBank = selectedProfile.banking.balance
+        const playerPurse = selectedMember.currencies.coin_purse;
+        const playerBank = selectedProfile.banking.balance;
 
         if (!selectedMember) {
           setError("Selected member not found");
           return;
         }
 
-        // ALL ITEMS
-        const allItems = await fetchAndProcessData();
-
-        // ALL ACCESSORIES
+        //////////////////////// ALL ACCESSORIES ////////////////////////
         // const accessoryItems = allItems.items.filter(item => item.category === "ACCESSORY");
         // const talismanNames = accessoryItems.map(item => item.name);
 
-        //////////////////////// NETWORTH ////////////////////////
+        //////////////////////// ALL ITEMS ////////////////////////
+        const allItems = await fetchAllItemsWithPrice();
 
+        //////////////////////// NETWORTH ////////////////////////
         let fishingBagItems = await calculateNetworth(selectedMember?.inventory?.bag_contents?.fishing_bag?.data, allItems);
         let accessoriesItems = await calculateNetworth(selectedMember?.inventory?.bag_contents?.talisman_bag?.data, allItems);
         let equipmentItems = await calculateNetworth(selectedMember?.inventory?.equipment_contents?.data, allItems);
         let armorItems = await calculateNetworth(selectedMember?.inventory?.inv_armor?.data, allItems);
         let inventoryItems = await calculateNetworth(selectedMember.inventory.inv_contents.data, allItems);
 
-        //////////////////////// END NETWORTH ////////////////////////
-
+        //////////////////////// SKILL ////////////////////////
         const {FARMING, FISHING, MINING, FORAGING, COMBAT} = hypixelSkills.skills;
         const farmingLvl = getSkillLevel(selectedMember.player_data.experience.SKILL_FARMING ?? 0, FARMING.levels);
         const fishingLvl = getSkillLevel(selectedMember.player_data.experience.SKILL_FISHING ?? 0, FISHING.levels);
@@ -157,7 +155,7 @@ export default function ProfilePage() {
   if (loading) {
     return (
       <div className="flex flex-col items-center justify-center gap-2 pt-5 min-h-screen">
-        <h1 className="text-4xl font-bold text-gray-200 text-center">Loading...</h1>
+        <h1 className="text-3xl font-bold text-gray-200 text-center">Loading profile...</h1>
       </div>
     );
   }
