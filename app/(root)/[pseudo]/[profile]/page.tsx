@@ -24,17 +24,13 @@ import ReleaseNoteRender from "@/components/render/ReleaseNoteRender";
 export default function ProfilePage() {
   const {pseudo} = useParams();
   const normalizedPseudo = Array.isArray(pseudo) ? pseudo[0] : pseudo;
-
   const [loading, setLoading] = useState(true);
   const [profileData, setProfileData] = useState<any>(null);
   const [error, setError] = useState<string | null>(null);
   const [activeSection, setActiveSection] = useState<Section>(Section.Home);
-
-
   const numberFetchesRef = useRef<number>(0);
   const [numberFetches, setNumberFetches] = useState<number>(0);
   const [totalFetches, setTotalFetches] = useState<number>(0);
-
 
   useEffect(() => {
     const fetchData = async () => {
@@ -78,13 +74,13 @@ export default function ProfilePage() {
           return;
         }
 
-        //////////////////////// ALL ITEMS ////////////////////////
+        //////////////////////// ALL ITEMS WITH PRICE ////////////////////////
         const allItems = await fetchAllItemsWithPrice(() => {
           numberFetchesRef.current += 1;
           setNumberFetches(numberFetchesRef.current);
         });
 
-        //////////////////////// NETWORTH ////////////////////////
+        //////////////////////// PLAYER NETWORTH ////////////////////////
         //console.log(selectedMember);
         let playerPurse = selectedMember.currencies.coin_purse;
         let playerBank = selectedProfile.banking.balance;
@@ -99,7 +95,8 @@ export default function ProfilePage() {
         let petItems = await calculateNetworth(selectedMember.inventory, allItems)
         let fishingBagItems = await calculateNetworth(selectedMember?.inventory?.bag_contents?.fishing_bag?.data, allItems)
         let museumItems = await calculateNetworth(selectedMember.inventory, allItems)
-        //////////////////////// SKILL ////////////////////////
+
+        //////////////////////// PLAYER SKILL ////////////////////////
         const {FARMING, FISHING, MINING, FORAGING, COMBAT} = hypixelSkills.skills;
         const farmingLvl = getSkillLevel(selectedMember.player_data.experience.SKILL_FARMING ?? 0, FARMING.levels);
         const fishingLvl = getSkillLevel(selectedMember.player_data.experience.SKILL_FISHING ?? 0, FISHING.levels);
@@ -157,10 +154,9 @@ export default function ProfilePage() {
         setLoading(false);
       }
     };
-    fetchData().then((r) => {
-      return r;
-    });
-  }, [normalizedPseudo]);
+    fetchData().then();
+  }, []);
+
   const renderSection = () => {
     switch (activeSection) {
       case Section.Home:
@@ -209,21 +205,23 @@ export default function ProfilePage() {
   if (error) {
     return (
       <div className="flex flex-col items-center justify-center gap-2 pt-5 min-h-screen">
-        <h1 className="text-4xl font-bold text-center">Error: {error}</h1>
+        <h1 className="text-3xl font-bold text-gray-200 text-center">Error: {error}</h1>
       </div>
     );
   }
 
   if (!profileData) {
-    return <p>No profile data available.</p>;
+    return (
+      <div className="flex flex-col items-center justify-center gap-2 pt-5 min-h-screen">
+        <h1 className="text-3xl font-bold text-gray-200 text-center">No profile data available.</h1>
+      </div>
+    );
   }
 
   return (
     <div className="flex">
-      <Navbar activeSection={activeSection} setActiveSection={setActiveSection} pseudo={profileData.pseudo} profile={profileData.profile}/>
-      <div className="flex-1">
-        {renderSection()}
-      </div>
+      <Navbar activeSection={activeSection} setActiveSection={setActiveSection} pseudo={profileData.pseudo} profile={profileData.profile} />
+      <div className="flex-1">{renderSection()}</div>
     </div>
   );
 }
