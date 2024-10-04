@@ -5,6 +5,7 @@ export enum Section {
   Accessories = "Accessories",
   Minions = "Minions",
   Progression = "Progression",
+  RealseNote = "RealseNote",
 
   // SKILLS
   Farming = "Farming",

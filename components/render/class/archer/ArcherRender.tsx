@@ -1,10 +1,10 @@
 import React, {FC, useState} from "react";
-import TankEarlyRender from "@/components/class/tank/TankEarlyRender";
-import TankMidRender from "@/components/class/tank/TankMidRender";
-import TankLateRender from "@/components/class/tank/TankLateRender";
-import TankEndRender from "@/components/class/tank/TankEndRender";
+import ArcherMidRender from "@/components/render/class/archer/ArcherMidRender";
+import ArcherEarlyRender from "@/components/render/class/archer/ArcherEarlyRender";
+import ArcherLateRender from "@/components/render/class/archer/ArcherLateRender";
+import ArcherEndRender from "@/components/render/class/archer/ArcherEndRender";
 
-const TankRender: FC<RenderProps> = ({profileData}) => {
+const ArcherRender: FC<RenderProps> = ({profileData}) => {
   const [gamePhase, setGamePhase] = useState("early");
 
   if (!profileData) return null;
@@ -12,13 +12,13 @@ const TankRender: FC<RenderProps> = ({profileData}) => {
   const renderGamePhase = () => {
     switch (gamePhase) {
       case "early":
-        return <TankEarlyRender profileData={profileData}/>;
+        return <ArcherEarlyRender profileData={profileData}/>;
       case "mid":
-        return <TankMidRender profileData={profileData}/>;
+        return <ArcherMidRender profileData={profileData}/>;
       case "late":
-        return <TankLateRender profileData={profileData}/>;
+        return <ArcherLateRender profileData={profileData}/>;
       case "end":
-        return <TankEndRender profileData={profileData}/>;
+        return <ArcherEndRender profileData={profileData}/>;
       default:
         return null;
     }
@@ -27,7 +27,7 @@ const TankRender: FC<RenderProps> = ({profileData}) => {
   return (
     <div className="rounded-3xl bg-gray-800 text-gray-200 p-8 m-5 shadow-lg">
       <h1 className="text-3xl font-extrabold underline decoration-wavy decoration-yellow decoration-4 underline-offset-8 mb-8">
-        Tank Optimizer:
+        Archer Optimizer:
       </h1>
 
       <div className="flex justify-around space-x-2 mb-6">
@@ -69,4 +69,4 @@ const TankRender: FC<RenderProps> = ({profileData}) => {
   );
 };
 
-export default TankRender;
+export default ArcherRender;

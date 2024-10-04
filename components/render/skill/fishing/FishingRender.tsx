@@ -1,10 +1,10 @@
 import React, {FC, useState} from "react";
-import BerserkEarlyRender from "@/components/class/berserk/BerserkEarlyRender";
-import BerserkMidRender from "@/components/class/berserk/BerserkMidRender";
-import BerserkEndRender from "@/components/class/berserk/BerserkEndRender";
-import BerserkLateRender from "@/components/class/berserk/BerserkLateRender";
+import FishingEndRender from "@/components/render/skill/fishing/FishingEndRender";
+import FishingEarlyRender from "@/components/render/skill/fishing/FishingEarlyRender";
+import FishingMidRender from "@/components/render/skill/fishing/FishingMidRender";
+import FishingLateRender from "@/components/render/skill/fishing/FishingLateRender";
 
-const BerserkRender: FC<RenderProps> = ({profileData}) => {
+const FishingRender: FC<RenderProps> = ({profileData}) => {
   const [gamePhase, setGamePhase] = useState("early");
 
   if (!profileData) return null;
@@ -12,13 +12,13 @@ const BerserkRender: FC<RenderProps> = ({profileData}) => {
   const renderGamePhase = () => {
     switch (gamePhase) {
       case "early":
-        return <BerserkEarlyRender profileData={profileData}/>;
+        return <FishingEarlyRender profileData={profileData}/>;
       case "mid":
-        return <BerserkMidRender profileData={profileData}/>;
+        return <FishingMidRender profileData={profileData}/>;
       case "late":
-        return <BerserkLateRender profileData={profileData}/>;
+        return <FishingLateRender profileData={profileData}/>;
       case "end":
-        return <BerserkEndRender profileData={profileData}/>;
+        return <FishingEndRender profileData={profileData}/>;
       default:
         return null;
     }
@@ -27,7 +27,7 @@ const BerserkRender: FC<RenderProps> = ({profileData}) => {
   return (
     <div className="rounded-3xl bg-gray-800 text-gray-200 p-8 m-5 shadow-lg">
       <h1 className="text-3xl font-extrabold underline decoration-wavy decoration-yellow decoration-4 underline-offset-8 mb-8">
-        Berserk Optimizer:
+        Fishing Optimizer:
       </h1>
 
       <div className="flex justify-around space-x-2 mb-6">
@@ -69,4 +69,4 @@ const BerserkRender: FC<RenderProps> = ({profileData}) => {
   );
 };
 
-export default BerserkRender;
+export default FishingRender;

@@ -1,10 +1,10 @@
 import React, {FC, useState} from "react";
-import ArcherMidRender from "@/components/class/archer/ArcherMidRender";
-import ArcherEarlyRender from "@/components/class/archer/ArcherEarlyRender";
-import ArcherLateRender from "@/components/class/archer/ArcherLateRender";
-import ArcherEndRender from "@/components/class/archer/ArcherEndRender";
+import ForagingEarlyRender from "@/components/render/skill/foraging/ForagingEarlyRender";
+import ForagingMidRender from "@/components/render/skill/foraging/ForagingMidRender";
+import ForagingLateRender from "@/components/render/skill/foraging/ForagingLateRender";
+import ForagingEndRender from "@/components/render/skill/foraging/ForagingEndRender";
 
-const ArcherRender: FC<RenderProps> = ({profileData}) => {
+const ForagingRender: FC<RenderProps> = ({profileData}) => {
   const [gamePhase, setGamePhase] = useState("early");
 
   if (!profileData) return null;
@@ -12,13 +12,13 @@ const ArcherRender: FC<RenderProps> = ({profileData}) => {
   const renderGamePhase = () => {
     switch (gamePhase) {
       case "early":
-        return <ArcherEarlyRender profileData={profileData}/>;
+        return <ForagingEarlyRender profileData={profileData}/>;
       case "mid":
-        return <ArcherMidRender profileData={profileData}/>;
+        return <ForagingMidRender profileData={profileData}/>;
       case "late":
-        return <ArcherLateRender profileData={profileData}/>;
+        return <ForagingLateRender profileData={profileData}/>;
       case "end":
-        return <ArcherEndRender profileData={profileData}/>;
+        return <ForagingEndRender profileData={profileData}/>;
       default:
         return null;
     }
@@ -27,7 +27,7 @@ const ArcherRender: FC<RenderProps> = ({profileData}) => {
   return (
     <div className="rounded-3xl bg-gray-800 text-gray-200 p-8 m-5 shadow-lg">
       <h1 className="text-3xl font-extrabold underline decoration-wavy decoration-yellow decoration-4 underline-offset-8 mb-8">
-        Archer Optimizer:
+        Foraging Optimizer:
       </h1>
 
       <div className="flex justify-around space-x-2 mb-6">
@@ -69,4 +69,4 @@ const ArcherRender: FC<RenderProps> = ({profileData}) => {
   );
 };
 
-export default ArcherRender;
+export default ForagingRender;

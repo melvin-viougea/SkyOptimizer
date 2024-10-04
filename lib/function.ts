@@ -58,7 +58,7 @@ export async function fetchAllItemsWithPrice(onProgressUpdate?: () => void) {
   allItems.forEach((item: any) => {
     allAuctions.forEach((auctions: any[]) => {
       auctions.forEach((auction: { bin: boolean; item_name: string; starting_bid: number; }) => {
-        if(auction.bin){
+        if (auction.bin) {
           if (item.name === auction.item_name) {
             if (item.ahPrice !== undefined) {
               if (item.ahPrice > auction.starting_bid) {
@@ -89,7 +89,7 @@ export async function decodeItems(invContents: any) {
   return nbtDecoded?.parsed?.value?.i?.value;
 }
 
-export async function calculateNetworth(searchValue: any, allItems: HypixelItem[]){
+export async function calculateNetworth(searchValue: any, allItems: HypixelItem[]) {
   let playerItems: NetworthItem[] = [];
   let playerItemsNetworth: number = 0;
 
@@ -126,7 +126,7 @@ export async function calculateNetworth(searchValue: any, allItems: HypixelItem[
                 networth: networth
               };
               playerItems.push(item);
-              playerItemsNetworth += item.networth*itemCount;
+              playerItemsNetworth += item.networth * itemCount;
             }
           }
         }

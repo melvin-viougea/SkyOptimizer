@@ -1,10 +1,10 @@
 import React, {FC, useState} from "react";
-import HealerEndRender from "@/components/class/healer/HealerEndRender";
-import HealerEarlyRender from "@/components/class/healer/HealerEarlyRender";
-import HealerMidRender from "@/components/class/healer/HealerMidRender";
-import HealerLateRender from "@/components/class/healer/HealerLateRender";
+import BerserkEarlyRender from "@/components/render/class/berserk/BerserkEarlyRender";
+import BerserkMidRender from "@/components/render/class/berserk/BerserkMidRender";
+import BerserkEndRender from "@/components/render/class/berserk/BerserkEndRender";
+import BerserkLateRender from "@/components/render/class/berserk/BerserkLateRender";
 
-const HealerRender: FC<RenderProps> = ({profileData}) => {
+const BerserkRender: FC<RenderProps> = ({profileData}) => {
   const [gamePhase, setGamePhase] = useState("early");
 
   if (!profileData) return null;
@@ -12,13 +12,13 @@ const HealerRender: FC<RenderProps> = ({profileData}) => {
   const renderGamePhase = () => {
     switch (gamePhase) {
       case "early":
-        return <HealerEarlyRender profileData={profileData}/>;
+        return <BerserkEarlyRender profileData={profileData}/>;
       case "mid":
-        return <HealerMidRender profileData={profileData}/>;
+        return <BerserkMidRender profileData={profileData}/>;
       case "late":
-        return <HealerLateRender profileData={profileData}/>;
+        return <BerserkLateRender profileData={profileData}/>;
       case "end":
-        return <HealerEndRender profileData={profileData}/>;
+        return <BerserkEndRender profileData={profileData}/>;
       default:
         return null;
     }
@@ -27,7 +27,7 @@ const HealerRender: FC<RenderProps> = ({profileData}) => {
   return (
     <div className="rounded-3xl bg-gray-800 text-gray-200 p-8 m-5 shadow-lg">
       <h1 className="text-3xl font-extrabold underline decoration-wavy decoration-yellow decoration-4 underline-offset-8 mb-8">
-        Healer Optimizer:
+        Berserk Optimizer:
       </h1>
 
       <div className="flex justify-around space-x-2 mb-6">
@@ -69,4 +69,4 @@ const HealerRender: FC<RenderProps> = ({profileData}) => {
   );
 };
 
-export default HealerRender;
+export default BerserkRender;

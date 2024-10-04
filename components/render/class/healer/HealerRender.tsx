@@ -1,10 +1,10 @@
 import React, {FC, useState} from "react";
-import MageEarlyRender from "@/components/class/mage/MageEarlyRender";
-import MageMidRender from "@/components/class/mage/MageMidRender";
-import MageLateRender from "@/components/class/mage/MageLateRender";
-import MageEndRender from "@/components/class/mage/MageEndRender";
+import HealerEndRender from "@/components/render/class/healer/HealerEndRender";
+import HealerEarlyRender from "@/components/render/class/healer/HealerEarlyRender";
+import HealerMidRender from "@/components/render/class/healer/HealerMidRender";
+import HealerLateRender from "@/components/render/class/healer/HealerLateRender";
 
-const MageRender: FC<RenderProps> = ({profileData}) => {
+const HealerRender: FC<RenderProps> = ({profileData}) => {
   const [gamePhase, setGamePhase] = useState("early");
 
   if (!profileData) return null;
@@ -12,13 +12,13 @@ const MageRender: FC<RenderProps> = ({profileData}) => {
   const renderGamePhase = () => {
     switch (gamePhase) {
       case "early":
-        return <MageEarlyRender profileData={profileData}/>;
+        return <HealerEarlyRender profileData={profileData}/>;
       case "mid":
-        return <MageMidRender profileData={profileData}/>;
+        return <HealerMidRender profileData={profileData}/>;
       case "late":
-        return <MageLateRender profileData={profileData}/>;
+        return <HealerLateRender profileData={profileData}/>;
       case "end":
-        return <MageEndRender profileData={profileData}/>;
+        return <HealerEndRender profileData={profileData}/>;
       default:
         return null;
     }
@@ -27,7 +27,7 @@ const MageRender: FC<RenderProps> = ({profileData}) => {
   return (
     <div className="rounded-3xl bg-gray-800 text-gray-200 p-8 m-5 shadow-lg">
       <h1 className="text-3xl font-extrabold underline decoration-wavy decoration-yellow decoration-4 underline-offset-8 mb-8">
-        Mage Optimizer:
+        Healer Optimizer:
       </h1>
 
       <div className="flex justify-around space-x-2 mb-6">
@@ -69,4 +69,4 @@ const MageRender: FC<RenderProps> = ({profileData}) => {
   );
 };
 
-export default MageRender;
+export default HealerRender;

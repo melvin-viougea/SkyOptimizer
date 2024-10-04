@@ -1,10 +1,10 @@
 import React, {FC, useState} from "react";
-import MiningEarlyRender from "@/components/skill/mining/MiningEarlyRender";
-import MiningMidRender from "@/components/skill/mining/MiningMidRender";
-import MiningLateRender from "@/components/skill/mining/MiningLateRender";
-import MiningEndRender from "@/components/skill/mining/MiningEndRender";
+import TankEarlyRender from "@/components/render/class/tank/TankEarlyRender";
+import TankMidRender from "@/components/render/class/tank/TankMidRender";
+import TankLateRender from "@/components/render/class/tank/TankLateRender";
+import TankEndRender from "@/components/render/class/tank/TankEndRender";
 
-const MiningRender: FC<RenderProps> = ({profileData}) => {
+const TankRender: FC<RenderProps> = ({profileData}) => {
   const [gamePhase, setGamePhase] = useState("early");
 
   if (!profileData) return null;
@@ -12,13 +12,13 @@ const MiningRender: FC<RenderProps> = ({profileData}) => {
   const renderGamePhase = () => {
     switch (gamePhase) {
       case "early":
-        return <MiningEarlyRender profileData={profileData}/>;
+        return <TankEarlyRender profileData={profileData}/>;
       case "mid":
-        return <MiningMidRender profileData={profileData}/>;
+        return <TankMidRender profileData={profileData}/>;
       case "late":
-        return <MiningLateRender profileData={profileData}/>;
+        return <TankLateRender profileData={profileData}/>;
       case "end":
-        return <MiningEndRender profileData={profileData}/>;
+        return <TankEndRender profileData={profileData}/>;
       default:
         return null;
     }
@@ -27,7 +27,7 @@ const MiningRender: FC<RenderProps> = ({profileData}) => {
   return (
     <div className="rounded-3xl bg-gray-800 text-gray-200 p-8 m-5 shadow-lg">
       <h1 className="text-3xl font-extrabold underline decoration-wavy decoration-yellow decoration-4 underline-offset-8 mb-8">
-        Mining Optimizer:
+        Tank Optimizer:
       </h1>
 
       <div className="flex justify-around space-x-2 mb-6">
@@ -69,4 +69,4 @@ const MiningRender: FC<RenderProps> = ({profileData}) => {
   );
 };
 
-export default MiningRender;
+export default TankRender;

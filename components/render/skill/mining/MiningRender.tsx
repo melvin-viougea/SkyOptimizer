@@ -1,10 +1,10 @@
 import React, {FC, useState} from "react";
-import FishingEndRender from "@/components/skill/fishing/FishingEndRender";
-import FishingEarlyRender from "@/components/skill/fishing/FishingEarlyRender";
-import FishingMidRender from "@/components/skill/fishing/FishingMidRender";
-import FishingLateRender from "@/components/skill/fishing/FishingLateRender";
+import MiningEarlyRender from "@/components/render/skill/mining/MiningEarlyRender";
+import MiningMidRender from "@/components/render/skill/mining/MiningMidRender";
+import MiningLateRender from "@/components/render/skill/mining/MiningLateRender";
+import MiningEndRender from "@/components/render/skill/mining/MiningEndRender";
 
-const FishingRender: FC<RenderProps> = ({profileData}) => {
+const MiningRender: FC<RenderProps> = ({profileData}) => {
   const [gamePhase, setGamePhase] = useState("early");
 
   if (!profileData) return null;
@@ -12,13 +12,13 @@ const FishingRender: FC<RenderProps> = ({profileData}) => {
   const renderGamePhase = () => {
     switch (gamePhase) {
       case "early":
-        return <FishingEarlyRender profileData={profileData}/>;
+        return <MiningEarlyRender profileData={profileData}/>;
       case "mid":
-        return <FishingMidRender profileData={profileData}/>;
+        return <MiningMidRender profileData={profileData}/>;
       case "late":
-        return <FishingLateRender profileData={profileData}/>;
+        return <MiningLateRender profileData={profileData}/>;
       case "end":
-        return <FishingEndRender profileData={profileData}/>;
+        return <MiningEndRender profileData={profileData}/>;
       default:
         return null;
     }
@@ -27,7 +27,7 @@ const FishingRender: FC<RenderProps> = ({profileData}) => {
   return (
     <div className="rounded-3xl bg-gray-800 text-gray-200 p-8 m-5 shadow-lg">
       <h1 className="text-3xl font-extrabold underline decoration-wavy decoration-yellow decoration-4 underline-offset-8 mb-8">
-        Fishing Optimizer:
+        Mining Optimizer:
       </h1>
 
       <div className="flex justify-around space-x-2 mb-6">
@@ -69,4 +69,4 @@ const FishingRender: FC<RenderProps> = ({profileData}) => {
   );
 };
 
-export default FishingRender;
+export default MiningRender;

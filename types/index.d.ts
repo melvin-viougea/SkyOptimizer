@@ -176,3 +176,10 @@ declare interface HypixelBazaarResponse {
 declare interface CustomError {
   message: string;
 }
+
+declare interface NavbarProps {
+  activeSection: Section;
+  setActiveSection: (section: Section) => void;
+  pseudo: string;
+  profile: string;
+}

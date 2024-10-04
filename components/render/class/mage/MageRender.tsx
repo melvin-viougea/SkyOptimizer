@@ -1,10 +1,10 @@
 import React, {FC, useState} from "react";
-import ForagingEarlyRender from "@/components/skill/foraging/ForagingEarlyRender";
-import ForagingMidRender from "@/components/skill/foraging/ForagingMidRender";
-import ForagingLateRender from "@/components/skill/foraging/ForagingLateRender";
-import ForagingEndRender from "@/components/skill/foraging/ForagingEndRender";
+import MageEarlyRender from "@/components/render/class/mage/MageEarlyRender";
+import MageMidRender from "@/components/render/class/mage/MageMidRender";
+import MageLateRender from "@/components/render/class/mage/MageLateRender";
+import MageEndRender from "@/components/render/class/mage/MageEndRender";
 
-const ForagingRender: FC<RenderProps> = ({profileData}) => {
+const MageRender: FC<RenderProps> = ({profileData}) => {
   const [gamePhase, setGamePhase] = useState("early");
 
   if (!profileData) return null;
@@ -12,13 +12,13 @@ const ForagingRender: FC<RenderProps> = ({profileData}) => {
   const renderGamePhase = () => {
     switch (gamePhase) {
       case "early":
-        return <ForagingEarlyRender profileData={profileData}/>;
+        return <MageEarlyRender profileData={profileData}/>;
       case "mid":
-        return <ForagingMidRender profileData={profileData}/>;
+        return <MageMidRender profileData={profileData}/>;
       case "late":
-        return <ForagingLateRender profileData={profileData}/>;
+        return <MageLateRender profileData={profileData}/>;
       case "end":
-        return <ForagingEndRender profileData={profileData}/>;
+        return <MageEndRender profileData={profileData}/>;
       default:
         return null;
     }
@@ -27,7 +27,7 @@ const ForagingRender: FC<RenderProps> = ({profileData}) => {
   return (
     <div className="rounded-3xl bg-gray-800 text-gray-200 p-8 m-5 shadow-lg">
       <h1 className="text-3xl font-extrabold underline decoration-wavy decoration-yellow decoration-4 underline-offset-8 mb-8">
-        Foraging Optimizer:
+        Mage Optimizer:
       </h1>
 
       <div className="flex justify-around space-x-2 mb-6">
@@ -69,4 +69,4 @@ const ForagingRender: FC<RenderProps> = ({profileData}) => {
   );
 };
 
-export default ForagingRender;
+export default MageRender;

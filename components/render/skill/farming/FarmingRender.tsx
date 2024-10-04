@@ -1,8 +1,8 @@
 import React, {FC, useState} from "react";
-import FarmingEarlyRender from "@/components/skill/farming/FarmingEarlyRender";
-import FarmingMidRender from "@/components/skill/farming/FarmingMidRender";
-import FarmingLateRender from "@/components/skill/farming/FarmingLateRender";
-import FarmingEndRender from "@/components/skill/farming/FarmingEndRender";
+import FarmingEarlyRender from "@/components/render/skill/farming/FarmingEarlyRender";
+import FarmingMidRender from "@/components/render/skill/farming/FarmingMidRender";
+import FarmingLateRender from "@/components/render/skill/farming/FarmingLateRender";
+import FarmingEndRender from "@/components/render/skill/farming/FarmingEndRender";
 
 const FarmingRender: FC<RenderProps> = ({profileData}) => {
   const [gamePhase, setGamePhase] = useState("early");
