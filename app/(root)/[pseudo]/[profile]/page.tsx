@@ -39,7 +39,7 @@ export default function ProfilePage() {
       setLoading(true);
       try {
         const firstResponse = await fetchHypixelAuction(0);
-        setTotalFetches(firstResponse.totalPages + 5);
+        setTotalFetches(firstResponse.totalPages + 4);
         const [hypixelSkills, mojangResponse] = await Promise.all([
           fetchSkills().then((response) => {
             numberFetchesRef.current += 1;
@@ -77,7 +77,7 @@ export default function ProfilePage() {
         }
 
         //////////////////////// ALL ITEMS ////////////////////////
-        const allItems = await fetchAllItemsWithPrice((progress) => {
+        const allItems = await fetchAllItemsWithPrice(() => {
           numberFetchesRef.current += 1;
           setNumberFetches(numberFetchesRef.current);
         });
@@ -85,61 +85,17 @@ export default function ProfilePage() {
         //////////////////////// NETWORTH ////////////////////////
         let playerPurse = selectedMember.currencies.coin_purse;
         let playerBank = selectedProfile.banking.balance;
-        let sackItems = await calculateNetworth(selectedMember?.inventory?.bag_contents?.sacks_bag?.data, allItems).then((response) => { // MARCHE PAS
-          numberFetchesRef.current += 1;
-          setNumberFetches(numberFetchesRef.current);
-          return response;
-        });
-        let armorItems = await calculateNetworth(selectedMember?.inventory?.inv_armor?.data, allItems).then((response) => {
-          numberFetchesRef.current += 1;
-          setNumberFetches(numberFetchesRef.current);
-          return response;
-        });
-        let equipmentItems = await calculateNetworth(selectedMember?.inventory?.equipment_contents?.data, allItems).then((response) => {
-          numberFetchesRef.current += 1;
-          setNumberFetches(numberFetchesRef.current);
-          return response;
-        });
-        let wardrobeItems = await calculateNetworth(selectedMember.inventory.wardrobe_contents.data, allItems).then((response) => {
-          numberFetchesRef.current += 1;
-          setNumberFetches(numberFetchesRef.current);
-          return response;
-        });
-        let inventoryItems = await calculateNetworth(selectedMember.inventory.inv_contents.data, allItems).then((response) => {
-          numberFetchesRef.current += 1;
-          setNumberFetches(numberFetchesRef.current);
-          return response;
-        });
-        let enderChestItems = await calculateNetworth(selectedMember.inventory.ender_chest_contents.data, allItems).then((response) => {
-          numberFetchesRef.current += 1;
-          setNumberFetches(numberFetchesRef.current);
-          return response;
-        });
-        let accessorieItems = await calculateNetworth(selectedMember?.inventory?.bag_contents?.talisman_bag?.data, allItems).then((response) => {
-          numberFetchesRef.current += 1;
-          setNumberFetches(numberFetchesRef.current);
-          return response;
-        });
-        let storageItems = await calculateNetworth(selectedMember.inventory?.backpack_contents?.data, allItems).then((response) => { // marche pas
-          numberFetchesRef.current += 1;
-          setNumberFetches(numberFetchesRef.current);
-          return response;
-        });
-        let petItems = await calculateNetworth(selectedMember.inventory, allItems).then((response) => {
-          numberFetchesRef.current += 1;
-          setNumberFetches(numberFetchesRef.current);
-          return response;
-        });
-        let fishingBagItems = await calculateNetworth(selectedMember?.inventory?.bag_contents?.fishing_bag?.data, allItems).then((response) => {
-          numberFetchesRef.current += 1;
-          setNumberFetches(numberFetchesRef.current);
-          return response;
-        });
-        let museumItems = await calculateNetworth(selectedMember.inventory, allItems).then((response) => {
-          numberFetchesRef.current += 1;
-          setNumberFetches(numberFetchesRef.current);
-          return response;
-        });
+        let sackItems = await calculateNetworth(selectedMember?.inventory?.bag_contents?.sacks_bag?.data, allItems)
+        let armorItems = await calculateNetworth(selectedMember?.inventory?.inv_armor?.data, allItems);
+        let equipmentItems = await calculateNetworth(selectedMember?.inventory?.equipment_contents?.data, allItems)
+        let wardrobeItems = await calculateNetworth(selectedMember.inventory.wardrobe_contents.data, allItems)
+        let inventoryItems = await calculateNetworth(selectedMember.inventory.inv_contents.data, allItems)
+        let enderChestItems = await calculateNetworth(selectedMember.inventory.ender_chest_contents.data, allItems)
+        let accessorieItems = await calculateNetworth(selectedMember?.inventory?.bag_contents?.talisman_bag?.data, allItems)
+        let storageItems = await calculateNetworth(selectedMember.inventory?.backpack_contents?.data, allItems)
+        let petItems = await calculateNetworth(selectedMember.inventory, allItems)
+        let fishingBagItems = await calculateNetworth(selectedMember?.inventory?.bag_contents?.fishing_bag?.data, allItems)
+        let museumItems = await calculateNetworth(selectedMember.inventory, allItems)
 
         console.log(selectedMember.inventory);
         //////////////////////// SKILL ////////////////////////
@@ -234,7 +190,7 @@ export default function ProfilePage() {
   if (loading) {
     return (
       <div className="flex flex-col items-center justify-center gap-2 pt-5 min-h-screen">
-        <h1 className="text-3xl font-bold text-gray-200 text-center">{Math.round(numberFetches * 100 / totalFetches)}%</h1>
+        <h1 className="text-3xl font-bold text-gray-200 text-center">{totalFetches ? Math.min(Math.round(numberFetches * 100 / totalFetches), 100) : 0}%</h1>
       </div>
     );
   }

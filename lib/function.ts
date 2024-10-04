@@ -27,20 +27,18 @@ export function formatToPrice(value: number): string {
   return Math.floor(value).toString();
 }
 
-export async function fetchAllItemsWithPrice(onProgressUpdate?: (progress: number) => void) {
+export async function fetchAllItemsWithPrice(onProgressUpdate?: () => void) {
   const itemsResponse = await fetchHypixelItems();
   const bazaarResponse = await fetchBazaar();
 
   const firstResponse = await fetchHypixelAuction(0);
   const totalPages = firstResponse.totalPages;
   const promises: Promise<HypixelAuctionResponse>[] = [];
-  let completedFetches = 0;
 
   for (let page = 0; page < totalPages; page++) {
     const request = fetchHypixelAuction(page).then((response) => {
-      completedFetches++;
       if (onProgressUpdate) {
-        onProgressUpdate(completedFetches);
+        onProgressUpdate();
       }
       return response;
     });
