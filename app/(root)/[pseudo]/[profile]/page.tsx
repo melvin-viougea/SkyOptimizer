@@ -16,7 +16,7 @@ import FarmingRender from "@/components/skill/farming/FarmingRender";
 import FishingRender from "@/components/skill/fishing/FishingRender";
 import ForagingRender from "@/components/skill/foraging/ForagingRender";
 import ProgressionRender from "@/components/ProgressionRender";
-import {fetchHypixelProfiles, fetchMojangData, fetchSkills} from "@/lib/fetch";
+import {fetchHypixelAuction, fetchHypixelProfiles, fetchMojangData, fetchSkills} from "@/lib/fetch";
 import {calculateNetworth, fetchAllItemsWithPrice, getSkillLevel} from "@/lib/function";
 
 export default function ProfilePage() {
@@ -29,15 +29,17 @@ export default function ProfilePage() {
   const [activeSection, setActiveSection] = useState<Section>(Section.Home);
 
 
-  const numberFetchesRef = useRef<number>(0); // Use ref instead of state
-  const [numberFetches, setNumberFetches] = useState<number>(0); // State for UI re-renders
-
+  const numberFetchesRef = useRef<number>(0);
+  const [numberFetches, setNumberFetches] = useState<number>(0);
+  const [totalFetches, setTotalFetches] = useState<number>(0);
 
 
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
       try {
+        const firstResponse = await fetchHypixelAuction(0);
+        setTotalFetches(firstResponse.totalPages + 5);
         const [hypixelSkills, mojangResponse] = await Promise.all([
           fetchSkills().then((response) => {
             numberFetchesRef.current += 1;
@@ -79,10 +81,9 @@ export default function ProfilePage() {
         }
 
         //////////////////////// ALL ITEMS ////////////////////////
-        const allItems = await fetchAllItemsWithPrice().then((response) => {
+        const allItems = await fetchAllItemsWithPrice((progress) => {
           numberFetchesRef.current += 1;
           setNumberFetches(numberFetchesRef.current);
-          return response;
         });
 
         //////////////////////// NETWORTH ////////////////////////
@@ -193,7 +194,7 @@ export default function ProfilePage() {
   if (loading) {
     return (
       <div className="flex flex-col items-center justify-center gap-2 pt-5 min-h-screen">
-        <h1 className="text-3xl font-bold text-gray-200 text-center">{Math.round(numberFetches*100/9)}%</h1>
+        <h1 className="text-3xl font-bold text-gray-200 text-center">{Math.round(numberFetches*100/totalFetches)}%</h1>
       </div>
     );
   }
