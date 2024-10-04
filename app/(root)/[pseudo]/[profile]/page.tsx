@@ -83,9 +83,10 @@ export default function ProfilePage() {
         });
 
         //////////////////////// NETWORTH ////////////////////////
+        //console.log(selectedMember);
         let playerPurse = selectedMember.currencies.coin_purse;
         let playerBank = selectedProfile.banking.balance;
-        let sackItems = await calculateSacksNetworth(selectedMember?.inventory?.bag_contents?.sacks_bag, allItems)
+        let sackItems = await calculateNetworth(selectedMember?.inventory?.bag_contents?.sacks_bag?.data, allItems);
         let armorItems = await calculateNetworth(selectedMember?.inventory?.inv_armor?.data, allItems);
         let equipmentItems = await calculateNetworth(selectedMember?.inventory?.equipment_contents?.data, allItems)
         let wardrobeItems = await calculateNetworth(selectedMember.inventory.wardrobe_contents.data, allItems)
@@ -96,8 +97,6 @@ export default function ProfilePage() {
         let petItems = await calculateNetworth(selectedMember.inventory, allItems)
         let fishingBagItems = await calculateNetworth(selectedMember?.inventory?.bag_contents?.fishing_bag?.data, allItems)
         let museumItems = await calculateNetworth(selectedMember.inventory, allItems)
-
-        console.log(selectedMember.inventory);
         //////////////////////// SKILL ////////////////////////
         const {FARMING, FISHING, MINING, FORAGING, COMBAT} = hypixelSkills.skills;
         const farmingLvl = getSkillLevel(selectedMember.player_data.experience.SKILL_FARMING ?? 0, FARMING.levels);
