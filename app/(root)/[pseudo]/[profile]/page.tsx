@@ -96,6 +96,8 @@ export default function ProfilePage() {
           playerArmorNetworth: armorItems.networth,
           playerEquipment: equipmentItems.items,
           playerEquipmentNetworth: equipmentItems.networth,
+          playerFishingBag: fishingBagItems.items,
+          playerFishingBagNetworth: fishingBagItems.networth,
           farmingLvl,
           fishingLvl,
           miningLvl,

@@ -75,7 +75,7 @@ export async function decodeItems(invContents: any) {
 }
 
 export async function calculateNetworth(searchValue: any, allItems: HypixelItem[]){
-  let playerItems: networthItem[] = [];
+  let playerItems: NetworthItem[] = [];
   let playerItemsNetworth: number = 0;
 
   try {
@@ -104,7 +104,7 @@ export async function calculateNetworth(searchValue: any, allItems: HypixelItem[
             }
 
             if (cleanedDisplayName && itemId !== undefined) {
-              const item: networthItem = {
+              const item: NetworthItem = {
                 name: cleanedDisplayName,
                 id: itemId,
                 count: itemCount,

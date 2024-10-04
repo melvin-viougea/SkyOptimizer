@@ -33,7 +33,7 @@ const HomeRender: FC<RenderProps> = ({profileData}) => {
         <p className="font-bold">Accessories : {formatToPrice(profileData.playerAccessoriesNetworth)}</p>
         <p className="font-bold">Storage : {profileData.combatLvl}</p>
         <p className="font-bold">Pets : {profileData.combatLvl}</p>
-        <p className="font-bold">Fishing bag : {profileData.combatLvl}</p>
+        <p className="font-bold">Fishing bag : {profileData.playerFishingBagNetworth}</p>
         <p className="font-bold">Museum : {profileData.combatLvl}</p>
       </div>
     </div>

@@ -10,13 +10,10 @@ export const fetchHypixelItems = async (): Promise<HypixelItemsResponse> => {
 
 export const fetchHypixelAuction = async (): Promise<HypixelAuctionResponse[]> => {
   const firstResponse = await ky.get("https://api.hypixel.net/v2/skyblock/auctions?page=0").json<HypixelAuctionResponse>();
-
   const totalPages = firstResponse.totalPages;
-
   const promises: Promise<HypixelAuctionResponse>[] = [];
 
-  //for (let page = 0; page < totalPages; page++) {
-  for (let page = 0; page < 1; page++) {
+  for (let page = 0; page < totalPages; page++) {
     const request = ky.get(`https://api.hypixel.net/v2/skyblock/auctions?page=${page}`).json<HypixelAuctionResponse>();
     promises.push(request);
   }
