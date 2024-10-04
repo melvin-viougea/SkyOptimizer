@@ -1,7 +1,7 @@
 "use client";
 
 import {useParams} from "next/navigation";
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import {Section} from "@/constants";
 import HomeRender from "@/components/HomeRender";
 import MinionsRender from "@/components/MinionsRender";
@@ -28,17 +28,35 @@ export default function ProfilePage() {
   const [error, setError] = useState<string | null>(null);
   const [activeSection, setActiveSection] = useState<Section>(Section.Home);
 
+
+  const numberFetchesRef = useRef<number>(0); // Use ref instead of state
+  const [numberFetches, setNumberFetches] = useState<number>(0); // State for UI re-renders
+
+
+
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
       try {
         const [hypixelSkills, mojangResponse] = await Promise.all([
-          fetchSkills(),
-          fetchMojangData(normalizedPseudo),
+          fetchSkills().then((response) => {
+            numberFetchesRef.current += 1;
+            setNumberFetches(numberFetchesRef.current);
+            return response;
+          }),
+          fetchMojangData(normalizedPseudo).then((response) => {
+            numberFetchesRef.current += 1;
+            setNumberFetches(numberFetchesRef.current);
+            return response;
+          }),
         ]);
 
         const playerUuid = mojangResponse.uuid;
-        const profilesResponse = await fetchHypixelProfiles(playerUuid);
+        const profilesResponse = await fetchHypixelProfiles(playerUuid).then((response) => {
+          numberFetchesRef.current += 1;
+          setNumberFetches(numberFetchesRef.current);
+          return response;
+        });
 
         const profiles = profilesResponse.profiles || [];
         const selectedProfile = profiles.find((profile) => profile.selected);
@@ -60,22 +78,42 @@ export default function ProfilePage() {
           return;
         }
 
-        //////////////////////// ALL ACCESSORIES ////////////////////////
-        // const accessoryItems = allItems.items.filter(item => item.category === "ACCESSORY");
-        // const talismanNames = accessoryItems.map(item => item.name);
-
         //////////////////////// ALL ITEMS ////////////////////////
-        const allItems = await fetchAllItemsWithPrice();
+        const allItems = await fetchAllItemsWithPrice().then((response) => {
+          numberFetchesRef.current += 1;
+          setNumberFetches(numberFetchesRef.current);
+          return response;
+        });
 
         //////////////////////// NETWORTH ////////////////////////
-        let fishingBagItems = await calculateNetworth(selectedMember?.inventory?.bag_contents?.fishing_bag?.data, allItems);
-        let accessoriesItems = await calculateNetworth(selectedMember?.inventory?.bag_contents?.talisman_bag?.data, allItems);
-        let equipmentItems = await calculateNetworth(selectedMember?.inventory?.equipment_contents?.data, allItems);
-        let armorItems = await calculateNetworth(selectedMember?.inventory?.inv_armor?.data, allItems);
-        let inventoryItems = await calculateNetworth(selectedMember.inventory.inv_contents.data, allItems);
+        let fishingBagItems = await calculateNetworth(selectedMember?.inventory?.bag_contents?.fishing_bag?.data, allItems).then((response) => {
+          numberFetchesRef.current += 1;
+          setNumberFetches(numberFetchesRef.current);
+          return response;
+        });
+        let accessoriesItems = await calculateNetworth(selectedMember?.inventory?.bag_contents?.talisman_bag?.data, allItems).then((response) => {
+          numberFetchesRef.current += 1;
+          setNumberFetches(numberFetchesRef.current);
+          return response;
+        });
+        let equipmentItems = await calculateNetworth(selectedMember?.inventory?.equipment_contents?.data, allItems).then((response) => {
+          numberFetchesRef.current += 1;
+          setNumberFetches(numberFetchesRef.current);
+          return response;
+        });
+        let armorItems = await calculateNetworth(selectedMember?.inventory?.inv_armor?.data, allItems).then((response) => {
+          numberFetchesRef.current += 1;
+          setNumberFetches(numberFetchesRef.current);
+          return response;
+        });
+        let inventoryItems = await calculateNetworth(selectedMember.inventory.inv_contents.data, allItems).then((response) => {
+          numberFetchesRef.current += 1;
+          setNumberFetches(numberFetchesRef.current);
+          return response;
+        });
 
         //////////////////////// SKILL ////////////////////////
-        const {FARMING, FISHING, MINING, FORAGING, COMBAT} = hypixelSkills.skills;
+        const { FARMING, FISHING, MINING, FORAGING, COMBAT } = hypixelSkills.skills;
         const farmingLvl = getSkillLevel(selectedMember.player_data.experience.SKILL_FARMING ?? 0, FARMING.levels);
         const fishingLvl = getSkillLevel(selectedMember.player_data.experience.SKILL_FISHING ?? 0, FISHING.levels);
         const miningLvl = getSkillLevel(selectedMember.player_data.experience.SKILL_MINING ?? 0, MINING.levels);
@@ -115,10 +153,8 @@ export default function ProfilePage() {
         setLoading(false);
       }
     };
-
-    fetchData();
+    fetchData().then((r) => { return r; });
   }, [normalizedPseudo]);
-
   const renderSection = () => {
     switch (activeSection) {
       case Section.Home:
@@ -157,7 +193,7 @@ export default function ProfilePage() {
   if (loading) {
     return (
       <div className="flex flex-col items-center justify-center gap-2 pt-5 min-h-screen">
-        <h1 className="text-3xl font-bold text-gray-200 text-center">Loading profile...</h1>
+        <h1 className="text-3xl font-bold text-gray-200 text-center">{Math.round(numberFetches*100/9)}%</h1>
       </div>
     );
   }
