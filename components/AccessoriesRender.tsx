@@ -14,8 +14,8 @@ const AccessoriesRender: FC<RenderProps> = ({profileData}) => {
           {profileData.playerAccessories.map((accessory, index) => (
             <div key={index} className="p-2 bg-gray-700 rounded-lg text-center">
               <p className="text-lg font-semibold">{accessory.name}</p>
-              {accessory.lowestBin !== undefined && (
-                <p className="font-bold text-sm text-yellow">Lowest Bin: {formatToPrice(accessory.lowestBin)}</p>
+              {accessory.networth !== undefined && accessory.networth !== 0 && (
+                <p className="font-bold text-sm text-yellow">Lowest Bin: {formatToPrice(accessory.networth)}</p>
               )}
             </div>
           ))}

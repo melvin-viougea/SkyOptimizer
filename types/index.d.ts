@@ -15,6 +15,12 @@ declare interface ProfilesResponse {
           inv_contents: {
             data: string;
           };
+          wardrobe_contents: {
+            data: string;
+          };
+          backpack_contents: {
+            data: string;
+          };
           bag_contents: {
             fishing_bag: {
               data: string;
@@ -22,11 +28,20 @@ declare interface ProfilesResponse {
             talisman_bag: {
               data: string;
             };
+            sacks_bag: {
+              data: string;
+            };
           };
           inv_armor: {
             data: string;
           };
           equipment_contents: {
+            data: string;
+          };
+          ender_chest_contents: {
+            data: string;
+          };
+          bags_contents: {
             data: string;
           };
         };
@@ -53,19 +68,31 @@ declare interface ProfileData {
   foragingMaxLvl: number;
   combatLvl: number;
   combatMaxLvl: number;
-  networth: number;
-  purse: number;
-  bank: number;
-  playerAccessories: NetworthItem[];
-  playerAccessoriesNetworth: number;
-  playerInventory: NetworthItem[];
-  playerInventoryNetworth: number;
-  playerArmor: NetworthItem[];
+  playerPurseNetworth: number;
+  playerBankNetworth: number;
+  playerSackNetworth: number;
   playerArmorNetworth: number;
-  playerEquipment: NetworthItem[];
   playerEquipmentNetworth: number;
-  playerFishingBag: NetworthItem[];
+  playerInventoryNetworth: number;
+  playerAccessoriesNetworth: number;
   playerFishingBagNetworth: number;
+  playerWardrobeNetworth: number;
+  playerEnderChestNetworth: number;
+  playerStorageNetworth: number;
+  playerPetsNetworth: number;
+  playerMuseumNetworth: number;
+  playerTotalNetworth: number;
+  playerSack: NetworthItem[];
+  playerArmor: NetworthItem[];
+  playerEquipment: NetworthItem[];
+  playerInventory: NetworthItem[];
+  playerAccessories: NetworthItem[];
+  playerFishingBag: NetworthItem[];
+  playerWardrobe: NetworthItem[];
+  playerEnderChest: NetworthItem[];
+  playerStorage: NetworthItem[];
+  playerPets: NetworthItem[];
+  playerMuseum: NetworthItem[];
 }
 
 declare interface NetworthItem {
@@ -73,7 +100,6 @@ declare interface NetworthItem {
   name: string;
   networth: number;
   count?: number;
-  lowestBin?: number;
 }
 
 declare interface RenderProps {

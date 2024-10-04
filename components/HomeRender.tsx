@@ -21,20 +21,20 @@ const HomeRender: FC<RenderProps> = ({profileData}) => {
         <h1 className="text-2xl font-bold underline decoration-wavy decoration-yellow decoration-4 underline-offset-8 mb-5">
           Networth :
         </h1>
-        <p className="font-bold">Total Networth : {formatToPrice(profileData.networth)}</p>
-        <p className="font-bold">Purse : {formatToPrice(profileData.purse)}</p>
-        <p className="font-bold">Bank : {formatToPrice(profileData.bank)}</p>
-        <p className="font-bold">Sacks : {profileData.combatLvl}</p>
+        <p className="font-bold">Total Networth : {formatToPrice(profileData.playerTotalNetworth)}</p>
+        <p className="font-bold">Purse : {formatToPrice(profileData.playerPurseNetworth)}</p>
+        <p className="font-bold">Bank : {formatToPrice(profileData.playerBankNetworth)}</p>
+        <p className="font-bold">Sacks : {formatToPrice(profileData.playerSackNetworth)}</p>
         <p className="font-bold">Armor : {formatToPrice(profileData.playerArmorNetworth)}</p>
         <p className="font-bold">Equipment : {formatToPrice(profileData.playerEquipmentNetworth)}</p>
-        <p className="font-bold">Wardrobe : {profileData.combatLvl}</p>
+        <p className="font-bold">Wardrobe : {formatToPrice(profileData.playerWardrobeNetworth)}</p>
         <p className="font-bold">Inventory : {formatToPrice(profileData.playerInventoryNetworth)}</p>
-        <p className="font-bold">Ender Chest : {profileData.combatLvl}</p>
+        <p className="font-bold">Ender Chest : {formatToPrice(profileData.playerEnderChestNetworth)}</p>
         <p className="font-bold">Accessories : {formatToPrice(profileData.playerAccessoriesNetworth)}</p>
-        <p className="font-bold">Storage : {profileData.combatLvl}</p>
-        <p className="font-bold">Pets : {profileData.combatLvl}</p>
+        <p className="font-bold">Storage : {formatToPrice(profileData.playerStorageNetworth)}</p>
+        <p className="font-bold">Pets : {formatToPrice(profileData.playerPetsNetworth)}</p>
         <p className="font-bold">Fishing bag : {formatToPrice(profileData.playerFishingBagNetworth)}</p>
-        <p className="font-bold">Museum : {profileData.combatLvl}</p>
+        <p className="font-bold">Museum : {formatToPrice(profileData.playerMuseumNetworth)}</p>
       </div>
     </div>
   );

@@ -71,10 +71,6 @@ export default function ProfilePage() {
         const members = selectedProfile.members;
         const normalizedPlayerUuid = playerUuid.replace(/-/g, "");
         const selectedMember = members[normalizedPlayerUuid];
-
-        const playerPurse = selectedMember.currencies.coin_purse;
-        const playerBank = selectedProfile.banking.balance;
-
         if (!selectedMember) {
           setError("Selected member not found");
           return;
@@ -87,17 +83,9 @@ export default function ProfilePage() {
         });
 
         //////////////////////// NETWORTH ////////////////////////
-        let fishingBagItems = await calculateNetworth(selectedMember?.inventory?.bag_contents?.fishing_bag?.data, allItems).then((response) => {
-          numberFetchesRef.current += 1;
-          setNumberFetches(numberFetchesRef.current);
-          return response;
-        });
-        let accessoriesItems = await calculateNetworth(selectedMember?.inventory?.bag_contents?.talisman_bag?.data, allItems).then((response) => {
-          numberFetchesRef.current += 1;
-          setNumberFetches(numberFetchesRef.current);
-          return response;
-        });
-        let equipmentItems = await calculateNetworth(selectedMember?.inventory?.equipment_contents?.data, allItems).then((response) => {
+        let playerPurse = selectedMember.currencies.coin_purse;
+        let playerBank = selectedProfile.banking.balance;
+        let sackItems = await calculateNetworth(selectedMember?.inventory?.bag_contents?.sacks_bag?.data, allItems).then((response) => { // MARCHE PAS
           numberFetchesRef.current += 1;
           setNumberFetches(numberFetchesRef.current);
           return response;
@@ -107,14 +95,55 @@ export default function ProfilePage() {
           setNumberFetches(numberFetchesRef.current);
           return response;
         });
+        let equipmentItems = await calculateNetworth(selectedMember?.inventory?.equipment_contents?.data, allItems).then((response) => {
+          numberFetchesRef.current += 1;
+          setNumberFetches(numberFetchesRef.current);
+          return response;
+        });
+        let wardrobeItems = await calculateNetworth(selectedMember.inventory.wardrobe_contents.data, allItems).then((response) => {
+          numberFetchesRef.current += 1;
+          setNumberFetches(numberFetchesRef.current);
+          return response;
+        });
         let inventoryItems = await calculateNetworth(selectedMember.inventory.inv_contents.data, allItems).then((response) => {
           numberFetchesRef.current += 1;
           setNumberFetches(numberFetchesRef.current);
           return response;
         });
+        let enderChestItems = await calculateNetworth(selectedMember.inventory.ender_chest_contents.data, allItems).then((response) => {
+          numberFetchesRef.current += 1;
+          setNumberFetches(numberFetchesRef.current);
+          return response;
+        });
+        let accessorieItems = await calculateNetworth(selectedMember?.inventory?.bag_contents?.talisman_bag?.data, allItems).then((response) => {
+          numberFetchesRef.current += 1;
+          setNumberFetches(numberFetchesRef.current);
+          return response;
+        });
+        let storageItems = await calculateNetworth(selectedMember.inventory?.backpack_contents?.data, allItems).then((response) => { // marche pas
+          numberFetchesRef.current += 1;
+          setNumberFetches(numberFetchesRef.current);
+          return response;
+        });
+        let petItems = await calculateNetworth(selectedMember.inventory, allItems).then((response) => {
+          numberFetchesRef.current += 1;
+          setNumberFetches(numberFetchesRef.current);
+          return response;
+        });
+        let fishingBagItems = await calculateNetworth(selectedMember?.inventory?.bag_contents?.fishing_bag?.data, allItems).then((response) => {
+          numberFetchesRef.current += 1;
+          setNumberFetches(numberFetchesRef.current);
+          return response;
+        });
+        let museumItems = await calculateNetworth(selectedMember.inventory, allItems).then((response) => {
+          numberFetchesRef.current += 1;
+          setNumberFetches(numberFetchesRef.current);
+          return response;
+        });
 
+        console.log(selectedMember.inventory);
         //////////////////////// SKILL ////////////////////////
-        const { FARMING, FISHING, MINING, FORAGING, COMBAT } = hypixelSkills.skills;
+        const {FARMING, FISHING, MINING, FORAGING, COMBAT} = hypixelSkills.skills;
         const farmingLvl = getSkillLevel(selectedMember.player_data.experience.SKILL_FARMING ?? 0, FARMING.levels);
         const fishingLvl = getSkillLevel(selectedMember.player_data.experience.SKILL_FISHING ?? 0, FISHING.levels);
         const miningLvl = getSkillLevel(selectedMember.player_data.experience.SKILL_MINING ?? 0, MINING.levels);
@@ -124,19 +153,28 @@ export default function ProfilePage() {
         setProfileData({
           pseudo: normalizedPseudo,
           profile: selectedProfile.cute_name,
-          networth: playerPurse + playerBank + accessoriesItems.networth + inventoryItems.networth + armorItems.networth + equipmentItems.networth,
-          purse: playerPurse,
-          bank: playerBank,
-          playerAccessories: accessoriesItems.items,
-          playerAccessoriesNetworth: accessoriesItems.networth,
-          playerInventory: inventoryItems.items,
-          playerInventoryNetworth: inventoryItems.networth,
-          playerArmor: armorItems.items,
+          // NETWORTH
+          playerPurseNetworth: playerPurse,
+          playerBankNetworth: playerBank,
+          playerSackNetworth: sackItems.networth,
           playerArmorNetworth: armorItems.networth,
-          playerEquipment: equipmentItems.items,
           playerEquipmentNetworth: equipmentItems.networth,
-          playerFishingBag: fishingBagItems.items,
+          playerWardrobeNetworth: wardrobeItems.networth,
+          playerInventoryNetworth: inventoryItems.networth,
+          playerEnderChestNetworth: enderChestItems.networth,
+          playerAccessoriesNetworth: accessorieItems.networth,
+          playerStorageNetworth: storageItems.networth,
+          playerPetsNetworth: petItems.networth,
           playerFishingBagNetworth: fishingBagItems.networth,
+          playerMuseumNetworth: museumItems.networth,
+          playerTotalNetworth: playerPurse + playerBank + sackItems.networth + armorItems.networth + equipmentItems.networth + wardrobeItems.networth + inventoryItems.networth + enderChestItems.networth + accessorieItems.networth + storageItems.networth + petItems.networth + fishingBagItems.networth + museumItems.networth,
+          // PLAYER ITEMS
+          playerAccessories: accessorieItems.items,
+          playerInventory: inventoryItems.items,
+          playerArmor: armorItems.items,
+          playerEquipment: equipmentItems.items,
+          playerFishingBag: fishingBagItems.items,
+          // SKILLS
           farmingLvl,
           fishingLvl,
           miningLvl,
@@ -154,7 +192,9 @@ export default function ProfilePage() {
         setLoading(false);
       }
     };
-    fetchData().then((r) => { return r; });
+    fetchData().then((r) => {
+      return r;
+    });
   }, [normalizedPseudo]);
   const renderSection = () => {
     switch (activeSection) {
@@ -194,7 +234,7 @@ export default function ProfilePage() {
   if (loading) {
     return (
       <div className="flex flex-col items-center justify-center gap-2 pt-5 min-h-screen">
-        <h1 className="text-3xl font-bold text-gray-200 text-center">{Math.round(numberFetches*100/totalFetches)}%</h1>
+        <h1 className="text-3xl font-bold text-gray-200 text-center">{Math.round(numberFetches * 100 / totalFetches)}%</h1>
       </div>
     );
   }
