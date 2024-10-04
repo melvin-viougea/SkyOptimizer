@@ -1,12 +1,6 @@
 import React, {FC} from "react";
 import {formatToPrice} from "@/lib/function";
 
-interface RenderProps {
-  profileData: {
-    networth: number;
-  };
-}
-
 const ProgressionRender: FC<RenderProps> = ({profileData}) => {
   if (!profileData) return null;
 
@@ -19,12 +13,12 @@ const ProgressionRender: FC<RenderProps> = ({profileData}) => {
       {/* Step 1 */}
       <div
         className={`${
-          profileData.networth >= 100_000_000 ? "bg-green-400" : "bg-red-400"
+          profileData.playerTotalNetworth >= 100_000_000 ? "bg-green-400" : "bg-red-400"
         } text-gray-800 rounded-lg p-5 w-1/2 mx-auto text-center mt-5`}
       >
         <h2 className="text-xl font-bold">Step 1 : 100M Networth</h2>
         <p className="mt-2 text-lg font-bold">
-          Player networth: {formatToPrice(profileData.networth)}
+          Player networth: {formatToPrice(profileData.playerTotalNetworth)}
         </p>
       </div>
 
@@ -41,23 +35,23 @@ const ProgressionRender: FC<RenderProps> = ({profileData}) => {
 
       <div
         className={`${
-          profileData.networth >= 6_000_000_000 ? "bg-green-400" : "bg-red-400"
+          profileData.playerTotalNetworth >= 6_000_000_000 ? "bg-green-400" : "bg-red-400"
         } text-gray-800 rounded-lg p-5 w-1/2 mx-auto text-center mt-5`}
       >
         <h2 className="text-xl font-bold">Step 2 : 6B Networth</h2>
         <p className="mt-2 text-lg font-bold">
-          Player networth: {formatToPrice(profileData.networth)}
+          Player networth: {formatToPrice(profileData.playerTotalNetworth)}
         </p>
       </div>
 
       <div
         className={`${
-          profileData.networth >= 15_000_000_000 ? "bg-green-400" : "bg-red-400"
+          profileData.playerTotalNetworth >= 15_000_000_000 ? "bg-green-400" : "bg-red-400"
         } text-gray-800 rounded-lg p-5 w-1/2 mx-auto text-center mt-5`}
       >
         <h2 className="text-xl font-bold">Step 3 : 15B Networth</h2>
         <p className="mt-2 text-lg font-bold">
-          Player networth: {formatToPrice(profileData.networth)}
+          Player networth: {formatToPrice(profileData.playerTotalNetworth)}
         </p>
       </div>
     </div>
