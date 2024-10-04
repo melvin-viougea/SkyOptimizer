@@ -141,3 +141,21 @@ export async function calculateNetworth(searchValue: any, allItems: HypixelItem[
     networth: playerItemsNetworth
   }
 }
+
+export async function calculateSacksNetworth(searchValue: any, allItems: HypixelItem[]) {
+  let totalSacksNetworth: number = 0;
+  let allSackItems: NetworthItem[] = [];
+
+  for (const sack of searchValue) {
+    if (sack) {
+      const networthData = await calculateNetworth(sack, allItems);
+      totalSacksNetworth += networthData.networth;
+      allSackItems = [...allSackItems, ...networthData.items];
+    }
+  }
+
+  return {
+    items: allSackItems,
+    networth: totalSacksNetworth
+  };
+}

@@ -17,7 +17,7 @@ import FishingRender from "@/components/skill/fishing/FishingRender";
 import ForagingRender from "@/components/skill/foraging/ForagingRender";
 import ProgressionRender from "@/components/ProgressionRender";
 import {fetchHypixelAuction, fetchHypixelProfiles, fetchMojangData, fetchSkills} from "@/lib/fetch";
-import {calculateNetworth, fetchAllItemsWithPrice, getSkillLevel} from "@/lib/function";
+import {calculateNetworth, calculateSacksNetworth, fetchAllItemsWithPrice, getSkillLevel} from "@/lib/function";
 
 export default function ProfilePage() {
   const {pseudo} = useParams();
@@ -85,7 +85,7 @@ export default function ProfilePage() {
         //////////////////////// NETWORTH ////////////////////////
         let playerPurse = selectedMember.currencies.coin_purse;
         let playerBank = selectedProfile.banking.balance;
-        let sackItems = await calculateNetworth(selectedMember?.inventory?.bag_contents?.sacks_bag?.data, allItems)
+        let sackItems = await calculateSacksNetworth(selectedMember?.inventory?.bag_contents?.sacks_bag, allItems)
         let armorItems = await calculateNetworth(selectedMember?.inventory?.inv_armor?.data, allItems);
         let equipmentItems = await calculateNetworth(selectedMember?.inventory?.equipment_contents?.data, allItems)
         let wardrobeItems = await calculateNetworth(selectedMember.inventory.wardrobe_contents.data, allItems)
@@ -125,11 +125,19 @@ export default function ProfilePage() {
           playerMuseumNetworth: museumItems.networth,
           playerTotalNetworth: playerPurse + playerBank + sackItems.networth + armorItems.networth + equipmentItems.networth + wardrobeItems.networth + inventoryItems.networth + enderChestItems.networth + accessorieItems.networth + storageItems.networth + petItems.networth + fishingBagItems.networth + museumItems.networth,
           // PLAYER ITEMS
-          playerAccessories: accessorieItems.items,
-          playerInventory: inventoryItems.items,
+          playerPurse: playerPurse,
+          playerBank: playerBank,
+          playerSack: sackItems.items,
           playerArmor: armorItems.items,
           playerEquipment: equipmentItems.items,
+          playerWardrobe: wardrobeItems.items,
+          playerInventory: inventoryItems.items,
+          playerEnderChest: enderChestItems.items,
+          playerAccessories: accessorieItems.items,
+          playerStorage: storageItems.items,
+          playerPets: petItems.items,
           playerFishingBag: fishingBagItems.items,
+          playerMuseum: museumItems.items,
           // SKILLS
           farmingLvl,
           fishingLvl,
