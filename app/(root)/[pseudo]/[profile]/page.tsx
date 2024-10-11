@@ -1,48 +1,62 @@
 "use client";
 
 import {useParams} from "next/navigation";
-import React, {useEffect, useState} from "react";
-import {fetchAndProcessData, getItemPriceByName, getSkillLevel} from "@/lib/function";
+import React, {useEffect, useRef, useState} from "react";
 import {Section} from "@/constants";
-import HomeRender from "@/components/HomeRender";
-import FarmingRender from "@/components/skill/FarmingRender";
-import MinionsRender from "@/components/MinionsRender";
-import AccessoriesRender from "@/components/AccessoriesRender";
-import MiningRender from "@/components/skill/MiningRender";
-import FishingRender from "@/components/skill/FishingRender";
-import ForagingRender from "@/components/skill/ForagingRender";
-import MageRender from "@/components/class/MageRender";
-import ArcherRender from "@/components/class/ArcherRender";
-import BerserkRender from "@/components/class/BerserkRender";
-import TankRender from "@/components/class/TankRender";
-import HealerRender from "@/components/class/HealerRender";
-import ProgressionRender from "@/components/ProgressionRender";
-import {Buffer} from "buffer";
-import nbt from 'prismarine-nbt';
-import {fetchHypixelProfiles, fetchMojangData, fetchSkills} from "@/lib/fetch";
+import HomeRender from "@/components/render/HomeRender";
+import MinionsRender from "@/components/render/MinionsRender";
+import AccessoriesRender from "@/components/render/AccessoriesRender";
+import HealerRender from "@/components/render/class/healer/HealerRender";
+import MageRender from "@/components/render/class/mage/MageRender";
+import ArcherRender from "@/components/render/class/archer/ArcherRender";
+import BerserkRender from "@/components/render/class/berserk/BerserkRender";
+import TankRender from "@/components/render/class/tank/TankRender";
+import MiningRender from "@/components/render/skill/mining/MiningRender";
+import FarmingRender from "@/components/render/skill/farming/FarmingRender";
+import FishingRender from "@/components/render/skill/fishing/FishingRender";
+import ForagingRender from "@/components/render/skill/foraging/ForagingRender";
+import ProgressionRender from "@/components/render/ProgressionRender";
+import {fetchHypixelAuction, fetchHypixelProfiles, fetchMojangData, fetchSkills} from "@/lib/fetch";
+import {calculateNetworth, fetchAllItemsWithPrice, getSkillLevel} from "@/lib/function";
+import Navbar from "@/components/Sidebar";
+import ReleaseNoteRender from "@/components/render/ReleaseNoteRender";
 
 export default function ProfilePage() {
   const {pseudo} = useParams();
-
-
   const normalizedPseudo = Array.isArray(pseudo) ? pseudo[0] : pseudo;
-
   const [loading, setLoading] = useState(true);
   const [profileData, setProfileData] = useState<any>(null);
   const [error, setError] = useState<string | null>(null);
   const [activeSection, setActiveSection] = useState<Section>(Section.Home);
+  const numberFetchesRef = useRef<number>(0);
+  const [numberFetches, setNumberFetches] = useState<number>(0);
+  const [totalFetches, setTotalFetches] = useState<number>(0);
 
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
       try {
+        const firstResponse = await fetchHypixelAuction(0);
+        setTotalFetches(firstResponse.totalPages + 4);
         const [hypixelSkills, mojangResponse] = await Promise.all([
-          fetchSkills(),
-          fetchMojangData(normalizedPseudo),
+          fetchSkills().then((response) => {
+            numberFetchesRef.current += 1;
+            setNumberFetches(numberFetchesRef.current);
+            return response;
+          }),
+          fetchMojangData(normalizedPseudo).then((response) => {
+            numberFetchesRef.current += 1;
+            setNumberFetches(numberFetchesRef.current);
+            return response;
+          }),
         ]);
 
         const playerUuid = mojangResponse.uuid;
-        const profilesResponse = await fetchHypixelProfiles(playerUuid);
+        const profilesResponse = await fetchHypixelProfiles(playerUuid).then((response) => {
+          numberFetchesRef.current += 1;
+          setNumberFetches(numberFetchesRef.current);
+          return response;
+        });
 
         const profiles = profilesResponse.profiles || [];
         const selectedProfile = profiles.find((profile) => profile.selected);
@@ -55,157 +69,34 @@ export default function ProfilePage() {
         const members = selectedProfile.members;
         const normalizedPlayerUuid = playerUuid.replace(/-/g, "");
         const selectedMember = members[normalizedPlayerUuid];
-
-        const playerPurse = selectedMember.currencies.coin_purse
-        const playerBank = selectedProfile.banking.balance
-
         if (!selectedMember) {
           setError("Selected member not found");
           return;
         }
 
-        // ALL ITEMS
-        const allItems = await fetchAndProcessData();
+        //////////////////////// ALL ITEMS WITH PRICE ////////////////////////
+        const allItems = await fetchAllItemsWithPrice(() => {
+          numberFetchesRef.current += 1;
+          setNumberFetches(numberFetchesRef.current);
+        });
 
-        // ALL ACCESSORIES
-        // const accessoryItems = allItems.items.filter(item => item.category === "ACCESSORY");
-        // const talismanNames = accessoryItems.map(item => item.name);
+        //////////////////////// PLAYER NETWORTH ////////////////////////
+        // //console.log(selectedMember);
+        let playerPurse = selectedMember.currencies.coin_purse;
+        let playerBank = selectedProfile.banking.balance;
+        let sackItems = await calculateNetworth(selectedMember?.inventory?.bag_contents?.sacks_bag?.data, allItems);
+        let armorItems = await calculateNetworth(selectedMember?.inventory?.inv_armor?.data, allItems);
+        let equipmentItems = await calculateNetworth(selectedMember?.inventory?.equipment_contents?.data, allItems)
+        let wardrobeItems = await calculateNetworth(selectedMember.inventory.wardrobe_contents.data, allItems)
+        let inventoryItems = await calculateNetworth(selectedMember.inventory.inv_contents.data, allItems)
+        let enderChestItems = await calculateNetworth(selectedMember.inventory.ender_chest_contents.data, allItems)
+        let accessorieItems = await calculateNetworth(selectedMember?.inventory?.bag_contents?.talisman_bag?.data, allItems)
+        let storageItems = await calculateNetworth(selectedMember.inventory?.backpack_contents?.data, allItems)
+        let petItems = await calculateNetworth(selectedMember.inventory, allItems)
+        let fishingBagItems = await calculateNetworth(selectedMember?.inventory?.bag_contents?.fishing_bag?.data, allItems)
+        let museumItems = await calculateNetworth(selectedMember.inventory, allItems)
 
-        //////////////////////// NETWORTH ////////////////////////
-
-        // NETWORTH PLAYER ACCESSORIES
-        let playerAccessories: AccessoriesItem[] = [];
-        let playerAccessoriesNetworth = 0;
-
-        try {
-          const inventoryData = selectedMember?.inventory?.bag_contents?.talisman_bag?.data;
-
-          if (inventoryData) {
-            const decodedBytes = Buffer.from(inventoryData, "base64");
-            const nbtDecoded = await nbt.parse(decodedBytes);
-            const accessories = nbtDecoded?.parsed?.value?.i?.value;
-
-            if (accessories && typeof accessories === 'object' && 'value' in accessories) {
-              const accessoriesItems = accessories.value as any[];
-
-              for (const element of accessoriesItems) {
-                if (element.tag && typeof element.tag === 'object' && 'value' in element.tag) {
-                  const displayName = element.tag.value?.display?.value?.Name?.value;
-                  const cleanedDisplayName = displayName.replace(/§./g, '');
-                  if (typeof cleanedDisplayName === 'string') {
-                    console.log(allItems)
-                    const accessoriesItems = await getItemPriceByName(cleanedDisplayName, allItems);
-                    if (accessoriesItems) {
-                      playerAccessories.push(accessoriesItems);
-                      if (accessoriesItems.lowestBin) {
-                        playerAccessoriesNetworth += accessoriesItems.lowestBin;
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
-        } catch (error) {
-          console.error('Error processing the inventory:', error);
-        }
-
-        // NETWORTH PLAYER ARMOR
-        let playerArmor: ArmorItem[] = [];
-        let playerArmorNetworth = 0;
-
-        try {
-          const armorData = selectedMember?.inventory?.inv_armor?.data;
-
-          if (armorData) {
-            const decodedBytes = Buffer.from(armorData, "base64");
-            const nbtDecoded = await nbt.parse(decodedBytes);
-            const armor = nbtDecoded?.parsed?.value?.i?.value;
-
-            if (armor && typeof armor === 'object' && 'value' in armor) {
-              const armorItems = armor.value as any[];
-
-              for (const element of armorItems) {
-                if (element.tag && typeof element.tag === 'object' && 'value' in element.tag) {
-                  const displayName = element.tag.value?.display?.value?.Name?.value;
-                  const cleanedDisplayName = displayName.replace(/§./g, '');
-                  if (typeof cleanedDisplayName === 'string') {
-                    const armorItem = await getItemPriceByName(cleanedDisplayName, allItems);
-                    if (armorItem) {
-                      playerArmor.push(armorItem);
-                      if (armorItem.lowestBin) {
-                        playerArmorNetworth += armorItem.lowestBin;
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
-        } catch (error) {
-          console.error('Error processing the inventory:', error);
-        }
-        console.log(playerArmorNetworth)
-
-        // NETWORTH PLAYER INVENTORY
-        let inventoryItems: InventoryItem[] = [];
-
-
-        try {
-          const yourBytes = Buffer.from(selectedMember.inventory.inv_contents.data, "base64");
-          const nbtDecoded = await nbt.parse(yourBytes);
-
-          const inventory = nbtDecoded?.parsed?.value?.i?.value;
-
-          if (Array.isArray(inventory)) {
-            inventory.forEach((element: any) => {
-              if (element.tag && typeof element.tag === 'object' && 'value' in element.tag) {
-                const displayName = element.tag.value?.display?.value?.Name?.value;
-
-                if (typeof displayName === 'string') {
-                  const cleanedDisplayName = displayName.replace(/§./g, '');
-                  const itemCount = element?.Count?.value;
-                  const itemId = element.tag?.ExtraAttributes?.value?.id?.value;
-                  let sellableItem = true;
-                  let bazaarPrice: number = 0;
-
-                  allItems.forEach((element2) => {
-                    if (itemId === element2.id) {
-                      if ("can_auction" in element2 || itemId === "SKYBLOCK_MENU") {
-                        sellableItem = false;
-                      }
-                    }
-                  });
-
-                  // if (sellableItem) {
-                  //   bazaarItems.forEach((element3) => {
-                  //     if (element3.product_id === itemId) {
-                  //       bazaarProduct = element3;
-                  //       bazaarPrice = bazaarProduct?.quick_status?.buyPrice ?? 0;
-                  //     }
-                  //   });
-                  // }
-
-                  if (cleanedDisplayName && itemCount !== undefined && itemId !== undefined) {
-                    const item: InventoryItem = {
-                      name: cleanedDisplayName,
-                      count: itemCount,
-                      id: itemId,
-                      sellable: sellableItem,
-                      bazaarPrice: bazaarPrice
-                    };
-                    inventoryItems.push(item);
-                  }
-                }
-              }
-            });
-          }
-        } catch (error) {
-          console.error('Erreur lors du traitement de l’inventaire:', error);
-        }
-
-        //--------------------------------------------------------
-
+        //////////////////////// PLAYER SKILL ////////////////////////
         const {FARMING, FISHING, MINING, FORAGING, COMBAT} = hypixelSkills.skills;
         const farmingLvl = getSkillLevel(selectedMember.player_data.experience.SKILL_FARMING ?? 0, FARMING.levels);
         const fishingLvl = getSkillLevel(selectedMember.player_data.experience.SKILL_FISHING ?? 0, FISHING.levels);
@@ -216,11 +107,36 @@ export default function ProfilePage() {
         setProfileData({
           pseudo: normalizedPseudo,
           profile: selectedProfile.cute_name,
-          networth: playerPurse + playerBank + playerAccessoriesNetworth,
-          purse: playerPurse,
-          bank: playerBank,
-          playerAccessories,
-          playerAccessoriesNetworth,
+          // NETWORTH
+          playerPurseNetworth: playerPurse,
+          playerBankNetworth: playerBank,
+          playerSackNetworth: sackItems.networth,
+          playerArmorNetworth: armorItems.networth,
+          playerEquipmentNetworth: equipmentItems.networth,
+          playerWardrobeNetworth: wardrobeItems.networth,
+          playerInventoryNetworth: inventoryItems.networth,
+          playerEnderChestNetworth: enderChestItems.networth,
+          playerAccessoriesNetworth: accessorieItems.networth,
+          playerStorageNetworth: storageItems.networth,
+          playerPetsNetworth: petItems.networth,
+          playerFishingBagNetworth: fishingBagItems.networth,
+          playerMuseumNetworth: museumItems.networth,
+          playerTotalNetworth: playerPurse + playerBank + sackItems.networth + armorItems.networth + equipmentItems.networth + wardrobeItems.networth + inventoryItems.networth + enderChestItems.networth + accessorieItems.networth + storageItems.networth + petItems.networth + fishingBagItems.networth + museumItems.networth,
+          // PLAYER ITEMS
+          playerPurse: playerPurse,
+          playerBank: playerBank,
+          playerSack: sackItems.items,
+          playerArmor: armorItems.items,
+          playerEquipment: equipmentItems.items,
+          playerWardrobe: wardrobeItems.items,
+          playerInventory: inventoryItems.items,
+          playerEnderChest: enderChestItems.items,
+          playerAccessories: accessorieItems.items,
+          playerStorage: storageItems.items,
+          playerPets: petItems.items,
+          playerFishingBag: fishingBagItems.items,
+          playerMuseum: museumItems.items,
+          // SKILLS
           farmingLvl,
           fishingLvl,
           miningLvl,
@@ -238,45 +154,41 @@ export default function ProfilePage() {
         setLoading(false);
       }
     };
-
-    fetchData();
-  }, [normalizedPseudo]);
-
+    fetchData().then();
+  }, []);
 
   const renderSection = () => {
     switch (activeSection) {
-
-      // GENERAL
       case Section.Home:
-        return <HomeRender profileData={profileData}/>
+        return <HomeRender profileData={profileData}/>;
       case Section.Accessories:
-        return <AccessoriesRender profileData={profileData}/>
+        return <AccessoriesRender profileData={profileData}/>;
       case Section.Minions:
-        return <MinionsRender profileData={profileData}/>
+        return <MinionsRender profileData={profileData}/>;
       case Section.Progression:
-        return <ProgressionRender profileData={profileData}/>
+        return <ProgressionRender profileData={profileData}/>;
+      case Section.RealseNote:
+        return <ReleaseNoteRender profileData={profileData}/>;
 
-      // SKILLS
       case Section.Farming:
-        return <FarmingRender profileData={profileData}/>
+        return <FarmingRender profileData={profileData}/>;
       case Section.Fishing:
-        return <FishingRender profileData={profileData}/>
+        return <FishingRender profileData={profileData}/>;
       case Section.Mining:
-        return <MiningRender profileData={profileData}/>
+        return <MiningRender profileData={profileData}/>;
       case Section.Foraging:
-        return <ForagingRender profileData={profileData}/>
+        return <ForagingRender profileData={profileData}/>;
 
-      // CLASS
       case Section.Mage:
-        return <MageRender profileData={profileData}/>
+        return <MageRender profileData={profileData}/>;
       case Section.Archer:
-        return <ArcherRender profileData={profileData}/>
+        return <ArcherRender profileData={profileData}/>;
       case Section.Berserk:
-        return <BerserkRender profileData={profileData}/>
+        return <BerserkRender profileData={profileData}/>;
       case Section.Tank:
-        return <TankRender profileData={profileData}/>
+        return <TankRender profileData={profileData}/>;
       case Section.Healer:
-        return <HealerRender profileData={profileData}/>
+        return <HealerRender profileData={profileData}/>;
       default:
         return null;
     }
@@ -285,7 +197,7 @@ export default function ProfilePage() {
   if (loading) {
     return (
       <div className="flex flex-col items-center justify-center gap-2 pt-5 min-h-screen">
-        <h1 className="text-4xl font-bold text-gray-200 text-center">Loading...</h1>
+        <h1 className="text-3xl font-bold text-gray-200 text-center">{totalFetches ? Math.min(Math.round(numberFetches * 100 / totalFetches), 100) : 0}%</h1>
       </div>
     );
   }
@@ -293,122 +205,23 @@ export default function ProfilePage() {
   if (error) {
     return (
       <div className="flex flex-col items-center justify-center gap-2 pt-5 min-h-screen">
-        <h1 className="text-4xl font-bold text-center">Error: {error}</h1>
+        <h1 className="text-3xl font-bold text-gray-200 text-center">Error: {error}</h1>
       </div>
     );
   }
 
   if (!profileData) {
-    return <p>No profile data available.</p>;
+    return (
+      <div className="flex flex-col items-center justify-center gap-2 pt-5 min-h-screen">
+        <h1 className="text-3xl font-bold text-gray-200 text-center">No profile data available.</h1>
+      </div>
+    );
   }
 
   return (
-    <div className="flex flex-col items-center justify-center gap-2 pt-5">
-      <h1 className="text-4xl font-bold text-center text-gray-200 mb-5">Show Optimizations For :</h1>
-      <h1 className="text-2xl font-bold text-center text-gray-200">{profileData.pseudo} - {profileData.profile}</h1>
-      <div className="flex gap-8 py-4">
-        {/* SKILLS */}
-        <div className="flex gap-2">
-          <button
-            onClick={() => setActiveSection(Section.Farming)}
-            className={`px-4 py-2 rounded font-bold text-gray-800 ${activeSection === Section.Farming ? "bg-yellow" : "bg-gray-200"}`}
-          >
-            Farming
-          </button>
-
-          <button
-            onClick={() => setActiveSection(Section.Fishing)}
-            className={`px-4 py-2 rounded font-bold text-gray-800 ${activeSection === Section.Fishing ? "bg-yellow" : "bg-gray-200"}`}
-          >
-            Fishing
-          </button>
-
-          <button
-            onClick={() => setActiveSection(Section.Mining)}
-            className={`px-4 py-2 rounded font-bold text-gray-800 ${activeSection === Section.Mining ? "bg-yellow" : "bg-gray-200"}`}
-          >
-            Mining
-          </button>
-
-          <button
-            onClick={() => setActiveSection(Section.Foraging)}
-            className={`px-4 py-2 rounded font-bold text-gray-800 ${activeSection === Section.Foraging ? "bg-yellow" : "bg-gray-200"}`}
-          >
-            Foraging
-          </button>
-        </div>
-
-        {/* GENERAL */}
-        <div className="flex gap-2">
-          <button
-            onClick={() => setActiveSection(Section.Home)}
-            className={`px-4 py-2 rounded font-bold text-gray-800 ${activeSection === Section.Home ? "bg-yellow" : "bg-gray-200"}`}
-          >
-            Home
-          </button>
-
-          <button
-            onClick={() => setActiveSection(Section.Progression)}
-            className={`px-4 py-2 rounded font-bold text-gray-800 ${activeSection === Section.Progression ? "bg-yellow" : "bg-gray-200"}`}
-          >
-            Progression
-          </button>
-
-          <button
-            onClick={() => setActiveSection(Section.Accessories)}
-            className={`px-4 py-2 rounded font-bold text-gray-800 ${activeSection === Section.Accessories ? "bg-yellow" : "bg-gray-200"}`}
-          >
-            Accessories
-          </button>
-
-          <button
-            onClick={() => setActiveSection(Section.Minions)}
-            className={`px-4 py-2 rounded font-bold text-gray-800 ${activeSection === Section.Minions ? "bg-yellow" : "bg-gray-200"}`}
-          >
-            Minions
-          </button>
-        </div>
-
-        {/* CLASS */}
-        <div className="flex gap-2">
-          <button
-            onClick={() => setActiveSection(Section.Mage)}
-            className={`px-4 py-2 rounded font-bold text-gray-800 ${activeSection === Section.Mage ? "bg-yellow" : "bg-gray-200"}`}
-          >
-            Mage
-          </button>
-
-          <button
-            onClick={() => setActiveSection(Section.Archer)}
-            className={`px-4 py-2 rounded font-bold text-gray-800 ${activeSection === Section.Archer ? "bg-yellow" : "bg-gray-200"}`}
-          >
-            Archer
-          </button>
-
-          <button
-            onClick={() => setActiveSection(Section.Berserk)}
-            className={`px-4 py-2 rounded font-bold text-gray-800 ${activeSection === Section.Berserk ? "bg-yellow" : "bg-gray-200"}`}
-          >
-            Berserk
-          </button>
-
-          <button
-            onClick={() => setActiveSection(Section.Tank)}
-            className={`px-4 py-2 rounded font-bold text-gray-800 ${activeSection === Section.Tank ? "bg-yellow" : "bg-gray-200"}`}
-          >
-            Tank
-          </button>
-
-          <button
-            onClick={() => setActiveSection(Section.Healer)}
-            className={`px-4 py-2 rounded font-bold text-gray-800 ${activeSection === Section.Healer ? "bg-yellow" : "bg-gray-200"}`}
-          >
-            Healer
-          </button>
-
-        </div>
-      </div>
-      {renderSection()}
+    <div className="flex">
+      <Navbar activeSection={activeSection} setActiveSection={setActiveSection} pseudo={profileData.pseudo} profile={profileData.profile} />
+      <div className="flex-1">{renderSection()}</div>
     </div>
   );
 }

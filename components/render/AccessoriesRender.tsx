@@ -6,7 +6,7 @@ const AccessoriesRender: FC<RenderProps> = ({profileData}) => {
 
   return (
     <div>
-      <div className="w-[75vw] rounded-3xl bg-gray-800 text-gray-200 p-8 m-5 shadow-lg">
+      <div className="rounded-3xl bg-gray-800 text-gray-200 p-8 m-5 shadow-lg">
         <h1 className="text-3xl font-extrabold underline decoration-wavy decoration-yellow decoration-4 underline-offset-8 mb-8">
           Accessories Optimizer :
         </h1>
@@ -14,8 +14,8 @@ const AccessoriesRender: FC<RenderProps> = ({profileData}) => {
           {profileData.playerAccessories.map((accessory, index) => (
             <div key={index} className="p-2 bg-gray-700 rounded-lg text-center">
               <p className="text-lg font-semibold">{accessory.name}</p>
-              {accessory.lowestBin !== undefined && (
-                <p className="font-bold text-sm text-yellow">Lowest Bin: {formatToPrice(accessory.lowestBin)}</p>
+              {accessory.networth !== undefined && accessory.networth !== 0 && (
+                <p className="font-bold text-sm text-yellow">Lowest Bin: {formatToPrice(accessory.networth)}</p>
               )}
             </div>
           ))}

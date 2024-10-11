@@ -1,23 +1,3 @@
-declare interface ProfileData {
-  pseudo: string;
-  profile: string;
-  farmingLvl: number;
-  farmingMaxLvl: number;
-  fishingLvl: number;
-  fishingMaxLvl: number;
-  miningLvl: number;
-  miningMaxLvl: number;
-  foragingLvl: number;
-  foragingMaxLvl: number;
-  combatLvl: number;
-  combatMaxLvl: number;
-  networth: number;
-  purse: number;
-  bank: number;
-  playerAccessories: accessoriesItem[];
-  playerAccessoriesNetworth: number;
-}
-
 declare interface ProfilesResponse {
   profiles: Array<{
     cute_name: string;
@@ -35,12 +15,33 @@ declare interface ProfilesResponse {
           inv_contents: {
             data: string;
           };
+          wardrobe_contents: {
+            data: string;
+          };
+          backpack_contents: {
+            data: string;
+          };
           bag_contents: {
+            fishing_bag: {
+              data: string;
+            }
             talisman_bag: {
+              data: string;
+            };
+            sacks_bag: {
               data: string;
             };
           };
           inv_armor: {
+            data: string;
+          };
+          equipment_contents: {
+            data: string;
+          };
+          ender_chest_contents: {
+            data: string;
+          };
+          bags_contents: {
             data: string;
           };
         };
@@ -54,23 +55,51 @@ declare interface ProfilesResponse {
   }>;
 }
 
-declare interface AccessoriesItem {
-  name: string;
-  lowestBin?: number;
+declare interface ProfileData {
+  pseudo: string;
+  profile: string;
+  farmingLvl: number;
+  farmingMaxLvl: number;
+  fishingLvl: number;
+  fishingMaxLvl: number;
+  miningLvl: number;
+  miningMaxLvl: number;
+  foragingLvl: number;
+  foragingMaxLvl: number;
+  combatLvl: number;
+  combatMaxLvl: number;
+  playerPurseNetworth: number;
+  playerBankNetworth: number;
+  playerSackNetworth: number;
+  playerArmorNetworth: number;
+  playerEquipmentNetworth: number;
+  playerInventoryNetworth: number;
+  playerAccessoriesNetworth: number;
+  playerFishingBagNetworth: number;
+  playerWardrobeNetworth: number;
+  playerEnderChestNetworth: number;
+  playerStorageNetworth: number;
+  playerPetsNetworth: number;
+  playerMuseumNetworth: number;
+  playerTotalNetworth: number;
+  playerSack: NetworthItem[];
+  playerArmor: NetworthItem[];
+  playerEquipment: NetworthItem[];
+  playerInventory: NetworthItem[];
+  playerAccessories: NetworthItem[];
+  playerFishingBag: NetworthItem[];
+  playerWardrobe: NetworthItem[];
+  playerEnderChest: NetworthItem[];
+  playerStorage: NetworthItem[];
+  playerPets: NetworthItem[];
+  playerMuseum: NetworthItem[];
 }
 
-declare interface ArmorItem {
+declare interface NetworthItem {
+  id: any;
   name: string;
-  lowestBin?: number;
-  bzPrice?: number;
-}
-
-declare interface InventoryItem {
-  name: string;
-  count: number;
-  id: string;
-  sellable: boolean;
-  bazaarPrice?: number;
+  networth: number;
+  count?: number;
 }
 
 declare interface RenderProps {
@@ -103,6 +132,7 @@ declare interface HypixelSkillsResponse {
 }
 
 declare interface HypixelItem {
+  lowestBin: undefined;
   bzPrice?: number;
   name: string;
   category: string;
@@ -110,6 +140,7 @@ declare interface HypixelItem {
   ahPrice?: number;
 }
 
+// RESPONSES
 declare interface HypixelItemsResponse {
   items: HypixelItem[];
 }
@@ -128,38 +159,27 @@ declare interface MojangResponse {
   uuid: string;
 }
 
-declare interface CustomError {
-  message: string;
-}
-
-declare interface InventoryItem {
-  name: string;
-  count: number;
-  id: number;
-  sellable: boolean;
-  bazaarPrice: number;
-}
-
 declare interface HypixelBazaarResponse {
   success: boolean;
   lastUpdated: number;
   products: {
-    [key: string]: BazaarItem;
+    [key: string]: {
+      quick_status: {
+        buyPrice: number;
+      }
+      product_id: string;
+    };
   }
 }
 
-declare interface BazaarItem {
-  quick_status: {
-    buyPrice: number;
-  }
-  product_id: string;
+// OTHERS
+declare interface CustomError {
+  message: string;
 }
 
-declare interface accessoriesItem {
-  name: string;
-}
-
-declare interface accessoriesItem {
-  name: string;
-  lowestBin?: number;
+declare interface NavbarProps {
+  activeSection: Section;
+  setActiveSection: (section: Section) => void;
+  pseudo: string;
+  profile: string;
 }

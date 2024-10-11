@@ -1,12 +1,12 @@
-import React, { FC } from "react";
+import React, {FC} from "react";
 
-const MageRender: FC<RenderProps> = ({ profileData }) => {
+const MageEndRender: FC<RenderProps> = ({profileData}) => {
   if (!profileData) return null;
 
   return (
-    <div className="w-[75vw] rounded-3xl bg-gray-800 text-gray-200 p-8 m-5 shadow-lg">
+    <div className="text-gray-200 p-8 m-5">
       <h1 className="text-3xl font-extrabold underline decoration-wavy decoration-yellow decoration-4 underline-offset-8 mb-8">
-        Mage Optimizer :
+        Mage End Game :
       </h1>
 
       <p className="font-bold text-lg">Weapon: <span className="text-yellow">Hyperion</span></p>
@@ -71,4 +71,4 @@ const MageRender: FC<RenderProps> = ({ profileData }) => {
   );
 };
 
-export default MageRender;
+export default MageEndRender;
