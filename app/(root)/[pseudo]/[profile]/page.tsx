@@ -81,7 +81,7 @@ export default function ProfilePage() {
         });
 
         //////////////////////// PLAYER NETWORTH ////////////////////////
-        //console.log(selectedMember);
+        // //console.log(selectedMember);
         let playerPurse = selectedMember.currencies.coin_purse;
         let playerBank = selectedProfile.banking.balance;
         let sackItems = await calculateNetworth(selectedMember?.inventory?.bag_contents?.sacks_bag?.data, allItems);
