@@ -7,8 +7,8 @@ const Navbar: React.FC<NavbarProps> = ({activeSection, setActiveSection, pseudo,
   return (
     <div className="w-64 h-screen bg-gray-800 text-white flex flex-col py-4">
       <h2 className="text-2xl font-bold text-center text-yellow mb-4">SkyOptimizer</h2>
-      <h2 className="text-xl font-bold text-center mb-4">{pseudo}</h2>
-      <h2 className="text-lg font-bold text-center mb-4">{profile}</h2>
+      <h2 className="text-xl font-bold text-center mb-1">{pseudo}</h2>
+      <h2 className="text-sm font-bold text-center text-gray-400 mb-4">{profile}</h2>
       <div className="flex flex-col gap-2 m-3">
         <button onClick={() => setActiveSection(Section.Home)} className={`px-4 py-2 rounded font-bold text-gray-200 ${activeSection === Section.Home ? "bg-yellow hover:bg-yellow" : "bg-gray-700 hover:bg-darkyellow"}`}>
           Home
