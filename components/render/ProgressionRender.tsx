@@ -63,10 +63,8 @@ const ProgressionRender: FC<RenderProps> = ({profileData}) => {
         <h2 className="text-xl font-bold">2 : Faire les quetes des 12 PNJ</h2>
       </div>
 
-
       <div className="bg-green-300 text-gray-800 rounded-lg p-5 w-1/2 mx-auto text-center mt-5">
         <h2 className="text-xl font-bold">3 : Faire les quetes du bucheron</h2>
-
       </div>
 
       <div className="bg-green-300 text-gray-800 rounded-lg p-5 w-1/2 mx-auto text-center mt-5">
@@ -74,19 +72,19 @@ const ProgressionRender: FC<RenderProps> = ({profileData}) => {
       </div>
 
       <div className="bg-green-300 text-gray-800 rounded-lg p-5 w-1/2 mx-auto text-center mt-5">
-        <h2 className="text-xl font-bold">5 : Faire les quetes du farmeur jusqu'a débloquer le mushroom desert</h2>
+        <h2 className="text-xl font-bold">5 : Faire les quetes du mineur jusqu'au deep caverne</h2>
       </div>
 
       <div className="bg-green-300 text-gray-800 rounded-lg p-5 w-1/2 mx-auto text-center mt-5">
-        <h2 className="text-xl font-bold">6 : Faire les quetes du mineur jusqu'au deep caverne</h2>
+        <h2 className="text-xl font-bold">6 : Aller au Spider Den pour parler au PNJ bestiaire</h2>
       </div>
 
       <div className="bg-green-300 text-gray-800 rounded-lg p-5 w-1/2 mx-auto text-center mt-5">
-        <h2 className="text-xl font-bold">7 : Aller au Spider Den pour parler au PNJ bestiaire et passer combat 5 avec le bestiaire</h2>
+        <h2 className="text-xl font-bold">7 : Faire les quetes du farmeur jusqu'a débloquer le mushroom desert</h2>
       </div>
 
       <div className="bg-green-300 text-gray-800 rounded-lg p-5 w-1/2 mx-auto text-center mt-5">
-        <h2 className="text-xl font-bold">8 : Passer combat 5 avec le bestiaire</h2>
+        <h2 className="text-xl font-bold">8 : Aller sur l'ile Barn et completer le bestiaire de l'ile</h2>
       </div>
 
       <div className="bg-green-300 text-gray-800 rounded-lg p-5 w-1/2 mx-auto text-center mt-5">
