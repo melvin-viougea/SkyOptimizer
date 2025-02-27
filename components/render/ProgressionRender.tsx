@@ -82,27 +82,51 @@ const ProgressionRender: FC<RenderProps> = ({profileData}) => {
       </div>
 
       <div className="bg-green-300 text-gray-800 rounded-lg p-5 w-1/2 mx-auto text-center mt-5">
-        <h2 className="text-xl font-bold">7 : Aller chercher l'arumure au starter combat gear</h2>
+        <h2 className="text-xl font-bold">7 : Aller au Spider Den pour parler au PNJ bestiaire et passer combat 5 avec le bestiaire</h2>
       </div>
 
       <div className="bg-green-300 text-gray-800 rounded-lg p-5 w-1/2 mx-auto text-center mt-5">
-        <h2 className="text-xl font-bold">8 : Continuer les quetes jusqu'a la zone redstone</h2>
+        <h2 className="text-xl font-bold">8 : Passer combat 5 avec le bestiaire</h2>
       </div>
 
       <div className="bg-green-300 text-gray-800 rounded-lg p-5 w-1/2 mx-auto text-center mt-5">
-        <h2 className="text-xl font-bold">9 : Monter collection redstone 2 pour débloquer le sac d'accessoire</h2>
+        <h2 className="text-xl font-bold">9 : Aller chercher l'arumure Squire a Rosetta (devant la mine du hub)</h2>
       </div>
 
       <div className="bg-green-300 text-gray-800 rounded-lg p-5 w-1/2 mx-auto text-center mt-5">
-        <h2 className="text-xl font-bold">10 : Aller chercher les talisement en fasse du PNJ bazaar</h2>
+        <h2 className="text-xl font-bold">10 : Continuer les quetes jusqu'a la zone redstone</h2>
       </div>
 
       <div className="bg-green-300 text-gray-800 rounded-lg p-5 w-1/2 mx-auto text-center mt-5">
-        <h2 className="text-xl font-bold">11 : Faire la quete du redstone mineur</h2>
+        <h2 className="text-xl font-bold">11 : Monter collection redstone 2 pour débloquer le sac d'accessoire</h2>
       </div>
 
       <div className="bg-green-300 text-gray-800 rounded-lg p-5 w-1/2 mx-auto text-center mt-5">
-        <h2 className="text-xl font-bold">12 : Récupéré assez de redstone pour aller faire 5 minion lvl 4 de redstone</h2>
+        <h2 className="text-xl font-bold">12 : Aller chercher les talisement en fasse du PNJ bazaar</h2>
+      </div>
+
+      <div className="bg-green-300 text-gray-800 rounded-lg p-5 w-1/2 mx-auto text-center mt-5">
+        <h2 className="text-xl font-bold">13 : Faire la quete du redstone mineur</h2>
+      </div>
+
+      <div className="bg-green-300 text-gray-800 rounded-lg p-5 w-1/2 mx-auto text-center mt-5">
+        <h2 className="text-xl font-bold">14 : Récupéré assez de redstone pour aller faire 5 minion lvl 4 de redstone</h2>
+      </div>
+
+      <div className="bg-green-300 text-gray-800 rounded-lg p-5 w-1/2 mx-auto text-center mt-5">
+        <h2 className="text-xl font-bold">15 : Finir de descendre dans les deep caverne en terminant les quetes</h2>
+      </div>
+
+      <div className="bg-green-300 text-gray-800 rounded-lg p-5 w-1/2 mx-auto text-center mt-5">
+        <h2 className="text-xl font-bold">16 : Aller chercher la promising shovel a Rick dans le Spider Den</h2>
+      </div>
+
+      <div className="bg-green-300 text-gray-800 rounded-lg p-5 w-1/2 mx-auto text-center mt-5">
+        <h2 className="text-xl font-bold">17 : Aller dans le mushroom desert pour farm le sable et passer mining lvl 12</h2>
+      </div>
+
+      <div className="bg-green-300 text-gray-800 rounded-lg p-5 w-1/2 mx-auto text-center mt-5">
+        <h2 className="text-xl font-bold">18 : Accèder au Dwarven Mine</h2>
       </div>
     </div>
   );
