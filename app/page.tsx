@@ -45,7 +45,11 @@ export default function Home() {
       }
     } catch (error) {
       if (error instanceof Error) {
-        setError({message: `Server error: ${error.message}`});
+        if (process.env.NODE_ENV === "production") {
+          setError({message: "No player found with this username."});
+        } else {
+          setError({message: `Server error: ${error.message}`});
+        }
       } else {
         setError({message: 'Unknown error occurred'});
       }
@@ -60,7 +64,7 @@ export default function Home() {
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen gap-8 bg">
-      <div className="py-10 px-40 rounded-3xl bg-gray-800 text-gray-200">
+      <div className="py-10 px-40 rounded-3xl bg-primary text-gray-200">
         <div className="flex flex-col items-center gap-8   w-full max-w-md">
           <h1 className="text-4xl font-bold text-center">Show Optimizations For</h1>
           <input
@@ -79,7 +83,7 @@ export default function Home() {
             Show
           </button>
 
-          {error && <p className="text-red-500">{error.message}</p>}
+          {error && <p className="text-red-500 text-center">{error.message}</p>}
         </div>
       </div>
     </div>

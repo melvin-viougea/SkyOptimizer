@@ -25,7 +25,7 @@ const FishingRender: FC<RenderProps> = ({profileData}) => {
   };
 
   return (
-    <div className="rounded-3xl bg-gray-800 text-gray-200 p-8 m-5 shadow-lg">
+    <div className="rounded-3xl bg-primary text-gray-200 p-8 m-5 shadow-lg">
       <h1 className="text-3xl font-extrabold underline decoration-wavy decoration-yellow decoration-4 underline-offset-8 mb-8">
         Fishing Optimizer:
       </h1>
@@ -34,7 +34,7 @@ const FishingRender: FC<RenderProps> = ({profileData}) => {
         <button
           onClick={() => setGamePhase("early")}
           className={`w-full px-4 py-2 rounded font-bold ${
-            gamePhase === "early" ? "bg-yellow text-gray-800" : "bg-gray-600 text-gray-200"
+            gamePhase === "early" ? "bg-yellow text-gray-800" : "bg-secondary text-gray-200"
           }`}
         >
           Early Game
@@ -42,7 +42,7 @@ const FishingRender: FC<RenderProps> = ({profileData}) => {
         <button
           onClick={() => setGamePhase("mid")}
           className={`w-full px-4 py-2 rounded font-bold ${
-            gamePhase === "mid" ? "bg-yellow text-gray-800" : "bg-gray-600 text-gray-200"
+            gamePhase === "mid" ? "bg-yellow text-gray-800" : "bg-secondary text-gray-200"
           }`}
         >
           Mid Game
@@ -50,7 +50,7 @@ const FishingRender: FC<RenderProps> = ({profileData}) => {
         <button
           onClick={() => setGamePhase("late")}
           className={`w-full px-4 py-2 rounded font-bold ${
-            gamePhase === "late" ? "bg-yellow text-gray-800" : "bg-gray-600 text-gray-200"
+            gamePhase === "late" ? "bg-yellow text-gray-800" : "bg-secondary text-gray-200"
           }`}
         >
           Late Game
@@ -58,7 +58,7 @@ const FishingRender: FC<RenderProps> = ({profileData}) => {
         <button
           onClick={() => setGamePhase("end")}
           className={`w-full px-4 py-2 rounded font-bold ${
-            gamePhase === "end" ? "bg-yellow text-gray-800" : "bg-gray-600 text-gray-200"
+            gamePhase === "end" ? "bg-yellow text-gray-800" : "bg-secondary text-gray-200"
           }`}
         >
           End Game
