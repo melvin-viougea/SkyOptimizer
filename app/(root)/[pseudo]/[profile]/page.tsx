@@ -206,7 +206,7 @@ export default function ProfilePage() {
     if (process.env.NODE_ENV === "production") {
       return (
         <div className="flex flex-col items-center justify-center gap-2 pt-5 min-h-screen">
-          <h1 className="text-3xl font-bold text-gray-200 text-center pb-5">An error has occurred. Please try again.</h1>
+          <h1 className="text-3xl font-bold text-gray-200 text-center pb-5">  Something went wrong! We couldn't retrieve the data. Please check if the API is activated and try again.</h1>
           <button
             onClick={() => window.history.back()}
             className="px-6 py-3 bg-yellow text-gray-800 rounded-md transition font-bold"
