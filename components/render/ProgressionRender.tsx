@@ -126,6 +126,22 @@ const ProgressionRender: FC<RenderProps> = ({profileData}) => {
       <div className="bg-green-300 text-gray-800 rounded-lg p-5 w-1/2 mx-auto text-center mt-5">
         <h2 className="text-xl font-bold">18 : Accèder au Dwarven Mine</h2>
       </div>
+
+      <div className="text-gray-800 w-1/2 mx-auto text-center mt-5">
+        <h2 className="text-xl font-bold">MINING INTRODUCTION</h2>
+      </div>
+
+      <div className="bg-green-300 text-gray-800 rounded-lg p-5 w-1/2 mx-auto text-center mt-5">
+        <h2 className="text-xl font-bold">19 : Achetez a Bubu la fractured mithril pickaxe</h2>
+      </div>
+
+      <div className="bg-green-300 text-gray-800 rounded-lg p-5 w-1/2 mx-auto text-center mt-5">
+        <h2 className="text-xl font-bold">20 : Aller tué des glacites pour récupéré la glacite armor</h2>
+      </div>
+
+      <div className="bg-green-300 text-gray-800 rounded-lg p-5 w-1/2 mx-auto text-center mt-5">
+        <h2 className="text-xl font-bold">21 : Farmer les glacites jewel jusqu'a pouvoir acheter le Mithril Golem en légendaire</h2>
+      </div>
     </div>
   );
 };

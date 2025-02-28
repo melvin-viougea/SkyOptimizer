@@ -203,11 +203,25 @@ export default function ProfilePage() {
   }
 
   if (error) {
-    return (
-      <div className="flex flex-col items-center justify-center gap-2 pt-5 min-h-screen">
-        <h1 className="text-3xl font-bold text-gray-200 text-center">Error: {error}</h1>
-      </div>
-    );
+    if (process.env.NODE_ENV === "production") {
+      return (
+        <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative">
+          <p>An error has occurred. Please try again.</p>
+          <button
+            onClick={() => window.history.back()}
+            className="px-6 py-3 bg-yellow text-gray-800 rounded-md transition font-bold"
+          >
+            Go Back
+          </button>
+        </div>
+      );
+    } else {
+      return (
+        <div className="flex flex-col items-center justify-center gap-2 pt-5 min-h-screen">
+          <h1 className="text-3xl font-bold text-gray-200 text-center">Error: {error}</h1>
+        </div>
+      );
+    }
   }
 
   if (!profileData) {
