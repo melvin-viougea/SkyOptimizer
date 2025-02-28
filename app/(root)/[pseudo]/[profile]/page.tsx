@@ -205,8 +205,8 @@ export default function ProfilePage() {
   if (error) {
     if (process.env.NODE_ENV === "production") {
       return (
-        <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative">
-          <p>An error has occurred. Please try again.</p>
+        <div className="flex flex-col items-center justify-center gap-2 pt-5 min-h-screen">
+          <h1 className="text-3xl font-bold text-gray-200 text-center pb-5">An error has occurred. Please try again.</h1>
           <button
             onClick={() => window.history.back()}
             className="px-6 py-3 bg-yellow text-gray-800 rounded-md transition font-bold"
@@ -234,7 +234,7 @@ export default function ProfilePage() {
 
   return (
     <div className="flex">
-      <Navbar activeSection={activeSection} setActiveSection={setActiveSection} pseudo={profileData.pseudo} profile={profileData.profile} />
+      <Navbar activeSection={activeSection} setActiveSection={setActiveSection} pseudo={profileData.pseudo} profile={profileData.profile}/>
       <div className="flex-1">{renderSection()}</div>
     </div>
   );

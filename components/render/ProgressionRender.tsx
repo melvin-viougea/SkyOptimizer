@@ -7,7 +7,7 @@ const ProgressionRender: FC<RenderProps> = ({profileData}) => {
   return (
     <div className="rounded-3xl bg-gray-800 text-gray-200 p-8 m-5 shadow-lg">
       <h1 className="text-3xl font-extrabold underline decoration-wavy decoration-yellow decoration-4 underline-offset-8 mb-8">
-        Progression Optimizer : (Work In Progress)
+        Progression Optimizer :
       </h1>
 
       {/*/!* Step 1 *!/*/}
@@ -55,92 +55,100 @@ const ProgressionRender: FC<RenderProps> = ({profileData}) => {
       {/*  </p>*/}
       {/*</div>*/}
 
+      <h1 className="text-3xl font-extrabold underline decoration-wavy decoration-yellow decoration-4 underline-offset-8 mb-8">
+        Progression Optimizer : (Work In Progress)
+      </h1>
+
       <div className="bg-green-300 text-gray-800 rounded-lg p-5 w-1/2 mx-auto text-center mt-5">
-        <h2 className="text-xl font-bold">1 : Faire les quetes de l'ile</h2>
+        <h2 className="text-xl font-bold">1 : Faire les quêtes de l'île</h2>
       </div>
 
       <div className="bg-green-300 text-gray-800 rounded-lg p-5 w-1/2 mx-auto text-center mt-5">
-        <h2 className="text-xl font-bold">2 : Faire les quetes des 12 PNJ</h2>
+        <h2 className="text-xl font-bold">2 : Faire les quêtes des 12 PNJ</h2>
       </div>
 
       <div className="bg-green-300 text-gray-800 rounded-lg p-5 w-1/2 mx-auto text-center mt-5">
-        <h2 className="text-xl font-bold">3 : Faire les quetes du bucheron</h2>
+        <h2 className="text-xl font-bold">3 : Faire les quêtes du bûcheron</h2>
       </div>
 
       <div className="bg-green-300 text-gray-800 rounded-lg p-5 w-1/2 mx-auto text-center mt-5">
-        <h2 className="text-xl font-bold">4 : Récupéré le hunter knife, fire talisement, la harpe, et la collection jungle Axe</h2>
+        <h2 className="text-xl font-bold">4 : Récupérer le Hunter Knife, Fire Talisman, la harpe et la collection Jungle Axe</h2>
       </div>
 
       <div className="bg-green-300 text-gray-800 rounded-lg p-5 w-1/2 mx-auto text-center mt-5">
-        <h2 className="text-xl font-bold">5 : Faire les quetes du mineur jusqu'au deep caverne</h2>
+        <h2 className="text-xl font-bold">5 : Faire les quêtes du mineur jusqu'aux Deep Caverns</h2>
       </div>
 
       <div className="bg-green-300 text-gray-800 rounded-lg p-5 w-1/2 mx-auto text-center mt-5">
-        <h2 className="text-xl font-bold">6 : Aller au Spider Den pour parler au PNJ bestiaire</h2>
+        <h2 className="text-xl font-bold">6 : Aller au Spider's Den pour parler au PNJ bestiaire</h2>
       </div>
 
       <div className="bg-green-300 text-gray-800 rounded-lg p-5 w-1/2 mx-auto text-center mt-5">
-        <h2 className="text-xl font-bold">7 : Faire les quetes du farmeur jusqu'a débloquer le mushroom desert</h2>
+        <h2 className="text-xl font-bold">7 : Faire les quêtes du fermier jusqu'à débloquer le Mushroom Desert</h2>
       </div>
 
       <div className="bg-green-300 text-gray-800 rounded-lg p-5 w-1/2 mx-auto text-center mt-5">
-        <h2 className="text-xl font-bold">8 : Aller sur l'ile Barn et completer le bestiaire de l'ile</h2>
+        <h2 className="text-xl font-bold">8 : Aller sur l'île Barn et compléter le bestiaire de l'île</h2>
       </div>
 
       <div className="bg-green-300 text-gray-800 rounded-lg p-5 w-1/2 mx-auto text-center mt-5">
-        <h2 className="text-xl font-bold">9 : Aller chercher l'arumure Squire a Rosetta (devant la mine du hub)</h2>
+        <h2 className="text-xl font-bold">9 : Aller chercher l'armure Squire à Rosetta (devant la mine du hub)</h2>
       </div>
 
       <div className="bg-green-300 text-gray-800 rounded-lg p-5 w-1/2 mx-auto text-center mt-5">
-        <h2 className="text-xl font-bold">10 : Continuer les quetes jusqu'a la zone redstone</h2>
+        <h2 className="text-xl font-bold">10 : Continuer les quêtes Deep Caverns jusqu'à la zone Redstone</h2>
       </div>
 
       <div className="bg-green-300 text-gray-800 rounded-lg p-5 w-1/2 mx-auto text-center mt-5">
-        <h2 className="text-xl font-bold">11 : Monter collection redstone 2 pour débloquer le sac d'accessoire</h2>
+        <h2 className="text-xl font-bold">11 : Monter la collection Redstone 2 pour débloquer le sac d'accessoires</h2>
       </div>
 
       <div className="bg-green-300 text-gray-800 rounded-lg p-5 w-1/2 mx-auto text-center mt-5">
-        <h2 className="text-xl font-bold">12 : Aller chercher les talisement en fasse du PNJ bazaar</h2>
+        <h2 className="text-xl font-bold">12 : Aller chercher les talismans en face du PNJ Bazaar</h2>
       </div>
 
       <div className="bg-green-300 text-gray-800 rounded-lg p-5 w-1/2 mx-auto text-center mt-5">
-        <h2 className="text-xl font-bold">13 : Faire la quete du redstone mineur</h2>
+        <h2 className="text-xl font-bold">13 : Faire la quête du mineur Redstone</h2>
       </div>
 
       <div className="bg-green-300 text-gray-800 rounded-lg p-5 w-1/2 mx-auto text-center mt-5">
-        <h2 className="text-xl font-bold">14 : Récupéré assez de redstone pour aller faire 5 minion lvl 4 de redstone</h2>
+        <h2 className="text-xl font-bold">14 : Récupérer assez de Redstone pour fabriquer 5 minions niveau 4 puis les placer sur son île</h2>
       </div>
 
       <div className="bg-green-300 text-gray-800 rounded-lg p-5 w-1/2 mx-auto text-center mt-5">
-        <h2 className="text-xl font-bold">15 : Finir de descendre dans les deep caverne en terminant les quetes</h2>
+        <h2 className="text-xl font-bold">15 : Finir de descendre dans les Deep Caverns en terminant les quêtes</h2>
       </div>
 
       <div className="bg-green-300 text-gray-800 rounded-lg p-5 w-1/2 mx-auto text-center mt-5">
-        <h2 className="text-xl font-bold">16 : Aller chercher la promising shovel a Rick dans le Spider Den</h2>
+        <h2 className="text-xl font-bold">16 : Aller chercher la Promising Shovel à Rick dans le Spider's Den</h2>
       </div>
 
       <div className="bg-green-300 text-gray-800 rounded-lg p-5 w-1/2 mx-auto text-center mt-5">
-        <h2 className="text-xl font-bold">17 : Aller dans le mushroom desert pour farm le sable et passer mining lvl 12</h2>
+        <h2 className="text-xl font-bold">17 : Aller dans le Mushroom Desert pour farmer le sable et passer Mining niveau 12</h2>
       </div>
 
       <div className="bg-green-300 text-gray-800 rounded-lg p-5 w-1/2 mx-auto text-center mt-5">
-        <h2 className="text-xl font-bold">18 : Accèder au Dwarven Mine</h2>
+        <h2 className="text-xl font-bold">18 : Débloquer l'accès aux Dwarven Mines</h2>
       </div>
 
-      <div className="text-gray-800 w-1/2 mx-auto text-center mt-5">
-        <h2 className="text-xl font-bold">MINING INTRODUCTION</h2>
-      </div>
-
-      <div className="bg-green-300 text-gray-800 rounded-lg p-5 w-1/2 mx-auto text-center mt-5">
-        <h2 className="text-xl font-bold">19 : Achetez a Bubu la fractured mithril pickaxe</h2>
+      <div className="w-1/2 mx-auto text-center py-16">
+        <h2 className="text-5xl font-bold">MINING INTRODUCTION</h2>
       </div>
 
       <div className="bg-green-300 text-gray-800 rounded-lg p-5 w-1/2 mx-auto text-center mt-5">
-        <h2 className="text-xl font-bold">20 : Aller tué des glacites pour récupéré la glacite armor</h2>
+        <h2 className="text-xl font-bold">1 : Accéder aux Dwarven Mines</h2>
       </div>
 
       <div className="bg-green-300 text-gray-800 rounded-lg p-5 w-1/2 mx-auto text-center mt-5">
-        <h2 className="text-xl font-bold">21 : Farmer les glacites jewel jusqu'a pouvoir acheter le Mithril Golem en légendaire</h2>
+        <h2 className="text-xl font-bold">2 : Acheter à Bubu la Fractured Mithril Pickaxe</h2>
+      </div>
+
+      <div className="bg-green-300 text-gray-800 rounded-lg p-5 w-1/2 mx-auto text-center mt-5">
+        <h2 className="text-xl font-bold">3 : Aller tuer des Glacites pour récupérer la Glacite Armor</h2>
+      </div>
+
+      <div className="bg-green-300 text-gray-800 rounded-lg p-5 w-1/2 mx-auto text-center mt-5">
+        <h2 className="text-xl font-bold">4 : Farmer les Glacite Jewels jusqu'à pouvoir acheter le Mithril Golem en légendaire</h2>
       </div>
     </div>
   );
