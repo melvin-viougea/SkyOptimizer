@@ -22,7 +22,7 @@ const BerserkEndRender: FC<RenderProps> = ({profileData}) => {
       </div>
 
       <div className="flex justify-around mt-8 space-x-6">
-        <div className="flex-1 bg-gray-700 p-6 rounded-xl shadow-lg transform hover:scale-105 transition-transform">
+        <div className="flex-1 bg-secondary p-6 rounded-xl shadow-lg transform hover:scale-105 transition-transform">
           <h2 className="text-2xl font-bold mb-4">Dungeon</h2>
           <div>
             <h3 className="font-bold text-lg">Armor:</h3>
@@ -44,7 +44,7 @@ const BerserkEndRender: FC<RenderProps> = ({profileData}) => {
           </div>
         </div>
 
-        <div className="flex-1 bg-gray-700 p-6 rounded-xl shadow-lg transform hover:scale-105 transition-transform">
+        <div className="flex-1 bg-secondary p-6 rounded-xl shadow-lg transform hover:scale-105 transition-transform">
           <h2 className="text-2xl font-bold mb-4">Outside Dungeon</h2>
           <div>
             <h3 className="font-bold text-lg">Armor:</h3>

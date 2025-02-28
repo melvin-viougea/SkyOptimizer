@@ -28,7 +28,7 @@ const FarmingEarlyRender: FC<RenderProps> = ({ profileData }) => {
       </div>
 
       <div className="flex justify-around mt-8 space-x-6">
-        <div className="flex-1 bg-gray-700 p-6 rounded-xl shadow-lg transform hover:scale-105 transition-transform">
+        <div className="flex-1 bg-secondary p-6 rounded-xl shadow-lg transform hover:scale-105 transition-transform">
           <h2 className="text-2xl font-bold mb-4">Armor</h2>
           <ul className="list-disc ml-6">
             <li className="font-bold">Helmet: <span className="text-yellow">Farm Suit Helmet</span></li>
@@ -38,7 +38,7 @@ const FarmingEarlyRender: FC<RenderProps> = ({ profileData }) => {
           </ul>
         </div>
 
-        <div className="flex-1 bg-gray-700 p-6 rounded-xl shadow-lg transform hover:scale-105 transition-transform">
+        <div className="flex-1 bg-secondary p-6 rounded-xl shadow-lg transform hover:scale-105 transition-transform">
           <h2 className="text-2xl font-bold mb-4">Equipment</h2>
           <ul className="list-disc ml-6">
             <li className="font-bold">Necklace: N/A</li>

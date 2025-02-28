@@ -6,7 +6,7 @@ const HomeRender: FC<RenderProps> = ({profileData}) => {
 
   return (
     <div>
-      <div className="rounded-3xl bg-gray-800 text-gray-200 p-8 m-5 shadow-lg">
+      <div className="rounded-3xl bg-primary text-gray-200 p-8 m-5 shadow-lg">
         <h1 className="text-3xl font-extrabold underline decoration-wavy decoration-yellow decoration-4 underline-offset-8 mb-8">
           Skills :
         </h1>
@@ -17,7 +17,7 @@ const HomeRender: FC<RenderProps> = ({profileData}) => {
         <p className="font-bold">Combat {profileData.combatLvl} / {profileData.combatMaxLvl}</p>
       </div>
 
-      <div className="rounded-3xl bg-gray-800 text-gray-200 p-5 m-5">
+      <div className="rounded-3xl bg-primary text-gray-200 p-5 m-5">
         <h1 className="text-2xl font-bold underline decoration-wavy decoration-yellow decoration-4 underline-offset-8 mb-5">
           Networth :
         </h1>
