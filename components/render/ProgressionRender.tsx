@@ -328,7 +328,7 @@ const ProgressionRender: FC<RenderProps> = ({profileData}) => {
       </div>
 
       <div className="bg-gray-300 text-gray-800 rounded-lg p-5 w-1/2 mx-auto text-center mt-5">
-        <h2 className="text-xl font-bold pb-4">HOTM TREE - Mithril max 1/2/3 puis le reste 4/5 (total 11.155.681) - Gemestone max 1/2/3/4 puis 5/6/7/8/9/10 (total 31.260.158)</h2>
+        <h2 className="text-xl font-bold pb-4">HOTM TREE - Mithril max 1/2/3 puis le reste 4/5 (total 11.155.681) - Gemestone max 1/2/3/4 puis 5/6/7/8/9/10 (total 31.260.158) si HOTM 10, monté le milieu jusqu'a Mining Master</h2>
         <div className="flex justify-center">
           <Image
             src="/hotm_gemstone_mining.png"
@@ -342,6 +342,18 @@ const ProgressionRender: FC<RenderProps> = ({profileData}) => {
 
       <div className="bg-gray-300 text-gray-800 rounded-lg p-5 w-1/2 mx-auto text-center mt-5">
         <h2 className="text-xl font-bold">1 : WIP</h2>
+      </div>
+
+      <div className="w-1/2 mx-auto text-center py-16">
+        <h2 className="text-5xl font-bold">BLOCK/ORE MINING (WIP)</h2>
+      </div>
+
+      <div className="w-1/2 mx-auto text-center py-16">
+        <h2 className="text-5xl font-bold">GLACITE MINESHAFT (WIP)</h2>
+      </div>
+
+      <div className="w-1/2 mx-auto text-center py-16">
+        <h2 className="text-5xl font-bold">END GAME CHECK-UP (WIP)</h2>
       </div>
     </div>
   );
