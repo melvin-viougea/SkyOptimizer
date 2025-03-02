@@ -3,11 +3,11 @@
 import React from "react";
 import {Section} from "@/constants";
 
-const Navbar: React.FC<NavbarProps> = ({activeSection, setActiveSection, pseudo, profile}) => {
+const Sidebar: React.FC<NavbarProps> = ({activeSection, setActiveSection, pseudo, level, profile}) => {
   return (
-    <div className="w-64 h-screen bg-sidebar text-white flex flex-col py-4 rounded-3xl">
+    <div className="fixed left-4 top-4 w-60 h-[calc(100vh-2rem)] bg-sidebar text-white flex flex-col py-4 rounded-3xl shadow-lg">
       <h2 className="text-2xl font-bold text-center text-yellow mb-4">SkyOptimizer</h2>
-      <h2 className="text-xl font-bold text-center mb-1">{pseudo}</h2>
+      <h2 className="text-xl font-bold text-center mb-1">[{level}] {pseudo}</h2>
       <h2 className="text-sm font-bold text-center text-gray-400 mb-4">{profile}</h2>
       <div className="flex flex-col gap-2 m-3">
         <button onClick={() => setActiveSection(Section.Home)} className={`px-4 py-2 rounded font-bold text-gray-200 ${activeSection === Section.Home ? "bg-yellow hover:bg-darkyellow" : "bg-sidebarlight hover:bg-primary"}`}>
@@ -64,4 +64,4 @@ const Navbar: React.FC<NavbarProps> = ({activeSection, setActiveSection, pseudo,
   );
 };
 
-export default Navbar;
+export default Sidebar;

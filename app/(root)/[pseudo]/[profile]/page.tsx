@@ -18,7 +18,7 @@ import ForagingRender from "@/components/render/skill/foraging/ForagingRender";
 import ProgressionRender from "@/components/render/ProgressionRender";
 import {fetchHypixelAuction, fetchHypixelProfiles, fetchMojangData, fetchSkills} from "@/lib/fetch";
 import {calculateNetworth, fetchAllItemsWithPrice, getSkillLevel} from "@/lib/function";
-import Navbar from "@/components/Sidebar";
+import Sidebar from "@/components/Sidebar";
 import ReleaseNoteRender from "@/components/render/ReleaseNoteRender";
 
 export default function ProfilePage() {
@@ -81,9 +81,10 @@ export default function ProfilePage() {
         });
 
         //////////////////////// PLAYER NETWORTH ////////////////////////
-        // //console.log(selectedMember);
+        // console.log(selectedMember);
         let playerPurse = selectedMember.currencies.coin_purse;
-        let playerBank = selectedProfile.banking.balance;
+        let playerBank = selectedProfile.banking?.balance ?? 0;
+        let playerLevel = Math.floor((selectedMember.leveling?.experience ?? 0) / 100);
         let sackItems = await calculateNetworth(selectedMember?.inventory?.bag_contents?.sacks_bag?.data, allItems);
         let armorItems = await calculateNetworth(selectedMember?.inventory?.inv_armor?.data, allItems);
         let equipmentItems = await calculateNetworth(selectedMember?.inventory?.equipment_contents?.data, allItems)
@@ -107,6 +108,7 @@ export default function ProfilePage() {
         setProfileData({
           pseudo: normalizedPseudo,
           profile: selectedProfile.cute_name,
+          playerLevel: playerLevel,
           // NETWORTH
           playerPurseNetworth: playerPurse,
           playerBankNetworth: playerBank,
@@ -195,12 +197,41 @@ export default function ProfilePage() {
   };
 
   if (loading) {
+    const percentage = totalFetches ? Math.min(Math.round((numberFetches * 100) / totalFetches), 100) : 0;
+    const radius = 40; // Rayon du cercle
+    const circumference = 2 * Math.PI * radius; // Circonférence
+    const progress = (percentage / 100) * circumference; // Progrès à afficher
+
     return (
       <div className="flex flex-col items-center justify-center gap-2 pt-5 min-h-screen">
-        <h1 className="text-3xl font-bold text-gray-200 text-center">{totalFetches ? Math.min(Math.round(numberFetches * 100 / totalFetches), 100) : 0}%</h1>
+        <svg className="w-24 h-24 transform -rotate-90" viewBox="0 0 100 100">
+          {/* Cercle de fond */}
+          <circle
+            cx="50"
+            cy="50"
+            r={radius}
+            fill="transparent"
+            stroke="var(--primary)"
+            strokeWidth="10"
+          />
+          {/* Cercle de progression */}
+          <circle
+            cx="50"
+            cy="50"
+            r={radius}
+            fill="transparent"
+            stroke="var(--yellow)"
+            strokeWidth="10"
+            strokeDasharray={circumference}
+            strokeDashoffset={circumference - progress}
+            strokeLinecap="round"
+          />
+        </svg>
+        <h1 className="text-3xl font-bold text-gray-200 text-center">{percentage}%</h1>
       </div>
     );
   }
+
 
   if (error) {
     if (process.env.NODE_ENV === "production") {
@@ -235,8 +266,8 @@ export default function ProfilePage() {
 
   return (
     <div className="flex">
-      <Navbar activeSection={activeSection} setActiveSection={setActiveSection} pseudo={profileData.pseudo} profile={profileData.profile}/>
-      <div className="flex-1">{renderSection()}</div>
+      <Sidebar activeSection={activeSection} setActiveSection={setActiveSection} pseudo={profileData.pseudo} level={profileData.playerLevel} profile={profileData.profile}/>
+      <div className="ml-64 flex-1">{renderSection()}</div>
     </div>
   );
 }
