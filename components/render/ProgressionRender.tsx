@@ -387,27 +387,34 @@ const ProgressionRender: FC<RenderProps> = ({profileData}) => {
 
       <div className="bg-yellow text-gray-300 rounded-lg w-1/2 mx-auto flex items-center mt-6">
         <span className="text-xl font-bold text-center text-gray-800 flex items-center justify-center rounded-l-lg w-14">1</span>
-        <h2 className="bg-secondary text-xl font-bold text-center flex-1 p-5 h-full">Reprendre la Mithrill Drill, la Sorrow Armor et le Mithril Golem</h2>
+        <h2 className="bg-secondary text-xl font-bold text-center flex-1 p-5 h-full">Pensez à acheter des Powder Pumpkin a Brynmor (32 202 -154.5) dans la taverne des Dwarven Mine</h2>
       </div>
 
       <div className="w-1 bg-gray-400 h-10 mx-auto"></div>
 
       <div className="bg-yellow text-gray-300 rounded-lg w-1/2 mx-auto flex items-center">
         <span className="text-xl font-bold text-center text-gray-800 flex items-center justify-center rounded-l-lg w-14">2</span>
-        <h2 className="bg-secondary text-xl font-bold text-center flex-1 p-5 h-full">Mettre la reforge Dimensional sur l'armure et Blazing sur les equipements</h2>
+        <h2 className="bg-secondary text-xl font-bold text-center flex-1 p-5 h-full">Reprendre la Mithrill Drill, la Sorrow Armor et le Mithril Golem</h2>
       </div>
 
       <div className="w-1 bg-gray-400 h-10 mx-auto"></div>
 
       <div className="bg-yellow text-gray-300 rounded-lg w-1/2 mx-auto flex items-center">
         <span className="text-xl font-bold text-center text-gray-800 flex items-center justify-center rounded-l-lg w-14">3</span>
-        <h2 className="bg-secondary text-xl font-bold text-center flex-1 p-5 h-full">Mettre des Perfect Gemstones dans la Sorrow Armor</h2>
+        <h2 className="bg-secondary text-xl font-bold text-center flex-1 p-5 h-full">Mettre la reforge Dimensional sur l'armure et Blazing sur les equipements</h2>
       </div>
 
       <div className="w-1 bg-gray-400 h-10 mx-auto"></div>
 
       <div className="bg-yellow text-gray-300 rounded-lg w-1/2 mx-auto flex items-center">
         <span className="text-xl font-bold text-center text-gray-800 flex items-center justify-center rounded-l-lg w-14">4</span>
+        <h2 className="bg-secondary text-xl font-bold text-center flex-1 p-5 h-full">Mettre des Perfect Gemstones dans la Sorrow Armor</h2>
+      </div>
+
+      <div className="w-1 bg-gray-400 h-10 mx-auto"></div>
+
+      <div className="bg-yellow text-gray-300 rounded-lg w-1/2 mx-auto flex items-center">
+        <span className="text-xl font-bold text-center text-gray-800 flex items-center justify-center rounded-l-lg w-14">5</span>
         <h2 className="bg-secondary text-xl font-bold text-center flex-1 p-5 h-full">Acheter/forger progressivement la <a href="https://wiki.hypixel.net/Armor_Of_Divan" className="text-raritylegendary underline underline-offset-4" target="_blank" rel="noopener noreferrer">ARMOR OF DIVAN</a> en la mettant pareil que la Sorrow Armor
         </h2>
       </div>
@@ -415,21 +422,21 @@ const ProgressionRender: FC<RenderProps> = ({profileData}) => {
       <div className="w-1 bg-gray-400 h-10 mx-auto"></div>
 
       <div className="bg-yellow text-gray-300 rounded-lg w-1/2 mx-auto flex items-center">
-        <span className="text-xl font-bold text-center text-gray-800 flex items-center justify-center rounded-l-lg w-14">5</span>
+        <span className="text-xl font-bold text-center text-gray-800 flex items-center justify-center rounded-l-lg w-14">6</span>
         <h2 className="bg-secondary text-xl font-bold text-center flex-1 p-5 h-full">Participer à un maximum d'event et les finir avec la drill en main</h2>
       </div>
 
       <div className="w-1 bg-gray-400 h-10 mx-auto"></div>
 
       <div className="bg-yellow text-gray-300 rounded-lg w-1/2 mx-auto flex items-center">
-        <span className="text-xl font-bold text-center text-gray-800 flex items-center justify-center rounded-l-lg w-14">6</span>
+        <span className="text-xl font-bold text-center text-gray-800 flex items-center justify-center rounded-l-lg w-14">7</span>
         <h2 className="bg-secondary text-xl font-bold text-center flex-1 p-5 h-full">Cibler le mithrill bleu pour plus de powder a des spot tel qu'en 12 170 35 ou 9 226 129 (un peu plus prisé, l'autre est souvent libre), ne pas hésiter à farm à droite et pickobulus à gauche ou inversement</h2>
       </div>
 
       <div className="w-1 bg-gray-400 h-10 mx-auto"></div>
 
       <div className="bg-yellow text-gray-300 rounded-lg w-1/2 mx-auto flex items-center">
-        <span className="text-xl font-bold text-center text-gray-800 flex items-center justify-center rounded-l-lg w-14">7</span>
+        <span className="text-xl font-bold text-center text-gray-800 flex items-center justify-center rounded-l-lg w-14">8</span>
         <h2 className="bg-secondary text-xl font-bold text-center flex-1 p-5 h-full">Atteindre <span className="text-powdermithril">3.966.926 mithril powder</span> (minimum nécessaire gemstone mining, retirer 93.838 si vous ne voulez pas la perks Quick Forge de montée)
         </h2>
       </div>
