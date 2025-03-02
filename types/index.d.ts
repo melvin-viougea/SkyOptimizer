@@ -11,6 +11,9 @@ declare interface ProfilesResponse {
         currencies: {
           coin_purse: number;
         };
+        leveling: {
+          experience: number;
+        };
         inventory: {
           inv_contents: {
             data: string;
@@ -182,4 +185,5 @@ declare interface NavbarProps {
   setActiveSection: (section: Section) => void;
   pseudo: string;
   profile: string;
+  level: string;
 }

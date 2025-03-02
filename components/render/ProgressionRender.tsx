@@ -247,7 +247,7 @@ const ProgressionRender: FC<RenderProps> = ({profileData}) => {
       </div>
 
       <div className="bg-secondary text-gray-300 rounded-lg p-5 w-1/2 mx-auto text-center mt-5">
-        <h2 className="text-xl font-bold">5 : Atteindre 12.076.732 de gemstone powder (minimum nécessaire)</h2>
+        <h2 className="text-xl font-bold">5 : Atteindre 12.076.732 de gemstone powder (minimum nécessaire gemstone mining)</h2>
       </div>
 
       <div className="w-1/2 mx-auto text-center py-16">
@@ -292,7 +292,7 @@ const ProgressionRender: FC<RenderProps> = ({profileData}) => {
       </div>
 
       <div className="bg-secondary text-gray-300 rounded-lg p-5 w-1/2 mx-auto text-center mt-5">
-        <h2 className="text-xl font-bold">7 : Atteindre 3.966.926 de Mithril Powder (minimum nécessaire, retirer 93.838 si vous ne voulez pas la perks Quick Forge de montée)</h2>
+        <h2 className="text-xl font-bold">7 : Atteindre 3.966.926 de Mithril Powder (minimum nécessaire gemstone mining, retirer 93.838 si vous ne voulez pas la perks Quick Forge de montée)</h2>
       </div>
 
       <div className="w-1/2 mx-auto text-center py-16">
