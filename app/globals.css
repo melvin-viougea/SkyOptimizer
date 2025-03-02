@@ -12,7 +12,21 @@
     --sidebarlight: #2F2F2F;
     --yellow: #F3AE3D;
     --darkyellow: #F3AE3DB2;
+    --raritycommon: #FFFFFF;
+    --rarityuncommon: #55FF55;
+    --rarityrare: #5555FF;
+    --rarityepic: #AA00AA;
+    --raritylegendary: #FFAA00;
+    --raritymythic: #FF55FF;
+    --raritydivine: #55FFFF;
+    --rarityspecial: #FF5555;
+    --rarityveryspecial: #FF5555;
+    --rarityultimate: #AA0000;
+    --rarityadmin: #AA0000;
+    --powdermithril: #00AA00;
+    --powdergemstone: #FF55FF;
 }
+
 
 /*:root {*/
 /*    --background: #ffffff;*/

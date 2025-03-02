@@ -95,6 +95,7 @@ export async function calculateNetworth(searchValue: any, allItems: HypixelItem[
 
   try {
     const items: any = await decodeItems(searchValue);
+    console.log(items);
     const itemsValues = items.value;
 
     if (Array.isArray(itemsValues)) {
