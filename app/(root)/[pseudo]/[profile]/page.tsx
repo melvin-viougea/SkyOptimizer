@@ -203,7 +203,11 @@ export default function ProfilePage() {
     const progress = (percentage / 100) * circumference; // Progrès à afficher
 
     return (
-      <div className="flex flex-col items-center justify-center gap-2 pt-5 min-h-screen">
+      <div className="relative flex flex-col justify-center items-center min-h-screen">
+        <h1 className="absolute top-32 text-9xl font-extrabold text-gray-200 text-center">
+          SkyOptimizer
+        </h1>
+
         <svg className="w-24 h-24 transform -rotate-90" viewBox="0 0 100 100">
           {/* Cercle de fond */}
           <circle
@@ -227,11 +231,12 @@ export default function ProfilePage() {
             strokeLinecap="round"
           />
         </svg>
-        <h1 className="text-3xl font-bold text-gray-200 text-center">{percentage}%</h1>
+
+        {/* Pourcentage */}
+        <h1 className="text-4xl font-bold text-gray-200 text-center pt-6">{percentage}%</h1>
       </div>
     );
   }
-
 
   if (error) {
     if (process.env.NODE_ENV === "production") {
