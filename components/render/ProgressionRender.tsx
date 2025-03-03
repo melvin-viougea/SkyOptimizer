@@ -178,7 +178,7 @@ const ProgressionRender: FC<RenderProps> = ({ profileData }) => {
         </div>
       </div>
 
-      <div className={`bg-yellow text-gray-300 rounded-lg w-1/2 mx-auto flex items-center mt-6 ${isStepSelected(19) ? 'bg-green-500 outline outline-2 outline-green-500' : 'bg-yellow'}`} onClick={() => handleClick(19)}>
+      <div className={`text-gray-300 rounded-lg w-1/2 mx-auto flex items-center mt-6 ${isStepSelected(19) ? 'bg-green-500 outline outline-2 outline-green-500' : 'bg-yellow'}`} onClick={() => handleClick(19)}>
         <span className="text-xl font-bold text-center text-gray-800 flex items-center justify-center rounded-l-lg w-14">1</span>
         <h2 className="bg-secondary text-xl font-bold text-center flex-1 p-5 h-full rounded-r-lg">Accéder aux Dwarven Mines</h2>
       </div>
@@ -312,7 +312,7 @@ const ProgressionRender: FC<RenderProps> = ({ profileData }) => {
         </div>
       </div>
 
-      <div className={`bg-yellow text-gray-300 rounded-lg w-1/2 mx-auto flex items-center mt-6 ${isStepSelected(36) ? 'bg-green-500 outline outline-2 outline-green-500' : 'bg-yellow'}`} onClick={() => handleClick(36)}>
+      <div className={`text-gray-300 rounded-lg w-1/2 mx-auto flex items-center mt-6 ${isStepSelected(36) ? 'bg-green-500 outline outline-2 outline-green-500' : 'bg-yellow'}`} onClick={() => handleClick(36)}>
         <span className="text-xl font-bold text-center text-gray-800 flex items-center justify-center rounded-l-lg w-14">1</span>
         <h2 className="bg-secondary text-xl font-bold text-center flex-1 p-5 h-full rounded-r-lg">Acheter la <a href="https://wiki.hypixel.net/Mineral_Armor" className="text-rarityepic underline underline-offset-4" target="_blank" rel="noopener noreferrer">MINERAL ARMOR</a></h2>
       </div>
@@ -362,7 +362,7 @@ const ProgressionRender: FC<RenderProps> = ({ profileData }) => {
         </div>
       </div>
 
-      <div className={`bg-yellow text-gray-300 rounded-lg w-1/2 mx-auto flex items-center mt-6 ${isStepSelected(41) ? 'bg-green-500 outline outline-2 outline-green-500' : 'bg-yellow'}`} onClick={() => handleClick(41)}>
+      <div className={`text-gray-300 rounded-lg w-1/2 mx-auto flex items-center mt-6 ${isStepSelected(41) ? 'bg-green-500 outline outline-2 outline-green-500' : 'bg-yellow'}`} onClick={() => handleClick(41)}>
         <span className="text-xl font-bold text-center text-gray-800 flex items-center justify-center rounded-l-lg w-14">1</span>
         <h2 className="bg-secondary text-xl font-bold text-center flex-1 p-5 h-full rounded-r-lg">Pensez à acheter des Powder Pumpkin a Brynmor (32 202 -154.5) dans la taverne des Dwarven Mine</h2>
       </div>
