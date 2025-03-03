@@ -7,8 +7,8 @@ const Sidebar: React.FC<NavbarProps> = ({activeSection, setActiveSection, pseudo
   return (
     <div className="fixed left-4 top-4 w-60 h-[calc(100vh-2rem)] bg-sidebar text-white flex flex-col py-4 rounded-3xl shadow-lg">
       <h2 className="text-2xl font-bold text-center text-yellow mb-4">SkyOptimizer</h2>
-      <h2 className="text-xl font-bold text-center mb-1">[{level}] {pseudo}</h2>
-      <h2 className="text-sm font-bold text-center text-gray-400 mb-4">{profile}</h2>
+      <h2 className="text-xl font-bold text-center mb-0.5">[{level}] {pseudo}</h2>
+      <h2 className="text-sm font-bold text-center text-gray-400 mb-3">{profile}</h2>
       <div className="flex flex-col gap-2 m-3">
         <button onClick={() => setActiveSection(Section.Home)} className={`px-4 py-1.5 rounded font-bold text-gray-200 ${activeSection === Section.Home ? "bg-yellow hover:bg-darkyellow" : "bg-sidebarlight hover:bg-primary"}`}>
           Home
@@ -23,7 +23,7 @@ const Sidebar: React.FC<NavbarProps> = ({activeSection, setActiveSection, pseudo
           Minions
         </button>
 
-        <button onClick={() => setActiveSection(Section.Farming)} className={`mt-5 px-4 py-1.5 rounded font-bold text-gray-200 ${activeSection === Section.Farming ? "bg-yellow hover:bg-darkyellow" : "bg-sidebarlight hover:bg-primary"}`}>
+        <button onClick={() => setActiveSection(Section.Farming)} className={`mt-3 px-4 py-1.5 rounded font-bold text-gray-200 ${activeSection === Section.Farming ? "bg-yellow hover:bg-darkyellow" : "bg-sidebarlight hover:bg-primary"}`}>
           Farming
         </button>
         <button onClick={() => setActiveSection(Section.Fishing)} className={`px-4 py-1.5 rounded font-bold text-gray-200 ${activeSection === Section.Fishing ? "bg-yellow hover:bg-darkyellow" : "bg-sidebarlight hover:bg-primary"}`}>
@@ -36,7 +36,7 @@ const Sidebar: React.FC<NavbarProps> = ({activeSection, setActiveSection, pseudo
           Foraging
         </button>
 
-        <button onClick={() => setActiveSection(Section.Mage)} className={`mt-5 px-4 py-1.5 rounded font-bold text-gray-200 ${activeSection === Section.Mage ? "bg-yellow hover:bg-darkyellow" : "bg-sidebarlight hover:bg-primary"}`}>
+        <button onClick={() => setActiveSection(Section.Mage)} className={`mt-3 px-4 py-1.5 rounded font-bold text-gray-200 ${activeSection === Section.Mage ? "bg-yellow hover:bg-darkyellow" : "bg-sidebarlight hover:bg-primary"}`}>
           Mage
         </button>
         <button onClick={() => setActiveSection(Section.Archer)} className={`px-4 py-1.5 rounded font-bold text-gray-200 ${activeSection === Section.Archer ? "bg-yellow hover:bg-darkyellow" : "bg-sidebarlight hover:bg-primary"}`}>
