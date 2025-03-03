@@ -59,7 +59,7 @@ const Sidebar: React.FC<NavbarProps> = ({activeSection, setActiveSection, pseudo
         </button>
       </div>
       <div className="text-center text-gray-500 text-sm">
-        for Skyblock 20.6
+        for Skyblock 21.3
       </div>
     </div>
   );
