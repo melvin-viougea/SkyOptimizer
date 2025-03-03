@@ -63,10 +63,12 @@ export default function Home() {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen gap-8 bg">
+    <div className="flex flex-col items-center justify-center min-h-screen gap-8">
+      <h1 className="absolute top-32 text-9xl font-extrabold text-gray-200 text-center">
+        SkyOptimizer
+      </h1>
       <div className="py-10 px-40 rounded-3xl bg-primary text-gray-200">
-        <div className="flex flex-col items-center gap-8   w-full max-w-md">
-          <h1 className="text-4xl font-bold text-center">Show Optimizations For</h1>
+        <div className="flex flex-col items-center gap-8 w-80 max-w-md">
           <input
             id="search-input"
             type="text"
@@ -85,6 +87,20 @@ export default function Home() {
 
           {error && <p className="text-red-500 text-center">{error.message}</p>}
         </div>
+      </div>
+
+      <div className="fixed bottom-0 left-0 w-full bg-yellow text-gray-800 text-center py-2 px-6 flex items-center justify-center gap-4 shadow-lg rounded-lg">
+        <p className="text-sm md:text-base">
+          Enjoying SkyOptimizer? Support us on <span className="font-bold text-yellow-400">Patreon</span>!
+        </p>
+        <a
+          href="https://www.patreon.com/SkyOptimizerteam"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="bg-primary text-yellow font-bold px-4 py-2 rounded-lg hover:bg-secondary transition"
+        >
+          Support Us
+        </a>
       </div>
     </div>
   );

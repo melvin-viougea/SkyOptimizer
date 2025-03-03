@@ -52,7 +52,8 @@ const Sidebar: React.FC<NavbarProps> = ({activeSection, setActiveSection, pseudo
           Healer
         </button>
       </div>
-      <div className="mt-auto text-center text-gray-500">
+      <a href="https://www.patreon.com/SkyOptimizerteam" target="_blank" rel="noopener noreferrer" className="mt-auto mx-auto text-center w-5/12 bg-sidebar border border-1 border-gray-200 rounded-full hover:bg-secondary transition">Patreon</a>
+      <div className="mt-3 mb-0.5 text-center text-gray-500">
         <button onClick={() => setActiveSection(Section.RealseNote)} className={`px-2 mb-1 rounded font-bold text-gray-200 ${activeSection === Section.RealseNote ? "bg-yellow hover:bg-darkyellow" : "bg-sidebarlight hover:bg-primary"}`}>
           v1.0
         </button>
