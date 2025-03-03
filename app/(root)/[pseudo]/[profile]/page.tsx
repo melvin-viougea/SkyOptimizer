@@ -234,6 +234,19 @@ export default function ProfilePage() {
 
         {/* Pourcentage */}
         <h1 className="text-4xl font-bold text-gray-200 text-center pt-6">{percentage}%</h1>
+        <div className="fixed bottom-0 left-0 w-full bg-yellow text-gray-800 text-center py-2 px-6 flex items-center justify-center gap-4 shadow-lg rounded-lg">
+          <p className="text-sm md:text-base">
+            Enjoying SkyOptimizer? Support us on <span className="font-bold text-yellow-400">Patreon</span>!
+          </p>
+          <a
+            href="https://www.patreon.com/SkyOptimizerteam"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="bg-primary text-yellow font-bold px-4 py-2 rounded-lg hover:bg-secondary transition"
+          >
+            Support Us
+          </a>
+        </div>
       </div>
     );
   }
