@@ -20,8 +20,10 @@ import {fetchHypixelAuction, fetchHypixelProfiles, fetchMojangData, fetchSkills}
 import {calculateNetworth, fetchAllItemsWithPrice, getSkillLevel} from "@/lib/function";
 import Sidebar from "@/components/Sidebar";
 import ReleaseNoteRender from "@/components/render/ReleaseNoteRender";
+import {useLocalStoragePermission} from "@/lib/useLocalStoragePermission";
 
 export default function ProfilePage() {
+  const {isAllowed, allowStorage, denyStorage} = useLocalStoragePermission();
   const {pseudo} = useParams();
   const normalizedPseudo = Array.isArray(pseudo) ? pseudo[0] : pseudo;
   const [loading, setLoading] = useState(true);
@@ -283,9 +285,24 @@ export default function ProfilePage() {
   }
 
   return (
-    <div className="flex">
-      <Sidebar activeSection={activeSection} setActiveSection={setActiveSection} pseudo={profileData.pseudo} level={profileData.playerLevel} profile={profileData.profile}/>
-      <div className="ml-64 flex-1">{renderSection()}</div>
+    <div className="relative">
+      <div className={isAllowed === null ? "blur-sm opacity-50 pointer-events-none" : ""}>
+        <Sidebar activeSection={activeSection} setActiveSection={setActiveSection} pseudo={profileData.pseudo} level={profileData.playerLevel} profile={profileData.profile}/>
+        <div className="ml-64 flex-1">{renderSection()}</div>
+      </div>
+
+      {isAllowed === null && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+          <div className="bg-primary text-gray-200 p-6 rounded-lg shadow-lg">
+            <h2 className="text-xl font-bold mb-4">Autorisation requise</h2>
+            <p className="mb-4">Acceptez-vous l'utilisation de cookie pour sauvegarder votre progression ?</p>
+            <div className="flex justify-end gap-4">
+              <button onClick={denyStorage} className="px-4 py-2 bg-red-500 text-white rounded-md">Refuser</button>
+              <button onClick={allowStorage} className="px-4 py-2 bg-green-500 text-white rounded-md">Accepter</button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

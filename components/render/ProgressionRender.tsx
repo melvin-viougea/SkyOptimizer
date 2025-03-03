@@ -1,28 +1,32 @@
 import React, { FC, useState, useEffect } from "react";
+import { useLocalStoragePermission } from "@/lib/useLocalStoragePermission";
 import Image from "next/image";
 
 const ProgressionRender: FC<RenderProps> = ({ profileData }) => {
   if (!profileData) return null;
 
-  const getStoredSteps = () => {
-    const storedSteps = localStorage.getItem('selectedSteps');
-    return storedSteps ? JSON.parse(storedSteps) : [];
-  };
-
-  const [selectedSteps, setSelectedSteps] = useState<number[]>(getStoredSteps);
+  const { isAllowed } = useLocalStoragePermission();
+  const [selectedSteps, setSelectedSteps] = useState<number[]>([]);
 
   useEffect(() => {
-    localStorage.setItem('selectedSteps', JSON.stringify(selectedSteps));
-  }, [selectedSteps]);
+    if (isAllowed) {
+      const storedSteps = localStorage.getItem("selectedSteps");
+      setSelectedSteps(storedSteps ? JSON.parse(storedSteps) : []);
+    }
+  }, [isAllowed]);
+
+  useEffect(() => {
+    if (isAllowed) {
+      localStorage.setItem("selectedSteps", JSON.stringify(selectedSteps));
+    }
+  }, [selectedSteps, isAllowed]);
 
   const handleClick = (stepNumber: number) => {
-    setSelectedSteps(prevSteps => {
-      if (prevSteps.includes(stepNumber)) {
-        return prevSteps.filter(step => step !== stepNumber);
-      } else {
-        return [...prevSteps, stepNumber];
-      }
-    });
+    setSelectedSteps((prevSteps) =>
+      prevSteps.includes(stepNumber)
+        ? prevSteps.filter((step) => step !== stepNumber)
+        : [...prevSteps, stepNumber]
+    );
   };
 
   const isStepSelected = (stepNumber: number) => selectedSteps.includes(stepNumber);
