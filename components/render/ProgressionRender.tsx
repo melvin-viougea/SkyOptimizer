@@ -479,10 +479,14 @@ const ProgressionRender: FC<RenderProps> = ({ profileData }) => {
         <h2 className="bg-secondary text-xl font-bold text-center flex-1 p-5 h-full rounded-r-lg">Aller au Mine au Divan dans le Mithril Deposite</h2>
       </div>
 
+      <div className="w-1 bg-gray-400 h-10 mx-auto"></div>
+
       <div className={`text-gray-300 rounded-lg w-1/2 mx-auto flex items-center ${isStepSelected(55) ? 'bg-green-500 outline outline-2 outline-green-500' : 'bg-yellow'}`} onClick={() => handleClick(55)}>
         <span className="text-xl font-bold text-center text-gray-800 flex items-center justify-center rounded-l-lg w-14">2</span>
         <h2 className="bg-secondary text-xl font-bold text-center flex-1 p-5 h-full rounded-r-lg">Les fillons sont au plafond, se faire une plateforme en cobble en dessous de l'un des gros spot</h2>
       </div>
+
+      <div className="w-1 bg-gray-400 h-10 mx-auto"></div>
 
       <div className={`text-gray-300 rounded-lg w-1/2 mx-auto flex items-center ${isStepSelected(56) ? 'bg-green-500 outline outline-2 outline-green-500' : 'bg-yellow'}`} onClick={() => handleClick(56)}>
         <span className="text-xl font-bold text-center text-gray-800 flex items-center justify-center rounded-l-lg w-14">3</span>
