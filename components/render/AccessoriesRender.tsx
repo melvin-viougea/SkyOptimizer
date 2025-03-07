@@ -1,14 +1,16 @@
 import React, {FC} from "react";
 import {formatToPrice} from "@/lib/function";
+import {useLanguage} from "@/context/LanguageProvider";
 
 const AccessoriesRender: FC<RenderProps> = ({profileData}) => {
   if (!profileData) return null;
+  const { language } = useLanguage();
 
   return (
     <div>
       <div className="rounded-3xl bg-primary text-gray-200 p-8 m-5 shadow-lg">
         <h1 className="text-3xl font-extrabold underline decoration-wavy decoration-yellow decoration-4 underline-offset-8 mb-8">
-          Accessories Optimizer :
+          {language === 'en' ? 'Accessories Optimizer :' : 'Accessoires Optimizer :'}
         </h1>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
           {profileData.playerAccessories.map((accessory, index) => (
