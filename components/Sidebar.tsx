@@ -22,17 +22,17 @@ const Sidebar: React.FC<NavbarProps> = ({ activeSection, setActiveSection, pseud
           {language === 'en' ? 'Home' : 'Accueil'}
         </button>
         <button onClick={() => setActiveSection(Section.Progression)} className={`px-4 py-1.5 rounded font-bold text-gray-200 ${activeSection === Section.Progression ? "bg-yellow hover:bg-darkyellow" : "bg-sidebarlight hover:bg-primary"}`}>
-          {language === 'en' ? 'Progression' : 'Progression'}
+          Progression
         </button>
         <button onClick={() => setActiveSection(Section.Accessories)} className={`px-4 py-1.5 rounded font-bold text-gray-200 ${activeSection === Section.Accessories ? "bg-yellow hover:bg-darkyellow" : "bg-sidebarlight hover:bg-primary"}`}>
           {language === 'en' ? 'Accessories' : 'Accessoires'}
         </button>
         <button onClick={() => setActiveSection(Section.Minions)} className={`px-4 py-1.5 rounded font-bold text-gray-200 ${activeSection === Section.Minions ? "bg-yellow hover:bg-darkyellow" : "bg-sidebarlight hover:bg-primary"}`}>
-          {language === 'en' ? 'Minions' : 'Minions'}
+          Minions
         </button>
 
         <button onClick={() => setActiveSection(Section.Farming)} className={`mt-3 px-4 py-1.5 rounded font-bold text-gray-200 ${activeSection === Section.Farming ? "bg-yellow hover:bg-darkyellow" : "bg-sidebarlight hover:bg-primary"}`}>
-          {language === 'en' ? 'Farming' : 'Agriculture'}
+          Farming
         </button>
         <button onClick={() => setActiveSection(Section.Fishing)} className={`px-4 py-1.5 rounded font-bold text-gray-200 ${activeSection === Section.Fishing ? "bg-yellow hover:bg-darkyellow" : "bg-sidebarlight hover:bg-primary"}`}>
           {language === 'en' ? 'Fishing' : 'Pêche'}
@@ -41,23 +41,23 @@ const Sidebar: React.FC<NavbarProps> = ({ activeSection, setActiveSection, pseud
           {language === 'en' ? 'Mining' : 'Minage'}
         </button>
         <button onClick={() => setActiveSection(Section.Foraging)} className={`px-4 py-1.5 rounded font-bold text-gray-200 ${activeSection === Section.Foraging ? "bg-yellow hover:bg-darkyellow" : "bg-sidebarlight hover:bg-primary"}`}>
-          {language === 'en' ? 'Foraging' : 'Collecte'}
+          Foraging
         </button>
 
         <button onClick={() => setActiveSection(Section.Mage)} className={`mt-3 px-4 py-1.5 rounded font-bold text-gray-200 ${activeSection === Section.Mage ? "bg-yellow hover:bg-darkyellow" : "bg-sidebarlight hover:bg-primary"}`}>
-          {language === 'en' ? 'Mage' : 'Mage'}
+          Mage
         </button>
         <button onClick={() => setActiveSection(Section.Archer)} className={`px-4 py-1.5 rounded font-bold text-gray-200 ${activeSection === Section.Archer ? "bg-yellow hover:bg-darkyellow" : "bg-sidebarlight hover:bg-primary"}`}>
-          {language === 'en' ? 'Archer' : 'Archer'}
+          Archer
         </button>
         <button onClick={() => setActiveSection(Section.Berserk)} className={`px-4 py-1.5 rounded font-bold text-gray-200 ${activeSection === Section.Berserk ? "bg-yellow hover:bg-darkyellow" : "bg-sidebarlight hover:bg-primary"}`}>
-          {language === 'en' ? 'Berserk' : 'Berserk'}
+          Berserk
         </button>
         <button onClick={() => setActiveSection(Section.Tank)} className={`px-4 py-1.5 rounded font-bold text-gray-200 ${activeSection === Section.Tank ? "bg-yellow hover:bg-darkyellow" : "bg-sidebarlight hover:bg-primary"}`}>
-          {language === 'en' ? 'Tank' : 'Tank'}
+          Tank
         </button>
         <button onClick={() => setActiveSection(Section.Healer)} className={`px-4 py-1.5 rounded font-bold text-gray-200 ${activeSection === Section.Healer ? "bg-yellow hover:bg-darkyellow" : "bg-sidebarlight hover:bg-primary"}`}>
-          {language === 'en' ? 'Healer' : 'Soigneur'}
+          Healer
         </button>
       </div>
 
