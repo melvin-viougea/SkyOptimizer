@@ -54,7 +54,7 @@ const EarlyProgressionRender: FC<RenderProps> = ({ profileData }) => {
       <div className={`text-gray-300 rounded-lg w-1/2 mx-auto flex items-center ${isStepSelected(2) ? 'bg-green-500 outline outline-2 outline-green-500' : 'bg-yellow'}`} onClick={() => handleClick(2)}>
         <span className="text-xl font-bold text-center text-gray-800 flex items-center justify-center rounded-l-lg w-14">2</span>
         <h2 className="bg-secondary text-xl font-bold text-center flex-1 p-5 h-full rounded-r-lg">
-          {language === 'en' ? 'Complete the island quests' : 'Faire les quêtes des 12 PNJ et récupérer la'} <a href="https://wiki.hypixel.net/Rogue_Sword" className="text-raritycommon underline underline-offset-4" target="_blank" rel="noopener noreferrer">ROGUE SWORD</a>
+          {language === 'en' ? 'Complete the island quests' : 'Faire les quêtes des 12 PNJ et récupérer la'} <a href="https://wiki.hypixel.net/Rogue_Sword" className="text-raritycommon underline underline-offset-4" target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()}>ROGUE SWORD</a>
         </h2>
       </div>
 
@@ -73,12 +73,12 @@ const EarlyProgressionRender: FC<RenderProps> = ({ profileData }) => {
         <span className="text-xl font-bold text-center text-gray-800 flex items-center justify-center rounded-l-lg w-14">4</span>
         <h2 className="bg-secondary text-xl font-bold text-center flex-1 p-5 h-full rounded-r-lg">
           {language === 'en' ? 'Retrieve the ' : 'Récupérer le '}
-          <a href="https://wiki.hypixel.net/Hunter_Knife" className="text-rarityuncommon underline underline-offset-4" target="_blank" rel="noopener noreferrer">HUNTER KNIFE</a>,
+          <a href="https://wiki.hypixel.net/Hunter_Knife" className="text-rarityuncommon underline underline-offset-4" target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()}>HUNTER KNIFE</a>,
           {' '}
-          <a href="https://wiki.hypixel.net/Campfire_Badge" className="text-raritycommon underline underline-offset-4" target="_blank" rel="noopener noreferrer">CAMPFIRE BADGE</a>,
+          <a href="https://wiki.hypixel.net/Campfire_Badge" className="text-raritycommon underline underline-offset-4" target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()}>CAMPFIRE BADGE</a>,
           {' '}
           {language === 'en' ? 'the harp and collection to unlock the ' : 'la harpe et la collection pour débloquer la '}
-          <a href="https://wiki.hypixel.net/Jungle_Axe" className="text-rarityuncommon underline underline-offset-4" target="_blank" rel="noopener noreferrer">JUNGLE AXE</a>
+          <a href="https://wiki.hypixel.net/Jungle_Axe" className="text-rarityuncommon underline underline-offset-4" target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()}>JUNGLE AXE</a>
         </h2>
       </div>
 
@@ -124,7 +124,7 @@ const EarlyProgressionRender: FC<RenderProps> = ({ profileData }) => {
         <span className="text-xl font-bold text-center text-gray-800 flex items-center justify-center rounded-l-lg w-14">9</span>
         <h2 className="bg-secondary text-xl font-bold text-center flex-1 p-5 h-full rounded-r-lg">
           {language === 'en' ? 'Go to get the ' : 'Aller chercher la '}
-          <a href="https://wiki.hypixel.net/Squire_Armor" className="text-rarityuncommon underline underline-offset-4" target="_blank" rel="noopener noreferrer">SQUIRE ARMOR</a>
+          <a href="https://wiki.hypixel.net/Squire_Armor" className="text-rarityuncommon underline underline-offset-4" target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()}>SQUIRE ARMOR</a>
           {language === 'en' ? ' at Rosetta (-12 68 -141) in the Hub' : ' à Rosetta (-12 68 -141) dans le Hub'}
         </h2>
       </div>
@@ -189,7 +189,7 @@ const EarlyProgressionRender: FC<RenderProps> = ({ profileData }) => {
         <span className="text-xl font-bold text-center text-gray-800 flex items-center justify-center rounded-l-lg w-14">16</span>
         <h2 className="bg-secondary text-xl font-bold text-center flex-1 p-5 h-full rounded-r-lg">
           {language === 'en' ? 'Go to get the ' : 'Aller chercher la '}
-          <a href="https://wiki.hypixel.net/Promising_Shovel" className="text-rarityuncommon underline underline-offset-4" target="_blank" rel="noopener noreferrer">PROMISING SHOVEL</a>
+          <a href="https://wiki.hypixel.net/Promising_Shovel" className="text-rarityuncommon underline underline-offset-4" target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()}>PROMISING SHOVEL</a>
           {language === 'en' ? ' at Rick (-251 70 -325) in the Spider\'s Den' : ' à Rick (-251 70 -325) dans le Spider\'s Den'}
         </h2>
       </div>
@@ -248,7 +248,7 @@ const EarlyProgressionRender: FC<RenderProps> = ({ profileData }) => {
           {language === 'en' ?
             'Buy from Bubu (-10 201 -103) in Dwarven Mines the ' :
             'Acheter à Bubu (-10 201 -103) dans les Dwarven Mines la '}
-          <a href="https://wiki.hypixel.net/Fractured_Mithril_Pickaxe" className="text-rarityuncommon underline underline-offset-4" target="_blank" rel="noopener noreferrer">FRACTURED MITHRIL PICKAXE</a>
+          <a href="https://wiki.hypixel.net/Fractured_Mithril_Pickaxe" className="text-rarityuncommon underline underline-offset-4" target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()}>FRACTURED MITHRIL PICKAXE</a>
         </h2>
       </div>
 
@@ -261,7 +261,7 @@ const EarlyProgressionRender: FC<RenderProps> = ({ profileData }) => {
           {language === 'en' ?
             'Go kill Glacite Walkers at the Great Ice Wall (0 128 150) to get the ' :
             'Aller tuer des Glacite Walkers au Great Ice Wall (0 128 150) pour récupérer la '}
-          <a href="https://hypixel-skyblock.fandom.com/wiki/Glacite_Armor" className="text-rarityepic underline underline-offset-4" target="_blank" rel="noopener noreferrer">GLACITE ARMOR</a>
+          <a href="https://hypixel-skyblock.fandom.com/wiki/Glacite_Armor" className="text-rarityepic underline underline-offset-4" target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()}>GLACITE ARMOR</a>
         </h2>
       </div>
 
@@ -304,7 +304,7 @@ const EarlyProgressionRender: FC<RenderProps> = ({ profileData }) => {
           {language === 'en' ?
             'Farm Glacite Jewels until you can buy the ' :
             'Farmer les Glacite Jewels jusqu\'à pouvoir acheter le '}
-          <a href="https://wiki.hypixel.net/Mithril_Golem_Pet" className="text-raritylegendary underline underline-offset-4" target="_blank" rel="noopener noreferrer">MITHRIL GOLEM</a>
+          <a href="https://wiki.hypixel.net/Mithril_Golem_Pet" className="text-raritylegendary underline underline-offset-4" target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()}>MITHRIL GOLEM</a>
         </h2>
       </div>
 
@@ -316,7 +316,7 @@ const EarlyProgressionRender: FC<RenderProps> = ({ profileData }) => {
           {language === 'en' ?
             'Buy/craft the ' :
             'Acheter/forger les '}
-          <a href="https://wiki.hypixel.net/Mithril_Equipment" className="text-rarityuncommon underline underline-offset-4" target="_blank" rel="noopener noreferrer">MITHRIL EQUIPMENT</a>
+          <a href="https://wiki.hypixel.net/Mithril_Equipment" className="text-rarityuncommon underline underline-offset-4" target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()}>MITHRIL EQUIPMENT</a>
         </h2>
       </div>
 
@@ -339,7 +339,7 @@ const EarlyProgressionRender: FC<RenderProps> = ({ profileData }) => {
           {language === 'en' ?
             'Buy the ' :
             'Acheter la '}
-          <a href="https://wiki.hypixel.net/Sorrow_Armor" className="text-raritylegendary underline underline-offset-4" target="_blank" rel="noopener noreferrer">SORROW ARMOR</a>
+          <a href="https://wiki.hypixel.net/Sorrow_Armor" className="text-raritylegendary underline underline-offset-4" target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()}>SORROW ARMOR</a>
         </h2>
       </div>
 
@@ -351,7 +351,7 @@ const EarlyProgressionRender: FC<RenderProps> = ({ profileData }) => {
           {language === 'en' ?
             'Buy/craft the ' :
             'Acheter/forger les '}
-          <a href="https://wiki.hypixel.net/Titanium_Equipment" className="text-rarityrare underline underline-offset-4" target="_blank" rel="noopener noreferrer">TITANIUM EQUIPMENT</a>
+          <a href="https://wiki.hypixel.net/Titanium_Equipment" className="text-rarityrare underline underline-offset-4" target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()}>TITANIUM EQUIPMENT</a>
         </h2>
       </div>
 
@@ -378,7 +378,7 @@ const EarlyProgressionRender: FC<RenderProps> = ({ profileData }) => {
           {language === 'en' ?
             'Buy/craft the ' :
             'Acheter/forger la '}
-          <a href="https://wiki.hypixel.net/Mithril_Drill_SX-R326" className="text-rarityrare underline underline-offset-4" target="_blank" rel="noopener noreferrer">
+          <a href="https://wiki.hypixel.net/Mithril_Drill_SX-R326" className="text-rarityrare underline underline-offset-4" target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()}>
             MITHRIL DRILL SX-R326
           </a>
           {language === 'en' ?
@@ -395,7 +395,7 @@ const EarlyProgressionRender: FC<RenderProps> = ({ profileData }) => {
           {language === 'en' ?
             'Buy/craft the ' :
             'Acheter/forger la '}
-          <a href="https://wiki.hypixel.net/Spicy_Goblin_Omelette" className="text-rarityrare underline underline-offset-4" target="_blank" rel="noopener noreferrer">
+          <a href="https://wiki.hypixel.net/Spicy_Goblin_Omelette" className="text-rarityrare underline underline-offset-4" target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()}>
             SPICY GOBLIN OMELETTE
           </a>
           {language === 'en' ?
@@ -412,7 +412,7 @@ const EarlyProgressionRender: FC<RenderProps> = ({ profileData }) => {
           {language === 'en' ?
             'Buy/craft the ' :
             'Acheter/forger le '}
-          <a href="https://wiki.hypixel.net/Mithril-Infused_Fuel_Tank" className="text-rarityrare underline underline-offset-4" target="_blank" rel="noopener noreferrer">
+          <a href="https://wiki.hypixel.net/Mithril-Infused_Fuel_Tank" className="text-rarityrare underline underline-offset-4" target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()}>
             MITHRIL-INFUSED FUEL TANK
           </a>
           {language === 'en' ?
@@ -429,7 +429,7 @@ const EarlyProgressionRender: FC<RenderProps> = ({ profileData }) => {
           {language === 'en' ?
             'Buy/craft the ' :
             'Acheter/forger le '}
-          <a href="https://wiki.hypixel.net/Mithril-Plated_Drill_Engine" className="text-rarityrare underline underline-offset-4" target="_blank" rel="noopener noreferrer">
+          <a href="https://wiki.hypixel.net/Mithril-Plated_Drill_Engine" className="text-rarityrare underline underline-offset-4" target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()}>
             MITHRIL-PLATED DRILL ENGINE
           </a>
           {language === 'en' ?
@@ -476,7 +476,7 @@ const EarlyProgressionRender: FC<RenderProps> = ({ profileData }) => {
           {language === 'en' ?
             'Buy the ' :
             'Acheter la '}
-          <a href="https://wiki.hypixel.net/Mineral_Armor" className="text-rarityepic underline underline-offset-4" target="_blank" rel="noopener noreferrer">MINERAL ARMOR</a>
+          <a href="https://wiki.hypixel.net/Mineral_Armor" className="text-rarityepic underline underline-offset-4" target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()}>MINERAL ARMOR</a>
         </h2>
       </div>
 
@@ -488,7 +488,7 @@ const EarlyProgressionRender: FC<RenderProps> = ({ profileData }) => {
           {language === 'en' ?
             'Buy an ' :
             'Acheter un '}
-          <a href="https://wiki.hypixel.net/Armadillo_Pet" className="text-raritylegendary underline underline-offset-4" target="_blank" rel="noopener noreferrer">ARMADILLO</a>
+          <a href="https://wiki.hypixel.net/Armadillo_Pet" className="text-raritylegendary underline underline-offset-4" target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()}>ARMADILLO</a>
         </h2>
       </div>
 
@@ -499,7 +499,7 @@ const EarlyProgressionRender: FC<RenderProps> = ({ profileData }) => {
         {language === 'en' ?
           'As soon as possible, buy/forge a ' :
           'Dès que possible, acheter/forger une '}
-        <a href="https://wiki.hypixel.net/Jasper_Drill_X" className="text-rarityepic underline underline-offset-4" target="_blank" rel="noopener noreferrer">JASPER DRILL X</a>
+        <a href="https://wiki.hypixel.net/Jasper_Drill_X" className="text-rarityepic underline underline-offset-4" target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()}>JASPER DRILL X</a>
         {language === 'en' ?
           ' and put the Drill Parts previously bought into it.' :
           ' et y mettre les Drill Parts achetés précédemment'}
@@ -602,7 +602,7 @@ const EarlyProgressionRender: FC<RenderProps> = ({ profileData }) => {
           {language === 'en' ?
             'Gradually buy/forge the ' :
             'Acheter/forger progressivement la '}
-          <a href="https://wiki.hypixel.net/Armor_Of_Divan" className="text-raritylegendary underline underline-offset-4" target="_blank" rel="noopener noreferrer">ARMOR OF DIVAN</a>
+          <a href="https://wiki.hypixel.net/Armor_Of_Divan" className="text-raritylegendary underline underline-offset-4" target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()}>ARMOR OF DIVAN</a>
           {language === 'en' ?
             ' and equip it the same way as the Sorrow Armor.' :
             ' en la mettant pareil que la Sorrow Armor'}
@@ -657,36 +657,36 @@ const EarlyProgressionRender: FC<RenderProps> = ({ profileData }) => {
 
       <div className={`text-gray-300 rounded-lg w-1/2 mx-auto flex items-center ${isStepSelected(49) ? 'bg-green-500 outline outline-2 outline-green-500' : 'bg-yellow'}`} onClick={() => handleClick(49)}>
         <span className="text-xl font-bold text-center text-gray-800 flex items-center justify-center rounded-l-lg w-14">1</span>
-        <h2 className="bg-secondary text-xl font-bold text-center flex-1 p-5 h-full rounded-r-lg">{language === 'en' ? 'Armor' : 'Armure'} : <a href="https://wiki.hypixel.net/Armor_Of_Divan" className="text-raritylegendary underline underline-offset-4" target="_blank" rel="noopener noreferrer">ARMOR OF DIVAN</a> jaded - recomb - full perfect - {language === 'en' ? 'optional upgrade' : 'amélioration non obligatoire'} : wisdom</h2>
+        <h2 className="bg-secondary text-xl font-bold text-center flex-1 p-5 h-full rounded-r-lg">{language === 'en' ? 'Armor' : 'Armure'} : <a href="https://wiki.hypixel.net/Armor_Of_Divan" className="text-raritylegendary underline underline-offset-4" target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()}>ARMOR OF DIVAN</a> jaded - recomb - full perfect - {language === 'en' ? 'optional upgrade' : 'amélioration non obligatoire'} : wisdom</h2>
       </div>
 
       <div className="w-1 bg-gray-400 h-10 mx-auto"></div>
 
       <div className={`text-gray-300 rounded-lg w-1/2 mx-auto flex items-center ${isStepSelected(50) ? 'bg-green-500 outline outline-2 outline-green-500' : 'bg-yellow'}`} onClick={() => handleClick(50)}>
         <span className="text-xl font-bold text-center text-gray-800 flex items-center justify-center rounded-l-lg w-14">2</span>
-        <h2 className="bg-secondary text-xl font-bold text-center flex-1 p-5 h-full rounded-r-lg">Drill : <a href="https://wiki.hypixel.net/Titanium_Drill_DR-X655" className="text-raritylegendary underline underline-offset-4" target="_blank" rel="noopener noreferrer">TITANIUM DRILL DR-X655</a> : Ruby-Polished Drill Engine ou Divan's Powder Coating - Prismatic Enchant - {language === 'en' ? 'optional upgrade' : 'amélioration non obligatoire'} : recomb - full perfect - 5 silex - compact - reforge Lustrous {'>'} Auspicious - Blue Cheese Goblin Omelette - un Fuel Tank</h2>
+        <h2 className="bg-secondary text-xl font-bold text-center flex-1 p-5 h-full rounded-r-lg">Drill : <a href="https://wiki.hypixel.net/Titanium_Drill_DR-X655" className="text-raritylegendary underline underline-offset-4" target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()}>TITANIUM DRILL DR-X655</a> : Ruby-Polished Drill Engine ou Divan's Powder Coating - Prismatic Enchant - {language === 'en' ? 'optional upgrade' : 'amélioration non obligatoire'} : recomb - full perfect - 5 silex - compact - reforge Lustrous {'>'} Auspicious - Blue Cheese Goblin Omelette - un Fuel Tank</h2>
       </div>
 
       <div className="w-1 bg-gray-400 h-10 mx-auto"></div>
 
       <div className={`text-gray-300 rounded-lg w-1/2 mx-auto flex items-center ${isStepSelected(51) ? 'bg-green-500 outline outline-2 outline-green-500' : 'bg-yellow'}`} onClick={() => handleClick(51)}>
         <span className="text-xl font-bold text-center text-gray-800 flex items-center justify-center rounded-l-lg w-14">3</span>
-        <h2 className="bg-secondary text-xl font-bold text-center flex-1 p-5 h-full rounded-r-lg">{language === 'en' ? 'Equipment' : 'Equipement'} : <a href="https://wiki.hypixel.net/Titanium_Equipment" className="text-rarityrare underline underline-offset-4" target="_blank" rel="noopener noreferrer">TITANIUM EQUIPMENT</a> - {language === 'en' ? 'optional upgrade' : 'amélioration non obligatoire'} : <a href="https://wiki.hypixel.net/Dwarven_Handwarmers" className="text-rarityepic underline underline-offset-4" target="_blank" rel="noopener noreferrer">DWARVEN HANDWARMERS</a> / <a href="https://wiki.hypixel.net/Gemstone_Equipment" className="text-rarityepic underline underline-offset-4" target="_blank" rel="noopener noreferrer">GEMSTONE EQUIPMENT</a> {language === 'en' ? 'of the mined gemstone' : 'de la gemstone minée'}</h2>
+        <h2 className="bg-secondary text-xl font-bold text-center flex-1 p-5 h-full rounded-r-lg">{language === 'en' ? 'Equipment' : 'Equipement'} : <a href="https://wiki.hypixel.net/Titanium_Equipment" className="text-rarityrare underline underline-offset-4" target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()}>TITANIUM EQUIPMENT</a> - {language === 'en' ? 'optional upgrade' : 'amélioration non obligatoire'} : <a href="https://wiki.hypixel.net/Dwarven_Handwarmers" className="text-rarityepic underline underline-offset-4" target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()}>DWARVEN HANDWARMERS</a> / <a href="https://wiki.hypixel.net/Gemstone_Equipment" className="text-rarityepic underline underline-offset-4" target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()}>GEMSTONE EQUIPMENT</a> {language === 'en' ? 'of the mined gemstone' : 'de la gemstone minée'}</h2>
       </div>
 
       <div className="w-1 bg-gray-400 h-10 mx-auto"></div>
 
       <div className={`text-gray-300 rounded-lg w-1/2 mx-auto flex items-center ${isStepSelected(52) ? 'bg-green-500 outline outline-2 outline-green-500' : 'bg-yellow'}`} onClick={() => handleClick(52)}>
         <span className="text-xl font-bold text-center text-gray-800 flex items-center justify-center rounded-l-lg w-14">4</span>
-        <h2 className="bg-secondary text-xl font-bold text-center flex-1 p-5 h-full rounded-r-lg">Pet : <a href="https://wiki.hypixel.net/Scatha_Pet" className="text-rarityrare underline underline-offset-4" target="_blank" rel="noopener noreferrer">SCATHA</a>, {language === 'en' ? 'else' : 'sinon'} <a href="https://wiki.hypixel.net/Bal_Pet" className="text-rarityepic underline underline-offset-4" target="_blank" rel="noopener noreferrer">BAL</a> {language === 'en' ? 'if mining in Magma Fields or' : 'si mining dans Magma Fields ou'} <a href="https://wiki.hypixel.net/Glacite_Golem_Pet" className="text-rarityepic underline underline-offset-4" target="_blank" rel="noopener noreferrer">GLACITE GOLEM</a> {language === 'en' ? 'if mining in Glacite Tunnels' : 'si mining dans les Glacite Tunnels'}</h2>
+        <h2 className="bg-secondary text-xl font-bold text-center flex-1 p-5 h-full rounded-r-lg">Pet : <a href="https://wiki.hypixel.net/Scatha_Pet" className="text-rarityrare underline underline-offset-4" target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()}>SCATHA</a>, {language === 'en' ? 'else' : 'sinon'} <a href="https://wiki.hypixel.net/Bal_Pet" className="text-rarityepic underline underline-offset-4" target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()}>BAL</a> {language === 'en' ? 'if mining in Magma Fields or' : 'si mining dans Magma Fields ou'} <a href="https://wiki.hypixel.net/Glacite_Golem_Pet" className="text-rarityepic underline underline-offset-4" target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()}>GLACITE GOLEM</a> {language === 'en' ? 'if mining in Glacite Tunnels' : 'si mining dans les Glacite Tunnels'}</h2>
       </div>
 
       <div className="w-1 bg-gray-400 h-10 mx-auto"></div>
 
       <div className={`text-gray-300 rounded-lg w-1/2 mx-auto flex items-center ${isStepSelected(53) ? 'bg-green-500 outline outline-2 outline-green-500' : 'bg-yellow'}`} onClick={() => handleClick(53)}>
         <span className="text-xl font-bold text-center text-gray-800 flex items-center justify-center rounded-l-lg w-14">5</span>
-        <h2 className="bg-secondary text-xl font-bold text-center flex-1 p-5 h-full rounded-r-lg">{language === 'en' ? 'Accessories' : 'Accessoires'} : <a href="https://wiki.hypixel.net/Mineral_Talisman" className="text-rarityrare underline underline-offset-4" target="_blank" rel="noopener noreferrer">MINERAL TALISMENT</a> - <a href="https://wiki.hypixel.net/Titanium_Artifact" className="text-rarityepic underline underline-offset-4" target="_blank" rel="noopener noreferrer">TITANIUM ARTIFACT</a> - <a href="https://wiki.hypixel.net/Artifact_Of_Power" className="text-rarityrare underline underline-offset-4" target="_blank" rel="noopener noreferrer">ARTIFACT OF POWER</a> - {language === 'en' ? 'optional upgrade' : 'amélioration non obligatoire'} : <a href="https://wiki.hypixel.net/Glossy_Mineral_Talisman" className="text-rarityepic underline underline-offset-4" target="_blank" rel="noopener noreferrer">GLOSSY MINERAL
-          TALISMENT</a> - <a href="https://wiki.hypixel.net/Titanium_Relic" className="text-raritylegendary underline underline-offset-4" target="_blank" rel="noopener noreferrer">TITANIUM RELIC</a> - <a href="https://wiki.hypixel.net/Relic_Of_Power" className="text-rarityepic underline underline-offset-4" target="_blank" rel="noopener noreferrer">RELIC OF POWER</a></h2>
+        <h2 className="bg-secondary text-xl font-bold text-center flex-1 p-5 h-full rounded-r-lg">{language === 'en' ? 'Accessories' : 'Accessoires'} : <a href="https://wiki.hypixel.net/Mineral_Talisman" className="text-rarityrare underline underline-offset-4" target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()}>MINERAL TALISMENT</a> - <a href="https://wiki.hypixel.net/Titanium_Artifact" className="text-rarityepic underline underline-offset-4" target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()}>TITANIUM ARTIFACT</a> - <a href="https://wiki.hypixel.net/Artifact_Of_Power" className="text-rarityrare underline underline-offset-4" target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()}>ARTIFACT OF POWER</a> - {language === 'en' ? 'optional upgrade' : 'amélioration non obligatoire'} : <a href="https://wiki.hypixel.net/Glossy_Mineral_Talisman" className="text-rarityepic underline underline-offset-4" target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()}>GLOSSY MINERAL
+          TALISMENT</a> - <a href="https://wiki.hypixel.net/Titanium_Relic" className="text-raritylegendary underline underline-offset-4" target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()}>TITANIUM RELIC</a> - <a href="https://wiki.hypixel.net/Relic_Of_Power" className="text-rarityepic underline underline-offset-4" target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()}>RELIC OF POWER</a></h2>
       </div>
 
       <div className="w-1/2 mx-auto text-center py-16">
