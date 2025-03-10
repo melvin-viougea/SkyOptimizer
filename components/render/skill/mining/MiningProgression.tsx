@@ -36,27 +36,27 @@ const ProgressionRender: FC<RenderProps> = ({profileData}) => {
 
   return (
     <div className="p-2">
-      <div className="flex space-x-2 mb-4">
-        <button onClick={() => setCurrentSection("MiningIntroduction")} className={`px-4 py-1.5 rounded font-bold text-gray-200  ${currentSection === "MiningIntroduction" ? "bg-yellow hover:bg-darkyellow" : "bg-sidebar hover:bg-secondary"}`}>
+      <div className="flex space-x-2 mb-4 overflow-x-auto whitespace-nowrap scrollbar-hide pb-4">
+        <button onClick={() => setCurrentSection("MiningIntroduction")} className={`px-4 py-1.5 rounded-full font-bold text-gray-200 ${currentSection === "MiningIntroduction" ? "bg-yellow hover:bg-darkyellow" : "bg-sidebar hover:bg-secondary"}`}>
           Mining Introduction
         </button>
-        <button onClick={() => setCurrentSection("GemstonePowderFarming")} className={`px-4 py-1.5 rounded font-bold text-gray-200  ${currentSection === "GemstonePowderFarming" ? "bg-yellow hover:bg-darkyellow" : "bg-sidebar hover:bg-secondary"}`}>
+        <button onClick={() => setCurrentSection("GemstonePowderFarming")} className={`px-4 py-1.5 rounded-full font-bold text-gray-200 ${currentSection === "GemstonePowderFarming" ? "bg-yellow hover:bg-darkyellow" : "bg-sidebar hover:bg-secondary"}`}>
           Gemstone Powder
         </button>
-        <button onClick={() => setCurrentSection("MithrilPowderFarming")} className={`px-4 py-1.5 rounded font-bold text-gray-200  ${currentSection === "MithrilPowderFarming" ? "bg-yellow hover:bg-darkyellow" : "bg-sidebar hover:bg-secondary"}`}>
+        <button onClick={() => setCurrentSection("MithrilPowderFarming")} className={`px-4 py-1.5 rounded-full font-bold text-gray-200 ${currentSection === "MithrilPowderFarming" ? "bg-yellow hover:bg-darkyellow" : "bg-sidebar hover:bg-secondary"}`}>
           Mithril Powder
         </button>
-        <button onClick={() => setCurrentSection("RequirementGemstoneMining")} className={`px-4 py-1.5 rounded font-bold text-gray-200  ${currentSection === "RequirementGemstoneMining" ? "bg-yellow hover:bg-darkyellow" : "bg-sidebar hover:bg-secondary"}`}>
+        <button onClick={() => setCurrentSection("RequirementGemstoneMining")} className={`px-4 py-1.5 rounded-full font-bold text-gray-200 ${currentSection === "RequirementGemstoneMining" ? "bg-yellow hover:bg-darkyellow" : "bg-sidebar hover:bg-secondary"}`}>
           Requirement Gemstone Mining
         </button>
-        <button onClick={() => setCurrentSection("GemstoneMining")} className={`px-4 py-1.5 rounded font-bold text-gray-200  ${currentSection === "GemstoneMining" ? "bg-yellow hover:bg-darkyellow" : "bg-sidebar hover:bg-secondary"}`}>
+        <button onClick={() => setCurrentSection("GemstoneMining")} className={`px-4 py-1.5 rounded-full font-bold text-gray-200 ${currentSection === "GemstoneMining" ? "bg-yellow hover:bg-darkyellow" : "bg-sidebar hover:bg-secondary"}`}>
           Gemstone Mining
         </button>
       </div>
       <div>
         {currentSection === "MiningIntroduction" && (
           <>
-            <div className="mx-auto text-center py-5">
+            <div className="mx-auto text-center pb-5">
               <h1 className="text-3xl font-extrabold underline decoration-wavy decoration-yellow decoration-4 underline-offset-8">
                 {language === 'en' ? 'MINING INTRODUCTION' : 'INTRODUCTION AU MINAGE'}
               </h1>
@@ -295,7 +295,7 @@ const ProgressionRender: FC<RenderProps> = ({profileData}) => {
         )}
         {currentSection === "GemstonePowderFarming" && (
           <>
-            <div className="mx-auto text-center py-5">
+            <div className="mx-auto text-center pb-5">
               <h1 className="text-3xl font-extrabold underline decoration-wavy decoration-yellow decoration-4 underline-offset-8">GEMSTONE POWDER FARMING</h1>
             </div>
 
@@ -380,7 +380,7 @@ const ProgressionRender: FC<RenderProps> = ({profileData}) => {
         )}
         {currentSection === "MithrilPowderFarming" && (
           <>
-            <div className="mx-auto text-center py-5">
+            <div className="mx-auto text-center pb-5">
               <h1 className="text-3xl font-extrabold underline decoration-wavy decoration-yellow decoration-4 underline-offset-8">MITHRIL POWDER FARMING</h1>
             </div>
 
@@ -498,13 +498,13 @@ const ProgressionRender: FC<RenderProps> = ({profileData}) => {
         )}
         {currentSection === "RequirementGemstoneMining" && (
           <>
-            <div className="mx-auto text-center py-5">
+            <div className="mx-auto text-center pb-5">
               <h1 className="text-3xl font-extrabold underline decoration-wavy decoration-yellow decoration-4 underline-offset-8">
                 {language === 'en' ? 'GEMSTONE MINING REQUIREMENT' : 'PRÉREQUIS GEMSTONE MINING'}
               </h1>
             </div>
 
-            <div className={`text-gray-300 rounded-lg mx-auto flex items-center ${isStepSelected(30) ? 'bg-green-500 outline outline-2 outline-green-500' : 'bg-yellow'}`} onClick={() => handleClick(30)}>
+            <div className={`mt-5 text-gray-300 rounded-lg mx-auto flex items-center ${isStepSelected(30) ? 'bg-green-500 outline outline-2 outline-green-500' : 'bg-yellow'}`} onClick={() => handleClick(30)}>
               <span className="text-xl font-bold text-center text-gray-800 flex items-center justify-center rounded-l-lg w-14">1</span>
               <h2 className="bg-secondary text-xl font-bold text-center flex-1 p-5 h-full rounded-r-lg">{language === 'en' ? 'Armor' : 'Armure'} : <a href="https://wiki.hypixel.net/Armor_Of_Divan" className="text-raritylegendary underline underline-offset-4" target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()}>ARMOR OF DIVAN</a> jaded - recomb - full perfect - {language === 'en' ? 'optional upgrade' : 'amélioration non obligatoire'} : wisdom</h2>
             </div>
@@ -534,14 +534,15 @@ const ProgressionRender: FC<RenderProps> = ({profileData}) => {
 
             <div className={`text-gray-300 rounded-lg mx-auto flex items-center ${isStepSelected(34) ? 'bg-green-500 outline outline-2 outline-green-500' : 'bg-yellow'}`} onClick={() => handleClick(34)}>
               <span className="text-xl font-bold text-center text-gray-800 flex items-center justify-center rounded-l-lg w-14">5</span>
-              <h2 className="bg-secondary text-xl font-bold text-center flex-1 p-5 h-full rounded-r-lg">{language === 'en' ? 'Accessories' : 'Accessoires'} : <a href="https://wiki.hypixel.net/Mineral_Talisman" className="text-rarityrare underline underline-offset-4" target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()}>MINERAL TALISMENT</a> - <a href="https://wiki.hypixel.net/Titanium_Artifact" className="text-rarityepic underline underline-offset-4" target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()}>TITANIUM ARTIFACT</a> - <a href="https://wiki.hypixel.net/Artifact_Of_Power" className="text-rarityrare underline underline-offset-4" target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()}>ARTIFACT OF POWER</a> - {language === 'en' ? 'optional upgrade' : 'amélioration non obligatoire'} : <a href="https://wiki.hypixel.net/Glossy_Mineral_Talisman" className="text-rarityepic underline underline-offset-4" target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()}>GLOSSY MINERAL
+              <h2 className="bg-secondary text-xl font-bold text-center flex-1 p-5 h-full rounded-r-lg">{language === 'en' ? 'Accessories' : 'Accessoires'} : <a href="https://wiki.hypixel.net/Mineral_Talisman" className="text-rarityrare underline underline-offset-4" target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()}>MINERAL TALISMENT</a> - <a href="https://wiki.hypixel.net/Titanium_Artifact" className="text-rarityepic underline underline-offset-4" target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()}>TITANIUM ARTIFACT</a> - <a href="https://wiki.hypixel.net/Artifact_Of_Power" className="text-rarityrare underline underline-offset-4" target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()}>ARTIFACT OF
+                POWER</a> - {language === 'en' ? 'optional upgrade' : 'amélioration non obligatoire'} : <a href="https://wiki.hypixel.net/Glossy_Mineral_Talisman" className="text-rarityepic underline underline-offset-4" target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()}>GLOSSY MINERAL
                 TALISMENT</a> - <a href="https://wiki.hypixel.net/Titanium_Relic" className="text-raritylegendary underline underline-offset-4" target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()}>TITANIUM RELIC</a> - <a href="https://wiki.hypixel.net/Relic_Of_Power" className="text-rarityepic underline underline-offset-4" target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()}>RELIC OF POWER</a></h2>
             </div>
           </>
         )}
         {currentSection === "GemstoneMining" && (
           <>
-            <div className="mx-auto text-center py-5">
+            <div className="mx-auto text-center pb-5">
               <h1 className="text-3xl font-extrabold underline decoration-wavy decoration-yellow decoration-4 underline-offset-8">GEMSTONE MINING</h1>
             </div>
 
