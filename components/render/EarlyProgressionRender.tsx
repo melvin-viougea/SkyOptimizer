@@ -3,7 +3,7 @@ import { useLocalStoragePermission } from "@/lib/useLocalStoragePermission";
 import Image from "next/image";
 import {useLanguage} from "@/context/LanguageProvider";
 
-const ProgressionRender: FC<RenderProps> = ({ profileData }) => {
+const EarlyProgressionRender: FC<RenderProps> = ({ profileData }) => {
   if (!profileData) return null;
   const { language } = useLanguage();
   const { isAllowed } = useLocalStoragePermission();
@@ -760,4 +760,4 @@ const ProgressionRender: FC<RenderProps> = ({ profileData }) => {
   );
 };
 
-export default ProgressionRender;
+export default EarlyProgressionRender;

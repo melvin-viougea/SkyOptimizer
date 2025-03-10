@@ -11,11 +11,11 @@ import MageRender from "@/components/render/class/mage/MageRender";
 import ArcherRender from "@/components/render/class/archer/ArcherRender";
 import BerserkRender from "@/components/render/class/berserk/BerserkRender";
 import TankRender from "@/components/render/class/tank/TankRender";
-import MiningRender from "@/components/render/skill/mining/MiningRender";
+import Mining from "@/components/render/skill/mining/Mining";
 import FarmingRender from "@/components/render/skill/farming/FarmingRender";
 import FishingRender from "@/components/render/skill/fishing/FishingRender";
 import ForagingRender from "@/components/render/skill/foraging/ForagingRender";
-import ProgressionRender from "@/components/render/ProgressionRender";
+import EarlyProgressionRender from "@/components/render/EarlyProgressionRender";
 import {fetchHypixelAuction, fetchHypixelProfiles, fetchMojangData, fetchSkills} from "@/lib/fetch";
 import {calculateNetworth, fetchAllItemsWithPrice, getSkillLevel} from "@/lib/function";
 import Sidebar from "@/components/Sidebar";
@@ -170,7 +170,7 @@ export default function ProfilePage() {
       case Section.Minions:
         return <MinionsRender profileData={profileData}/>;
       case Section.Progression:
-        return <ProgressionRender profileData={profileData}/>;
+        return <EarlyProgressionRender profileData={profileData}/>;
       case Section.RealseNote:
         return <ReleaseNoteRender profileData={profileData}/>;
 
@@ -179,7 +179,7 @@ export default function ProfilePage() {
       case Section.Fishing:
         return <FishingRender profileData={profileData}/>;
       case Section.Mining:
-        return <MiningRender profileData={profileData}/>;
+        return <Mining profileData={profileData}/>;
       case Section.Foraging:
         return <ForagingRender profileData={profileData}/>;
 
