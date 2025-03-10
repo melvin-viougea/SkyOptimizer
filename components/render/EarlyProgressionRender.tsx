@@ -33,11 +33,7 @@ const EarlyProgressionRender: FC<RenderProps> = ({ profileData }) => {
 
   return (
     <div className="rounded-3xl bg-primary text-gray-200 p-8 m-5 shadow-lg">
-      <h1 className="text-3xl font-extrabold underline decoration-wavy decoration-yellow decoration-4 underline-offset-8 mb-8">
-        Progression Optimizer :
-      </h1>
-
-      <div className="w-1/2 mx-auto text-center py-16">
+      <div className="w-1/2 mx-auto text-center pb-10">
         <h1 className="text-3xl font-extrabold underline decoration-wavy decoration-yellow decoration-4 underline-offset-8">INTRODUCTION</h1>
       </div>
 
