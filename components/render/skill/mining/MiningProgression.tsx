@@ -38,16 +38,18 @@ const ProgressionRender: FC<RenderProps> = ({profileData}) => {
     <div className="p-2">
       <div className="flex space-x-2 mb-4 overflow-x-auto whitespace-nowrap scrollbar-hide pb-4">
         <button onClick={() => setCurrentSection("MiningIntroduction")} className={`px-4 py-1.5 rounded-full font-bold text-gray-200 ${currentSection === "MiningIntroduction" ? "bg-yellow hover:bg-darkyellow" : "bg-sidebar hover:bg-secondary"}`}>
-          Mining Introduction
+          Introduction
         </button>
-        <button onClick={() => setCurrentSection("GemstonePowderFarming")} className={`px-4 py-1.5 rounded-full font-bold text-gray-200 ${currentSection === "GemstonePowderFarming" ? "bg-yellow hover:bg-darkyellow" : "bg-sidebar hover:bg-secondary"}`}>
+        <button onClick={() => setCurrentSection("GemstonePowder")} className={`px-4 py-1.5 rounded-full font-bold text-gray-200 ${currentSection === "GemstonePowder" ? "bg-yellow hover:bg-darkyellow" : "bg-sidebar hover:bg-secondary"}`}>
           Gemstone Powder
         </button>
-        <button onClick={() => setCurrentSection("MithrilPowderFarming")} className={`px-4 py-1.5 rounded-full font-bold text-gray-200 ${currentSection === "MithrilPowderFarming" ? "bg-yellow hover:bg-darkyellow" : "bg-sidebar hover:bg-secondary"}`}>
+        <button onClick={() => setCurrentSection("MithrilPowder")} className={`px-4 py-1.5 rounded-full font-bold text-gray-200 ${currentSection === "MithrilPowder" ? "bg-yellow hover:bg-darkyellow" : "bg-sidebar hover:bg-secondary"}`}>
           Mithril Powder
         </button>
         <button onClick={() => setCurrentSection("RequirementGemstoneMining")} className={`px-4 py-1.5 rounded-full font-bold text-gray-200 ${currentSection === "RequirementGemstoneMining" ? "bg-yellow hover:bg-darkyellow" : "bg-sidebar hover:bg-secondary"}`}>
-          Requirement Gemstone Mining
+          {language === 'en' ?
+            'Requirement Gemstone Mining' :
+            'Prérequis Gemstone Mining'}
         </button>
         <button onClick={() => setCurrentSection("GemstoneMining")} className={`px-4 py-1.5 rounded-full font-bold text-gray-200 ${currentSection === "GemstoneMining" ? "bg-yellow hover:bg-darkyellow" : "bg-sidebar hover:bg-secondary"}`}>
           Gemstone Mining
@@ -58,7 +60,7 @@ const ProgressionRender: FC<RenderProps> = ({profileData}) => {
           <>
             <div className="mx-auto text-center pb-5">
               <h1 className="text-3xl font-extrabold underline decoration-wavy decoration-yellow decoration-4 underline-offset-8">
-                {language === 'en' ? 'MINING INTRODUCTION' : 'INTRODUCTION AU MINAGE'}
+                INTRODUCTION
               </h1>
             </div>
 
@@ -293,10 +295,10 @@ const ProgressionRender: FC<RenderProps> = ({profileData}) => {
             </div>
           </>
         )}
-        {currentSection === "GemstonePowderFarming" && (
+        {currentSection === "GemstonePowder" && (
           <>
             <div className="mx-auto text-center pb-5">
-              <h1 className="text-3xl font-extrabold underline decoration-wavy decoration-yellow decoration-4 underline-offset-8">GEMSTONE POWDER FARMING</h1>
+              <h1 className="text-3xl font-extrabold underline decoration-wavy decoration-yellow decoration-4 underline-offset-8">GEMSTONE POWDER</h1>
             </div>
 
             <div className="bg-secondary text-gray-300 rounded-lg mx-auto text-center mt-5">
@@ -341,19 +343,22 @@ const ProgressionRender: FC<RenderProps> = ({profileData}) => {
 
             <div className="w-1 bg-gray-400 h-10 mx-auto"></div>
 
-            <h2 className="bg-secondary text-xl font-bold text-center flex-1 p-5 h-full rounded-r-lg">
-              {language === 'en' ?
-                'As soon as possible, buy/forge a ' :
-                'Dès que possible, acheter/forger une '}
-              <a href="https://wiki.hypixel.net/Jasper_Drill_X" className="text-rarityepic underline underline-offset-4" target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()}>JASPER DRILL X</a>
-              {language === 'en' ?
-                ' and put the Drill Parts previously bought into it.' :
-                ' et y mettre les Drill Parts achetés précédemment'}
-            </h2>
+            <div className={`text-gray-300 rounded-lg mx-auto flex items-center ${isStepSelected(20) ? 'bg-green-500 outline outline-2 outline-green-500' : 'bg-yellow'}`} onClick={() => handleClick(20)}>
+              <span className="text-xl font-bold text-center text-gray-800 flex items-center justify-center rounded-l-lg w-14">3</span>
+              <h2 className="bg-secondary text-xl font-bold text-center flex-1 p-5 h-full rounded-r-lg">
+                {language === 'en' ?
+                  'As soon as possible, buy/forge a ' :
+                  'Dès que possible, acheter/forger une '}
+                <a href="https://wiki.hypixel.net/Jasper_Drill_X" className="text-rarityepic underline underline-offset-4" target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()}>JASPER DRILL X</a>
+                {language === 'en' ?
+                  ' and put the Drill Parts previously bought into it.' :
+                  ' et y mettre les Drill Parts achetés précédemment'}
+              </h2>
+            </div>
 
             <div className="w-1 bg-gray-400 h-10 mx-auto"></div>
 
-            <div className={`text-gray-300 rounded-lg mx-auto flex items-center ${isStepSelected(20) ? 'bg-green-500 outline outline-2 outline-green-500' : 'bg-yellow'}`} onClick={() => handleClick(20)}>
+            <div className={`text-gray-300 rounded-lg mx-auto flex items-center ${isStepSelected(21) ? 'bg-green-500 outline outline-2 outline-green-500' : 'bg-yellow'}`} onClick={() => handleClick(21)}>
               <span className="text-xl font-bold text-center text-gray-800 flex items-center justify-center rounded-l-lg w-14">4</span>
               <h2 className="bg-secondary text-xl font-bold text-center flex-1 p-5 h-full rounded-r-lg">
                 {language === 'en' ?
@@ -364,7 +369,7 @@ const ProgressionRender: FC<RenderProps> = ({profileData}) => {
 
             <div className="w-1 bg-gray-400 h-10 mx-auto"></div>
 
-            <div className={`text-gray-300 rounded-lg mx-auto flex items-center ${isStepSelected(21) ? 'bg-green-500 outline outline-2 outline-green-500' : 'bg-yellow'}`} onClick={() => handleClick(21)}>
+            <div className={`text-gray-300 rounded-lg mx-auto flex items-center ${isStepSelected(22) ? 'bg-green-500 outline outline-2 outline-green-500' : 'bg-yellow'}`} onClick={() => handleClick(22)}>
               <span className="text-xl font-bold text-center text-gray-800 flex items-center justify-center rounded-l-lg w-14">5</span>
               <h2 className="bg-secondary text-xl font-bold text-center flex-1 p-5 h-full rounded-r-lg">
                 {language === 'en' ?
@@ -378,10 +383,10 @@ const ProgressionRender: FC<RenderProps> = ({profileData}) => {
             </div>
           </>
         )}
-        {currentSection === "MithrilPowderFarming" && (
+        {currentSection === "MithrilPowder" && (
           <>
             <div className="mx-auto text-center pb-5">
-              <h1 className="text-3xl font-extrabold underline decoration-wavy decoration-yellow decoration-4 underline-offset-8">MITHRIL POWDER FARMING</h1>
+              <h1 className="text-3xl font-extrabold underline decoration-wavy decoration-yellow decoration-4 underline-offset-8">MITHRIL POWDER</h1>
             </div>
 
             <div className="bg-secondary text-gray-300 rounded-lg mx-auto text-center mt-5">
@@ -401,7 +406,7 @@ const ProgressionRender: FC<RenderProps> = ({profileData}) => {
               </div>
             </div>
 
-            <div className={`text-gray-300 rounded-lg mx-auto flex items-center mt-6 ${isStepSelected(22) ? 'bg-green-500 outline outline-2 outline-green-500' : 'bg-yellow'}`} onClick={() => handleClick(22)}>
+            <div className={`text-gray-300 rounded-lg mx-auto flex items-center mt-6 ${isStepSelected(23) ? 'bg-green-500 outline outline-2 outline-green-500' : 'bg-yellow'}`} onClick={() => handleClick(23)}>
               <span className="text-xl font-bold text-center text-gray-800 flex items-center justify-center rounded-l-lg w-14">1</span>
               <h2 className="bg-secondary text-xl font-bold text-center flex-1 p-5 h-full rounded-r-lg">
                 {language === 'en' ?
@@ -412,7 +417,7 @@ const ProgressionRender: FC<RenderProps> = ({profileData}) => {
 
             <div className="w-1 bg-gray-400 h-10 mx-auto"></div>
 
-            <div className={`text-gray-300 rounded-lg mx-auto flex items-center ${isStepSelected(23) ? 'bg-green-500 outline outline-2 outline-green-500' : 'bg-yellow'}`} onClick={() => handleClick(23)}>
+            <div className={`text-gray-300 rounded-lg mx-auto flex items-center ${isStepSelected(24) ? 'bg-green-500 outline outline-2 outline-green-500' : 'bg-yellow'}`} onClick={() => handleClick(24)}>
               <span className="text-xl font-bold text-center text-gray-800 flex items-center justify-center rounded-l-lg w-14">2</span>
               <h2 className="bg-secondary text-xl font-bold text-center flex-1 p-5 h-full rounded-r-lg">
                 {language === 'en' ?
@@ -423,7 +428,7 @@ const ProgressionRender: FC<RenderProps> = ({profileData}) => {
 
             <div className="w-1 bg-gray-400 h-10 mx-auto"></div>
 
-            <div className={`text-gray-300 rounded-lg mx-auto flex items-center ${isStepSelected(24) ? 'bg-green-500 outline outline-2 outline-green-500' : 'bg-yellow'}`} onClick={() => handleClick(24)}>
+            <div className={`text-gray-300 rounded-lg mx-auto flex items-center ${isStepSelected(25) ? 'bg-green-500 outline outline-2 outline-green-500' : 'bg-yellow'}`} onClick={() => handleClick(25)}>
               <span className="text-xl font-bold text-center text-gray-800 flex items-center justify-center rounded-l-lg w-14">3</span>
               <h2 className="bg-secondary text-xl font-bold text-center flex-1 p-5 h-full rounded-r-lg">
                 {language === 'en' ?
@@ -434,7 +439,7 @@ const ProgressionRender: FC<RenderProps> = ({profileData}) => {
 
             <div className="w-1 bg-gray-400 h-10 mx-auto"></div>
 
-            <div className={`text-gray-300 rounded-lg mx-auto flex items-center ${isStepSelected(25) ? 'bg-green-500 outline outline-2 outline-green-500' : 'bg-yellow'}`} onClick={() => handleClick(25)}>
+            <div className={`text-gray-300 rounded-lg mx-auto flex items-center ${isStepSelected(26) ? 'bg-green-500 outline outline-2 outline-green-500' : 'bg-yellow'}`} onClick={() => handleClick(26)}>
               <span className="text-xl font-bold text-center text-gray-800 flex items-center justify-center rounded-l-lg w-14">4</span>
               <h2 className="bg-secondary text-xl font-bold text-center flex-1 p-5 h-full rounded-r-lg">
                 {language === 'en' ?
@@ -445,7 +450,7 @@ const ProgressionRender: FC<RenderProps> = ({profileData}) => {
 
             <div className="w-1 bg-gray-400 h-10 mx-auto"></div>
 
-            <div className={`text-gray-300 rounded-lg mx-auto flex items-center ${isStepSelected(26) ? 'bg-green-500 outline outline-2 outline-green-500' : 'bg-yellow'}`} onClick={() => handleClick(26)}>
+            <div className={`text-gray-300 rounded-lg mx-auto flex items-center ${isStepSelected(27) ? 'bg-green-500 outline outline-2 outline-green-500' : 'bg-yellow'}`} onClick={() => handleClick(27)}>
               <span className="text-xl font-bold text-center text-gray-800 flex items-center justify-center rounded-l-lg w-14">5</span>
               <h2 className="bg-secondary text-xl font-bold text-center flex-1 p-5 h-full rounded-r-lg">
                 {language === 'en' ?
@@ -460,7 +465,7 @@ const ProgressionRender: FC<RenderProps> = ({profileData}) => {
 
             <div className="w-1 bg-gray-400 h-10 mx-auto"></div>
 
-            <div className={`text-gray-300 rounded-lg mx-auto flex items-center ${isStepSelected(27) ? 'bg-green-500 outline outline-2 outline-green-500' : 'bg-yellow'}`} onClick={() => handleClick(27)}>
+            <div className={`text-gray-300 rounded-lg mx-auto flex items-center ${isStepSelected(28) ? 'bg-green-500 outline outline-2 outline-green-500' : 'bg-yellow'}`} onClick={() => handleClick(28)}>
               <span className="text-xl font-bold text-center text-gray-800 flex items-center justify-center rounded-l-lg w-14">6</span>
               <h2 className="bg-secondary text-xl font-bold text-center flex-1 p-5 h-full rounded-r-lg">
                 {language === 'en' ?
@@ -471,7 +476,7 @@ const ProgressionRender: FC<RenderProps> = ({profileData}) => {
 
             <div className="w-1 bg-gray-400 h-10 mx-auto"></div>
 
-            <div className={`text-gray-300 rounded-lg mx-auto flex items-center ${isStepSelected(28) ? 'bg-green-500 outline outline-2 outline-green-500' : 'bg-yellow'}`} onClick={() => handleClick(28)}>
+            <div className={`text-gray-300 rounded-lg mx-auto flex items-center ${isStepSelected(29) ? 'bg-green-500 outline outline-2 outline-green-500' : 'bg-yellow'}`} onClick={() => handleClick(29)}>
               <span className="text-xl font-bold text-center text-gray-800 flex items-center justify-center rounded-l-lg w-14">7</span>
               <h2 className="bg-secondary text-xl font-bold text-center flex-1 p-5 h-full rounded-r-lg">
                 {language === 'en' ?
@@ -482,7 +487,7 @@ const ProgressionRender: FC<RenderProps> = ({profileData}) => {
 
             <div className="w-1 bg-gray-400 h-10 mx-auto"></div>
 
-            <div className={`text-gray-300 rounded-lg mx-auto flex items-center ${isStepSelected(29) ? 'bg-green-500 outline outline-2 outline-green-500' : 'bg-yellow'}`} onClick={() => handleClick(29)}>
+            <div className={`text-gray-300 rounded-lg mx-auto flex items-center ${isStepSelected(30) ? 'bg-green-500 outline outline-2 outline-green-500' : 'bg-yellow'}`} onClick={() => handleClick(30)}>
               <span className="text-xl font-bold text-center text-gray-800 flex items-center justify-center rounded-l-lg w-14">8</span>
               <h2 className="bg-secondary text-xl font-bold text-center flex-1 p-5 h-full rounded-r-lg">
                 {language === 'en' ?
@@ -504,35 +509,35 @@ const ProgressionRender: FC<RenderProps> = ({profileData}) => {
               </h1>
             </div>
 
-            <div className={`mt-5 text-gray-300 rounded-lg mx-auto flex items-center ${isStepSelected(30) ? 'bg-green-500 outline outline-2 outline-green-500' : 'bg-yellow'}`} onClick={() => handleClick(30)}>
+            <div className={`mt-5 text-gray-300 rounded-lg mx-auto flex items-center ${isStepSelected(31) ? 'bg-green-500 outline outline-2 outline-green-500' : 'bg-yellow'}`} onClick={() => handleClick(31)}>
               <span className="text-xl font-bold text-center text-gray-800 flex items-center justify-center rounded-l-lg w-14">1</span>
               <h2 className="bg-secondary text-xl font-bold text-center flex-1 p-5 h-full rounded-r-lg">{language === 'en' ? 'Armor' : 'Armure'} : <a href="https://wiki.hypixel.net/Armor_Of_Divan" className="text-raritylegendary underline underline-offset-4" target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()}>ARMOR OF DIVAN</a> jaded - recomb - full perfect - {language === 'en' ? 'optional upgrade' : 'amélioration non obligatoire'} : wisdom</h2>
             </div>
 
             <div className="w-1 bg-gray-400 h-10 mx-auto"></div>
 
-            <div className={`text-gray-300 rounded-lg mx-auto flex items-center ${isStepSelected(31) ? 'bg-green-500 outline outline-2 outline-green-500' : 'bg-yellow'}`} onClick={() => handleClick(31)}>
+            <div className={`text-gray-300 rounded-lg mx-auto flex items-center ${isStepSelected(32) ? 'bg-green-500 outline outline-2 outline-green-500' : 'bg-yellow'}`} onClick={() => handleClick(32)}>
               <span className="text-xl font-bold text-center text-gray-800 flex items-center justify-center rounded-l-lg w-14">2</span>
               <h2 className="bg-secondary text-xl font-bold text-center flex-1 p-5 h-full rounded-r-lg">Drill : <a href="https://wiki.hypixel.net/Titanium_Drill_DR-X655" className="text-raritylegendary underline underline-offset-4" target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()}>TITANIUM DRILL DR-X655</a> : Ruby-Polished Drill Engine ou Divan's Powder Coating - Prismatic Enchant - {language === 'en' ? 'optional upgrade' : 'amélioration non obligatoire'} : recomb - full perfect - 5 silex - compact - reforge Lustrous {'>'} Auspicious - Blue Cheese Goblin Omelette - un Fuel Tank</h2>
             </div>
 
             <div className="w-1 bg-gray-400 h-10 mx-auto"></div>
 
-            <div className={`text-gray-300 rounded-lg mx-auto flex items-center ${isStepSelected(32) ? 'bg-green-500 outline outline-2 outline-green-500' : 'bg-yellow'}`} onClick={() => handleClick(32)}>
+            <div className={`text-gray-300 rounded-lg mx-auto flex items-center ${isStepSelected(33) ? 'bg-green-500 outline outline-2 outline-green-500' : 'bg-yellow'}`} onClick={() => handleClick(33)}>
               <span className="text-xl font-bold text-center text-gray-800 flex items-center justify-center rounded-l-lg w-14">3</span>
               <h2 className="bg-secondary text-xl font-bold text-center flex-1 p-5 h-full rounded-r-lg">{language === 'en' ? 'Equipment' : 'Equipement'} : <a href="https://wiki.hypixel.net/Titanium_Equipment" className="text-rarityrare underline underline-offset-4" target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()}>TITANIUM EQUIPMENT</a> - {language === 'en' ? 'optional upgrade' : 'amélioration non obligatoire'} : <a href="https://wiki.hypixel.net/Dwarven_Handwarmers" className="text-rarityepic underline underline-offset-4" target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()}>DWARVEN HANDWARMERS</a> / <a href="https://wiki.hypixel.net/Gemstone_Equipment" className="text-rarityepic underline underline-offset-4" target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()}>GEMSTONE EQUIPMENT</a> {language === 'en' ? 'of the mined gemstone' : 'de la gemstone minée'}</h2>
             </div>
 
             <div className="w-1 bg-gray-400 h-10 mx-auto"></div>
 
-            <div className={`text-gray-300 rounded-lg mx-auto flex items-center ${isStepSelected(33) ? 'bg-green-500 outline outline-2 outline-green-500' : 'bg-yellow'}`} onClick={() => handleClick(33)}>
+            <div className={`text-gray-300 rounded-lg mx-auto flex items-center ${isStepSelected(34) ? 'bg-green-500 outline outline-2 outline-green-500' : 'bg-yellow'}`} onClick={() => handleClick(34)}>
               <span className="text-xl font-bold text-center text-gray-800 flex items-center justify-center rounded-l-lg w-14">4</span>
               <h2 className="bg-secondary text-xl font-bold text-center flex-1 p-5 h-full rounded-r-lg">Pet : <a href="https://wiki.hypixel.net/Scatha_Pet" className="text-rarityrare underline underline-offset-4" target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()}>SCATHA</a>, {language === 'en' ? 'else' : 'sinon'} <a href="https://wiki.hypixel.net/Bal_Pet" className="text-rarityepic underline underline-offset-4" target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()}>BAL</a> {language === 'en' ? 'if mining in Magma Fields or' : 'si mining dans Magma Fields ou'} <a href="https://wiki.hypixel.net/Glacite_Golem_Pet" className="text-rarityepic underline underline-offset-4" target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()}>GLACITE GOLEM</a> {language === 'en' ? 'if mining in Glacite Tunnels' : 'si mining dans les Glacite Tunnels'}</h2>
             </div>
 
             <div className="w-1 bg-gray-400 h-10 mx-auto"></div>
 
-            <div className={`text-gray-300 rounded-lg mx-auto flex items-center ${isStepSelected(34) ? 'bg-green-500 outline outline-2 outline-green-500' : 'bg-yellow'}`} onClick={() => handleClick(34)}>
+            <div className={`text-gray-300 rounded-lg mx-auto flex items-center ${isStepSelected(35) ? 'bg-green-500 outline outline-2 outline-green-500' : 'bg-yellow'}`} onClick={() => handleClick(35)}>
               <span className="text-xl font-bold text-center text-gray-800 flex items-center justify-center rounded-l-lg w-14">5</span>
               <h2 className="bg-secondary text-xl font-bold text-center flex-1 p-5 h-full rounded-r-lg">{language === 'en' ? 'Accessories' : 'Accessoires'} : <a href="https://wiki.hypixel.net/Mineral_Talisman" className="text-rarityrare underline underline-offset-4" target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()}>MINERAL TALISMENT</a> - <a href="https://wiki.hypixel.net/Titanium_Artifact" className="text-rarityepic underline underline-offset-4" target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()}>TITANIUM ARTIFACT</a> - <a href="https://wiki.hypixel.net/Artifact_Of_Power" className="text-rarityrare underline underline-offset-4" target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()}>ARTIFACT OF
                 POWER</a> - {language === 'en' ? 'optional upgrade' : 'amélioration non obligatoire'} : <a href="https://wiki.hypixel.net/Glossy_Mineral_Talisman" className="text-rarityepic underline underline-offset-4" target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()}>GLOSSY MINERAL
@@ -547,7 +552,7 @@ const ProgressionRender: FC<RenderProps> = ({profileData}) => {
             </div>
 
             <div className="bg-secondary text-gray-300 rounded-lg mx-auto text-center mt-5">
-              <h2 className="bg-secondary text-xl font-bold text-center flex-1 p-5 h-full rounded-r-lg">
+              <h2 className="text-xl font-bold text-gray-800 bg-yellow p-5 rounded-t-lg">
                 {language === 'en' ?
                   'HOTM TREE - Mithril max 1/2/3 then the rest 4/5 - Gemstone max 1/2/3/4 then 5/6/7/8/9/10, if HOTM 10, level the middle up to Mining Master (' :
                   'HOTM TREE - Mithril max 1/2/3 puis le reste 4/5 - Gemestone max 1/2/3/4 puis 5/6/7/8/9/10, si HOTM 10, monté le milieu jusqu\'a Mining Master ('}
@@ -567,7 +572,7 @@ const ProgressionRender: FC<RenderProps> = ({profileData}) => {
               </div>
             </div>
 
-            <div className={`text-gray-300 rounded-lg mx-auto flex items-center mt-6 ${isStepSelected(35) ? 'bg-green-500 outline outline-2 outline-green-500' : 'bg-yellow'}`} onClick={() => handleClick(35)}>
+            <div className={`text-gray-300 rounded-lg mx-auto flex items-center mt-6 ${isStepSelected(36) ? 'bg-green-500 outline outline-2 outline-green-500' : 'bg-yellow'}`} onClick={() => handleClick(36)}>
               <span className="text-xl font-bold text-center text-gray-800 flex items-center justify-center rounded-l-lg w-14">1</span>
               <h2 className="bg-secondary text-xl font-bold text-center flex-1 p-5 h-full rounded-r-lg">
                 {language === 'en'
@@ -578,7 +583,7 @@ const ProgressionRender: FC<RenderProps> = ({profileData}) => {
 
             <div className="w-1 bg-gray-400 h-10 mx-auto"></div>
 
-            <div className={`text-gray-300 rounded-lg mx-auto flex items-center ${isStepSelected(36) ? 'bg-green-500 outline outline-2 outline-green-500' : 'bg-yellow'}`} onClick={() => handleClick(36)}>
+            <div className={`text-gray-300 rounded-lg mx-auto flex items-center ${isStepSelected(37) ? 'bg-green-500 outline outline-2 outline-green-500' : 'bg-yellow'}`} onClick={() => handleClick(37)}>
               <span className="text-xl font-bold text-center text-gray-800 flex items-center justify-center rounded-l-lg w-14">2</span>
               <h2 className="bg-secondary text-xl font-bold text-center flex-1 p-5 h-full rounded-r-lg">
                 {language === 'en'
@@ -589,7 +594,7 @@ const ProgressionRender: FC<RenderProps> = ({profileData}) => {
 
             <div className="w-1 bg-gray-400 h-10 mx-auto"></div>
 
-            <div className={`text-gray-300 rounded-lg mx-auto flex items-center ${isStepSelected(37) ? 'bg-green-500 outline outline-2 outline-green-500' : 'bg-yellow'}`} onClick={() => handleClick(37)}>
+            <div className={`text-gray-300 rounded-lg mx-auto flex items-center ${isStepSelected(38) ? 'bg-green-500 outline outline-2 outline-green-500' : 'bg-yellow'}`} onClick={() => handleClick(38)}>
               <span className="text-xl font-bold text-center text-gray-800 flex items-center justify-center rounded-l-lg w-14">3</span>
               <h2 className="bg-secondary text-xl font-bold text-center flex-1 p-5 h-full rounded-r-lg">
                 {language === 'en'
@@ -877,7 +882,7 @@ export default ProgressionRender;
 //     </div>
 //
 //       <div className="mx-auto text-center py-16">
-//         <h1 className="text-3xl font-extrabold underline decoration-wavy decoration-yellow decoration-4 underline-offset-8">GEMSTONE POWDER FARMING</h1>
+//         <h1 className="text-3xl font-extrabold underline decoration-wavy decoration-yellow decoration-4 underline-offset-8">GEMSTONE POWDER</h1>
 //       </div>
 //
 //       <div className="bg-secondary text-gray-300 rounded-lg mx-auto text-center mt-5">
@@ -959,7 +964,7 @@ export default ProgressionRender;
 //       </div>
 //
 //       <div className="mx-auto text-center py-16">
-//         <h1 className="text-3xl font-extrabold underline decoration-wavy decoration-yellow decoration-4 underline-offset-8">MITHRIL POWDER FARMING</h1>
+//         <h1 className="text-3xl font-extrabold underline decoration-wavy decoration-yellow decoration-4 underline-offset-8">MITHRIL POWDER</h1>
 //       </div>
 //
 //       <div className="bg-secondary text-gray-300 rounded-lg mx-auto text-center mt-5">

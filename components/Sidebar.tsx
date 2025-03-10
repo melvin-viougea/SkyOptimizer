@@ -28,7 +28,7 @@ const Sidebar: React.FC<NavbarProps> = ({ activeSection, setActiveSection, pseud
           Minions
         </button>
         <button onClick={() => setActiveSection(Section.Progression)} className={`px-4 py-1.5 rounded font-bold text-gray-200 ${activeSection === Section.Progression ? "bg-yellow hover:bg-darkyellow" : "bg-sidebarlight hover:bg-primary"}`}>
-          Early Progression
+          {language === 'en' ? 'Early Progression' : 'Progression débutant'}
         </button>
 
         <button onClick={() => setActiveSection(Section.Mining)} className={`mt-3 px-4 py-1.5 rounded font-bold text-gray-200 ${activeSection === Section.Mining ? "bg-yellow hover:bg-darkyellow" : "bg-sidebarlight hover:bg-primary"}`}>
