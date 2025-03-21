@@ -26,7 +26,7 @@ const Mining: FC<RenderProps> = ({ profileData }) => {
             <div className="bg-secondary p-3 rounded-xl">
               <h3 className="text-xl font-semibold">Armor</h3>
               <div className="mb-1 flex p-2 space-x-2">
-                <div className="p-2">
+                <div className="p-2 text-center">
                   <Image
                     src="/slot.webp"
                     width={150}
@@ -34,8 +34,9 @@ const Mining: FC<RenderProps> = ({ profileData }) => {
                     alt="slot"
                     className="object-contain rounded-lg"
                   />
+                  Glacite Helmet
                 </div>
-                <div className="p-2">
+                <div className="p-2 text-center">
                   <Image
                     src="/slot.webp"
                     width={150}
@@ -43,8 +44,9 @@ const Mining: FC<RenderProps> = ({ profileData }) => {
                     alt="slot"
                     className="object-contain rounded-lg"
                   />
+                  Glacite Chestplate
                 </div>
-                <div className="p-2">
+                <div className="p-2 text-center">
                   <Image
                     src="/slot.webp"
                     width={150}
@@ -52,8 +54,9 @@ const Mining: FC<RenderProps> = ({ profileData }) => {
                     alt="slot"
                     className="object-contain rounded-lg"
                   />
+                  Glacite Leggings
                 </div>
-                <div className="p-2">
+                <div className="p-2 text-center">
                   <Image
                     src="/slot.webp"
                     width={150}
@@ -61,6 +64,7 @@ const Mining: FC<RenderProps> = ({ profileData }) => {
                     alt="slot"
                     className="object-contain rounded-lg"
                   />
+                  Glacite Boots
                 </div>
               </div>
             </div>
@@ -71,7 +75,7 @@ const Mining: FC<RenderProps> = ({ profileData }) => {
               <div className="bg-secondary p-3 rounded-xl flex-1">
                 <h3 className="text-xl font-semibold">Weapon</h3>
                 <div className="flex justify-start p-2 space-x-2">
-                  <div className="p-2">
+                  <div className="p-2 text-center">
                     <Image
                       src="/slot.webp"
                       width={150}
@@ -79,6 +83,7 @@ const Mining: FC<RenderProps> = ({ profileData }) => {
                       alt="slot"
                       className="object-contain rounded-lg"
                     />
+                    Fractured Mithril Pickaxe
                   </div>
                 </div>
               </div>
@@ -87,7 +92,7 @@ const Mining: FC<RenderProps> = ({ profileData }) => {
               <div className="bg-secondary p-3 rounded-xl flex-1">
                 <h3 className="text-xl font-semibold">Pet</h3>
                 <div className="flex justify-start p-2 space-x-2">
-                  <div className="p-2">
+                  <div className="p-2 text-center">
                     <Image
                       src="/slot.webp"
                       width={150}
@@ -95,6 +100,7 @@ const Mining: FC<RenderProps> = ({ profileData }) => {
                       alt="slot"
                       className="object-contain rounded-lg"
                     />
+                    Glacite Golem
                   </div>
                 </div>
               </div>
@@ -104,7 +110,7 @@ const Mining: FC<RenderProps> = ({ profileData }) => {
             <div className="bg-secondary p-3 rounded-xl mt-auto">
               <h3 className="text-xl font-semibold">Accessories</h3>
               <div className="mb-1 flex p-2 space-x-2">
-                <div className="p-2">
+                <div className="p-2 text-center">
                   <Image
                     src="/slot.webp"
                     width={150}
@@ -113,7 +119,7 @@ const Mining: FC<RenderProps> = ({ profileData }) => {
                     className="object-contain rounded-lg"
                   />
                 </div>
-                <div className="p-2">
+                <div className="p-2 text-center">
                   <Image
                     src="/slot.webp"
                     width={150}
@@ -122,7 +128,7 @@ const Mining: FC<RenderProps> = ({ profileData }) => {
                     className="object-contain rounded-lg"
                   />
                 </div>
-                <div className="p-2">
+                <div className="p-2 text-center">
                   <Image
                     src="/slot.webp"
                     width={150}
@@ -131,7 +137,7 @@ const Mining: FC<RenderProps> = ({ profileData }) => {
                     className="object-contain rounded-lg"
                   />
                 </div>
-                <div className="p-2">
+                <div className="p-2 text-center">
                   <Image
                     src="/slot.webp"
                     width={150}
