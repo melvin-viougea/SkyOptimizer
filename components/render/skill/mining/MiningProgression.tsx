@@ -43,8 +43,8 @@ const MiningProgression: FC<RenderProps> = ({profileData}) => {
         <h2 className="text-3xl font-bold flex-1 h-full">Progression</h2>
         <div className="pl-5 w-full">
           <div className="relative w-full h-6 bg-gray-300 rounded-full overflow-hidden">
-            <div className="h-full bg-yellow transition-all duration-500 ease-in-out" style={{width: `${(selectedSteps.length / 38) * 100}%`}}/>
-            <span className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-lg font-bold text-black">{((selectedSteps.length / 38) * 100).toFixed(1)}%</span>
+            <div className="h-full bg-yellow transition-all duration-500 ease-in-out" style={{width: `${(selectedSteps.length / 35) * 100}%`}}/>
+            <span className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-lg font-bold text-black">{((selectedSteps.length / 35) * 100).toFixed(1)}%</span>
           </div>
         </div>
       </div>
@@ -56,6 +56,7 @@ const MiningProgression: FC<RenderProps> = ({profileData}) => {
               'Step 1 : HOTM 1 - 7' :
               'Étape 1 : HOTM 1 - 7'}
           </h2>
+          <span className="text-xl font-bold mr-5">{((selectedSteps.filter(step => step >= 1 && step <= 17).length / 17) * 100).toFixed()}%</span>
         </div>
         {miningIntroduction && (
           <>
@@ -303,6 +304,7 @@ const MiningProgression: FC<RenderProps> = ({profileData}) => {
               'Step 2 : GEMSTONE POWDER' :
               'Étape 2 : GEMSTONE POWDER'}
           </h2>
+          <span className="text-xl font-bold mr-5">{((selectedSteps.filter(step => step >= 18 && step <= 22).length / 5) * 100).toFixed()}%</span>
         </div>
         {gemstonePowder && (
           <>
@@ -401,6 +403,7 @@ const MiningProgression: FC<RenderProps> = ({profileData}) => {
               'Step 3 : MITHRIL POWDER' :
               'Étape 3 : MITHRIL POWDER'}
           </h2>
+          <span className="text-xl font-bold mr-5">{((selectedSteps.filter(step => step >= 23 && step <= 30).length / 8) * 100).toFixed()}%</span>
         </div>
         {mithrilPowder && (
           <>
@@ -529,6 +532,7 @@ const MiningProgression: FC<RenderProps> = ({profileData}) => {
               'Step 4 : GEMSTONE MINING REQUIREMENT' :
               'Étape 4 : PRÉREQUIS GEMSTONE MINING'}
           </h2>
+          <span className="text-xl font-bold mr-5">{((selectedSteps.filter(step => step >= 30 && step <= 35).length / 6) * 100).toFixed()}%</span>
         </div>
         {requirementGemstoneMining && (
           <>
@@ -769,7 +773,7 @@ const MiningProgression: FC<RenderProps> = ({profileData}) => {
         <div className="text-gray-800 rounded-lg bg-yellow mx-auto flex items-center cursor-pointer mt-5">
           <span className={`text-xl font-bold text-center flex items-center justify-center rounded-l-lg w-14 transition-transform duration-300`}>WIP</span>
           <h2 className="text-xl font-bold flex-1 p-5 h-full rounded-r-lg">
-            RUBY AMBER SAPPHIRE AMETHYST TOPAZ GEMSTONE (23.4 M/H)
+            GLOWSTONE (23.4 M/H)
           </h2>
         </div>
       </div>
