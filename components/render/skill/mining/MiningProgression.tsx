@@ -37,14 +37,18 @@ const MiningProgression: FC<RenderProps> = ({profileData}) => {
 
   const isStepSelected = (stepNumber: number) => selectedSteps.includes(stepNumber);
 
+  const progression = ((((selectedSteps.filter(step => step >= 1 && step <= 17).length / 17) * 100) +
+      ((selectedSteps.filter(step => step >= 18 && step <= 22).length / 5) * 100) +
+      ((selectedSteps.filter(step => step >= 23 && step <= 30).length / 8) * 100) +
+      ((selectedSteps.filter(step => step >= 31 && step <= 35).length / 5) * 100)) / 4).toFixed(1);
   return (
     <div className="px-2">
       <div className="sticky top-0 bg-primary outline outline-2 outline-primary z-10 flex items-center justify-between pb-2">
         <h2 className="text-3xl font-bold flex-1 h-full">Progression</h2>
         <div className="pl-5 w-full">
           <div className="relative w-full h-6 bg-gray-300 rounded-full overflow-hidden">
-            <div className="h-full bg-yellow transition-all duration-500 ease-in-out" style={{width: `${(selectedSteps.length / 35) * 100}%`}}/>
-            <span className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-lg font-bold text-black">{((selectedSteps.length / 35) * 100).toFixed(1)}%</span>
+            <div className="h-full bg-yellow transition-all duration-500 ease-in-out" style={{width: `${progression}%`}}/>
+            <span className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-lg font-bold text-black">{progression}%</span>
           </div>
         </div>
       </div>
@@ -532,7 +536,7 @@ const MiningProgression: FC<RenderProps> = ({profileData}) => {
               'Step 4 : GEMSTONE MINING REQUIREMENT' :
               'Étape 4 : PRÉREQUIS GEMSTONE MINING'}
           </h2>
-          <span className="text-xl font-bold mr-5">{((selectedSteps.filter(step => step >= 30 && step <= 35).length / 6) * 100).toFixed()}%</span>
+          <span className="text-xl font-bold mr-5">{((selectedSteps.filter(step => step >= 31 && step <= 35).length / 6) * 100).toFixed()}%</span>
         </div>
         {requirementGemstoneMining && (
           <>
