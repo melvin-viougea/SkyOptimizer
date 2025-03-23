@@ -637,7 +637,7 @@ const MiningProgression: FC<RenderProps> = ({profileData}) => {
         <div className="mt-3 text-gray-800 rounded-lg bg-yellow mx-auto flex items-center cursor-pointer">
           <span className={`text-xl font-bold text-center flex items-center justify-center rounded-l-lg w-14 transition-transform duration-300`}>WIP</span>
           <h2 className="text-xl font-bold flex-1 p-5 h-full rounded-r-lg">
-            MINING FIESTA - CH Gemstone Mining (100 M/H)
+            MINING FIESTA - CH Gemstone Mining (155 M/H)
           </h2>
         </div>
       </div>
