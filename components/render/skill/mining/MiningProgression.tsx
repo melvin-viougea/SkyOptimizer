@@ -619,7 +619,7 @@ const MiningProgression: FC<RenderProps> = ({profileData}) => {
         <div className="mt-3 text-gray-800 rounded-lg bg-yellow mx-auto flex items-center cursor-pointer">
           <span className={`text-xl font-bold text-center flex items-center justify-center rounded-l-lg w-14 transition-transform duration-300`}>WIP</span>
           <h2 className="text-xl font-bold flex-1 p-5 h-full rounded-r-lg">
-            COAL ROAD CH (84.4 M/H)
+            MINING FEISTA - Mineshaft Gemstone Mining (161 M/H)
           </h2>
         </div>
       </div>
@@ -628,7 +628,7 @@ const MiningProgression: FC<RenderProps> = ({profileData}) => {
         <div className="mt-3 text-gray-800 rounded-lg bg-yellow mx-auto flex items-center cursor-pointer">
           <span className={`text-xl font-bold text-center flex items-center justify-center rounded-l-lg w-14 transition-transform duration-300`}>WIP</span>
           <h2 className="text-xl font-bold flex-1 p-5 h-full rounded-r-lg">
-            MINESHAFT GEMSTONE (67.5 M/H)
+            MINING FEISTA - Ruby Pickobulus Road (155 M/H)
           </h2>
         </div>
       </div>
@@ -637,7 +637,7 @@ const MiningProgression: FC<RenderProps> = ({profileData}) => {
         <div className="mt-3 text-gray-800 rounded-lg bg-yellow mx-auto flex items-center cursor-pointer">
           <span className={`text-xl font-bold text-center flex items-center justify-center rounded-l-lg w-14 transition-transform duration-300`}>WIP</span>
           <h2 className="text-xl font-bold flex-1 p-5 h-full rounded-r-lg">
-            QUARTZ DWARVEN MINE (59.6 M/H)
+            MINING FIESTA - CH Gemstone Mining (155 M/H)
           </h2>
         </div>
       </div>
@@ -646,7 +646,7 @@ const MiningProgression: FC<RenderProps> = ({profileData}) => {
         <div className="mt-3 text-gray-800 rounded-lg bg-yellow mx-auto flex items-center cursor-pointer">
           <span className={`text-xl font-bold text-center flex items-center justify-center rounded-l-lg w-14 transition-transform duration-300`}>WIP</span>
           <h2 className="text-xl font-bold flex-1 p-5 h-full rounded-r-lg">
-            UMBER TUNGSTEN ROAD (46.7 M/H)
+            CH Coal Road (84.4 M/H)
           </h2>
         </div>
       </div>
@@ -655,7 +655,7 @@ const MiningProgression: FC<RenderProps> = ({profileData}) => {
         <div className="mt-3 text-gray-800 rounded-lg bg-yellow mx-auto flex items-center cursor-pointer">
           <span className={`text-xl font-bold text-center flex items-center justify-center rounded-l-lg w-14 transition-transform duration-300`}>WIP</span>
           <h2 className="text-xl font-bold flex-1 p-5 h-full rounded-r-lg">
-            RUBY AMBER SAPPHIRE AMETHYST TOPAZ GEMSTONE (46.7 M/H)
+            Mineshaft Gemstone Mining (67.5 M/H)
           </h2>
         </div>
       </div>
@@ -664,7 +664,34 @@ const MiningProgression: FC<RenderProps> = ({profileData}) => {
         <div className="mt-3 text-gray-800 rounded-lg bg-yellow mx-auto flex items-center cursor-pointer">
           <span className={`text-xl font-bold text-center flex items-center justify-center rounded-l-lg w-14 transition-transform duration-300`}>WIP</span>
           <h2 className="text-xl font-bold flex-1 p-5 h-full rounded-r-lg">
-            GOLD MINE OF DIVAN (42.3 M/H)
+            Quartz Dwarven Mine (59.6 M/H)
+          </h2>
+        </div>
+      </div>
+
+      <div>
+        <div className="mt-3 text-gray-800 rounded-lg bg-yellow mx-auto flex items-center cursor-pointer">
+          <span className={`text-xl font-bold text-center flex items-center justify-center rounded-l-lg w-14 transition-transform duration-300`}>WIP</span>
+          <h2 className="text-xl font-bold flex-1 p-5 h-full rounded-r-lg">
+            Umber / Tungesten Road (46.7 M/H)
+          </h2>
+        </div>
+      </div>
+
+      <div>
+        <div className="mt-3 text-gray-800 rounded-lg bg-yellow mx-auto flex items-center cursor-pointer">
+          <span className={`text-xl font-bold text-center flex items-center justify-center rounded-l-lg w-14 transition-transform duration-300`}>WIP</span>
+          <h2 className="text-xl font-bold flex-1 p-5 h-full rounded-r-lg">
+            CH Ruby Amber Sapphire Amethyst Topaz Mining (46.7 M/H)
+          </h2>
+        </div>
+      </div>
+
+      <div>
+        <div className="mt-3 text-gray-800 rounded-lg bg-yellow mx-auto flex items-center cursor-pointer">
+          <span className={`text-xl font-bold text-center flex items-center justify-center rounded-l-lg w-14 transition-transform duration-300`}>WIP</span>
+          <h2 className="text-xl font-bold flex-1 p-5 h-full rounded-r-lg">
+            Gold Mine of Divan (42.3 M/H)
           </h2>
         </div>
       </div>
@@ -673,7 +700,7 @@ const MiningProgression: FC<RenderProps> = ({profileData}) => {
         <div className="text-gray-800 rounded-lg bg-yellow mx-auto flex items-center cursor-pointer mt-5">
           <span className={`text-xl font-bold text-center flex items-center justify-center rounded-l-lg w-14 transition-transform duration-300`}>WIP</span>
           <h2 className="text-xl font-bold flex-1 p-5 h-full rounded-r-lg">
-            SAND MUSHROOM DESERT (42.1 M/H)
+            Flint Spider Den (42.1 M/H)
           </h2>
         </div>
       </div>
@@ -682,7 +709,7 @@ const MiningProgression: FC<RenderProps> = ({profileData}) => {
         <div className="text-gray-800 rounded-lg bg-yellow mx-auto flex items-center cursor-pointer mt-5">
           <span className={`text-xl font-bold text-center flex items-center justify-center rounded-l-lg w-14 transition-transform duration-300`}>WIP</span>
           <h2 className="text-xl font-bold flex-1 p-5 h-full rounded-r-lg">
-            MYCELIUM RED SAND MUSHROOM DESERT (41 M/H)
+            Mycelium / Red Sand (41 M/H)
           </h2>
         </div>
       </div>
@@ -691,7 +718,7 @@ const MiningProgression: FC<RenderProps> = ({profileData}) => {
         <div className="text-gray-800 rounded-lg bg-yellow mx-auto flex items-center cursor-pointer mt-5">
           <span className={`text-xl font-bold text-center flex items-center justify-center rounded-l-lg w-14 transition-transform duration-300`}>WIP</span>
           <h2 className="text-xl font-bold flex-1 p-5 h-full rounded-r-lg">
-            MITHRIL TITANIUM (38 M/H)
+            Mithril / Titanium (38 M/H)
           </h2>
         </div>
       </div>
@@ -700,7 +727,7 @@ const MiningProgression: FC<RenderProps> = ({profileData}) => {
         <div className="mt-5 text-gray-800 rounded-lg bg-yellow mx-auto flex items-center cursor-pointer" onClick={() => setGemstoneMining(!gemstoneMining)}>
           <span className={`text-xl font-bold text-center flex items-center justify-center rounded-l-lg w-14 transition-transform duration-300 ${gemstoneMining ? 'rotate-90' : 'rotate-0'}`}>&gt;</span>
           <h2 className="text-xl font-bold flex-1 p-5 h-full rounded-r-lg">
-            JADE GEMSTONE MINING (33.4 M/H)
+            Jade Gemstone Mining (33.4 M/H)
           </h2>
         </div>
         {gemstoneMining && (
@@ -768,7 +795,7 @@ const MiningProgression: FC<RenderProps> = ({profileData}) => {
         <div className="text-gray-800 rounded-lg bg-yellow mx-auto flex items-center cursor-pointer mt-5">
           <span className={`text-xl font-bold text-center flex items-center justify-center rounded-l-lg w-14 transition-transform duration-300`}>WIP</span>
           <h2 className="text-xl font-bold flex-1 p-5 h-full rounded-r-lg">
-            HARDSTONE CH (25.1 M/H)
+            CH Hardstone (25.1 M/H)
           </h2>
         </div>
       </div>
@@ -777,7 +804,7 @@ const MiningProgression: FC<RenderProps> = ({profileData}) => {
         <div className="text-gray-800 rounded-lg bg-yellow mx-auto flex items-center cursor-pointer mt-5">
           <span className={`text-xl font-bold text-center flex items-center justify-center rounded-l-lg w-14 transition-transform duration-300`}>WIP</span>
           <h2 className="text-xl font-bold flex-1 p-5 h-full rounded-r-lg">
-            GLOWSTONE (23.4 M/H)
+            Glowstone (23.4 M/H)
           </h2>
         </div>
       </div>
@@ -786,7 +813,7 @@ const MiningProgression: FC<RenderProps> = ({profileData}) => {
         <div className="text-gray-800 rounded-lg bg-yellow mx-auto flex items-center cursor-pointer mt-5">
           <span className={`text-xl font-bold text-center flex items-center justify-center rounded-l-lg w-14 transition-transform duration-300`}>WIP</span>
           <h2 className="text-xl font-bold flex-1 p-5 h-full rounded-r-lg">
-            SAND (21.9 M/H)
+            Sand Mushroom Desert (21.9 M/H)
           </h2>
         </div>
       </div>
@@ -795,7 +822,7 @@ const MiningProgression: FC<RenderProps> = ({profileData}) => {
         <div className="text-gray-800 rounded-lg bg-yellow mx-auto flex items-center cursor-pointer mt-5">
           <span className={`text-xl font-bold text-center flex items-center justify-center rounded-l-lg w-14 transition-transform duration-300`}>WIP</span>
           <h2 className="text-xl font-bold flex-1 p-5 h-full rounded-r-lg">
-            OBSIDIAN (21.4 M/H)
+            Obsidian (21.4 M/H)
           </h2>
         </div>
       </div>
@@ -804,7 +831,7 @@ const MiningProgression: FC<RenderProps> = ({profileData}) => {
         <div className="text-gray-800 rounded-lg bg-yellow mx-auto flex items-center cursor-pointer mt-5">
           <span className={`text-xl font-bold text-center flex items-center justify-center rounded-l-lg w-14 transition-transform duration-300`}>WIP</span>
           <h2 className="text-xl font-bold flex-1 p-5 h-full rounded-r-lg">
-            ENDSTONE (15.2 M/H)
+            Endstone (15.2 M/H)
           </h2>
         </div>
       </div>
@@ -813,7 +840,7 @@ const MiningProgression: FC<RenderProps> = ({profileData}) => {
         <div className="text-gray-800 rounded-lg bg-yellow mx-auto flex items-center cursor-pointer mt-5">
           <span className={`text-xl font-bold text-center flex items-center justify-center rounded-l-lg w-14 transition-transform duration-300`}>WIP</span>
           <h2 className="text-xl font-bold flex-1 p-5 h-full rounded-r-lg">
-            GLAICTE (7.7 M/H)
+            Glacite (7.7 M/H)
           </h2>
         </div>
       </div>
@@ -822,7 +849,7 @@ const MiningProgression: FC<RenderProps> = ({profileData}) => {
         <div className="text-gray-800 rounded-lg bg-yellow mx-auto flex items-center cursor-pointer mt-5">
           <span className={`text-xl font-bold text-center flex items-center justify-center rounded-l-lg w-14 transition-transform duration-300`}>WIP</span>
           <h2 className="text-xl font-bold flex-1 p-5 h-full rounded-r-lg">
-            ICE (4.7 M/H)
+            Ice (4.7 M/H)
           </h2>
         </div>
       </div>
